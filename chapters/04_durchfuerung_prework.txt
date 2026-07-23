@@ -1,0 +1,56 @@
+\section{Prototypische Umsetzung und Datenerhebung}
+\label{sec:durchfuehrung}
+
+% ==========================================
+% TODO-LISTE FÜR MARCEL (Vor finaler Abgabe löschen!)
+% ==========================================
+{\color{red}
+\textbf{TODO-Liste für dieses Kapitel:}
+\begin{itemize}
+    \item \textbf{Umgebung:} Java-Version, Cypress- und Selenium-Version sowie den exakten Browser (Microsoft Edge) benennen.
+    \item \textbf{Messmethodik:} Die Art der Zeitmessung (z.\,B. IDE-Logs vs. Cypress Runner) und die Flakiness-Prüfung (Resultate der 10 Durchläufe) konkretisieren.
+    \item \textbf{Testdaten \& Architektur:} Den Umgang mit Testdaten (Setup/Teardown, Generierung dynamischer Projektnamen) beschreiben und die Architektur-Pattern (Page Object Model in Selenium vs. Custom Commands in Cypress) gegenüberstellen.
+    \item \textbf{Code-Beispiele:} Konkrete Snippets für Hilfsmethoden, Custom Commands und Assertions aus beiden Frameworks einfügen.
+    \item \textbf{Hürden:} Die Select2/CKEditor-Problematik (Selenium) und die Proxy-Lösung für \texttt{npm install} (Cypress) in 1-2 Sätzen prägnant ausformulieren.
+    \item \textbf{Visualisierung:} 1-2 aussagekräftige Screenshots ergänzen (z.\,B. das Cypress Time-Travel Feature oder ein fehlgeschlagener Selenium-Test zur Fehlerdiagnose).
+\end{itemize}
+}
+% ==========================================
+
+In diesem Kapitel wird die praktische Erprobung der beiden Test-Frameworks beschrieben. Die prototypische Umsetzung erfolgte in der lokalen Entwicklungsumgebung der JUMO GmbH \& Co. KG, um die Werkzeuge unter den realen infrastrukturellen Bedingungen des Unternehmens zu evaluieren.
+
+\subsection{Das Testobjekt: Die Webanwendung „Puma“}
+\label{subsec:testobjekt_puma}
+Als Testobjekt dient die intern entwickelte Webanwendung „Puma“. Diese Anwendung wurde geschaffen, um firmeninterne Projekte und Arbeitspläne übersichtlich zu verwalten. Sie integriert komplexe Funktionen wie eine detaillierte Kosten- und Stundenplanung sowie eine SAP-Schnittstelle zur Datensynchronisation. Durch die Zuweisung von Teams und die Einbindung von Dokumenten weist die Benutzeroberfläche eine hohe Dynamik auf. Dies macht sie zu einem idealen, da anspruchsvollen Testobjekt für automatisierte End-to-End-Tests.
+
+\subsection{Testkonzeption und Vergleichbarkeit}
+\label{subsec:testszenarien}
+Um eine valide Datengrundlage für die Nutzwertanalyse zu schaffen, war es zwingend erforderlich, dass die Tests in beiden Frameworks exakt denselben Ablauf abbilden. Beide Implementierungen nutzen denselben Startzustand der Anwendung und führen identische Interaktionsketten durch. Folgende drei repräsentative und regressionskritische Szenarien wurden hierfür umgesetzt:
+
+\begin{enumerate}
+    \item \textbf{Authentifizierung (Login):} Überprüfung der Zugriffssteuerung als Basis für alle weiteren Aktionen.
+    \item \textbf{Aktivität anlegen (Einfaches Formular):} Test der grundlegenden Formularverarbeitung und Navigation.
+    \item \textbf{Projekt erstellen (Komplexer Prozess):} Ein mehrstufiger Ablauf mit dynamischen Elementen (z.\,B. \texttt{Select2}-Dropdowns, \texttt{CKEditor} für Rich-Text) und asynchronen Speicherprozessen.
+\end{enumerate}
+
+\subsection{Implementierung mit Selenium}
+\label{subsec:impl_selenium}
+Die Integration von Selenium erfolgte nativ in den bestehenden Java- und Maven-Stack des Unternehmens. Die Einbindung der Abhängigkeiten über die \texttt{pom.xml} verlief unkompliziert. Eine technische Hürde stellte die im Betrieb genutzte ältere JDK-Version dar, welche die Auswahl einer dazu kompatiblen Selenium-Version für das \texttt{ui-test}-Modul erforderte.
+
+Die Teststruktur wurde mit dem Test-Runner JUnit abgebildet. Bei der Implementierung zeigte sich, dass Selenium stark technisch orientiert ist. Web-Elemente mussten explizit über Selektoren gesucht und als \texttt{WebElement} instanziiert werden, bevor Aktionen darauf ausgeführt werden konnten. 
+Besonders bei dynamischen UI-Komponenten wie Select2-Feldern oder dem Rich-Text-Editor wurde der Code schnell unübersichtlich. Um die Wartbarkeit zu erhalten, war es zwingend notwendig, wiederkehrende Abläufe in eigene Hilfsmethoden (z.\,B. \texttt{selectDropdownByTextAndAssert()} oder \texttt{select2SearchAndAssert()}) auszulagern. Zudem musste intensiv mit expliziten Wartebedingungen (\texttt{wait.until()}) gearbeitet werden, um Timing-Probleme bei nachladenden Seitenelementen zu verhindern.
+
+\subsection{Implementierung mit Cypress}
+\label{subsec:impl_cypress}
+Im Gegensatz zu Selenium basiert Cypress auf Node.js und \texttt{npm}. Dies führte im stark reglementierten Firmennetzwerk der JUMO GmbH \& Co. KG direkt zu Beginn zu Problemen, da der Befehl \texttt{npm install} durch Proxy- und Sicherheitsrichtlinien blockiert wurde. Die Installation erforderte daher zunächst die Einbindung des IT-Services, was den initialen organisatorischen Integrationsaufwand erhöhte.
+
+Nach der Einrichtung überzeugte Cypress durch eine sehr direkte und deskriptive Syntax. Die Tests ließen sich stark an der tatsächlichen manuellen Nutzerinteraktion orientieren (z.\,B. Element suchen, tippen, prüfen über Befehlsketten). Dynamische Ladezeiten wurden durch das integrierte Auto-Waiting und das Abfangen von Ajax-Requests via \texttt{cy.intercept()} und \texttt{cy.wait()} robust gehandhabt, ohne dass statische Pausen im Code ergänzt werden mussten. Auch hier wurden zur Steigerung der Lesbarkeit wiederkehrende Schritte, wie der Login-Prozess, in Custom Commands (\texttt{cy.login()}) ausgelagert.
+
+\subsection{Datenerhebung und praktische Beobachtungen}
+\label{subsec:beobachtungen}
+Während der Testausführung wurden parallel quantitative und qualitative Daten für die Auswertung erhoben:
+\begin{itemize}
+    \item \textbf{Laufzeit:} Beide Tools benötigten für den initialen Startlauf (inklusive Start der Testumgebung und Aufbau des Startzustands) rund 45 Sekunden. Bei einfachen Folgeausführungen (Aktivität anlegen) lagen beide Frameworks mit 22 bis 32 Sekunden eng beieinander. Beim vollständigen Erstellen eines Projekts wirkte Cypress durch die internen Retry-Mechanismen etwas performanter.
+    \item \textbf{Stabilität (Flakiness):} Bei zehn aufeinanderfolgenden Testläufen wies Selenium eine Fehlerquote von rund 40\,\% (4 von 10) auf. Die Abbrüche waren meist auf minimale Timing-Abweichungen oder nicht vollständig geladene Elemente zurückzuführen. Cypress hingegen lief deutlich stabiler mit lediglich einem Fehlschlag bei zehn Durchläufen.
+    \item \textbf{Fehlerdiagnose:} Tritt in Selenium ein Fehler auf, wird meist eine technische Exception (z.\,B. in Eclipse) ausgegeben. Cypress bot hier durch den grafischen Test Runner und die Time-Travel-Funktion, mit der Zustände der Anwendung zum Zeitpunkt des Fehlers visuell rekonstruiert werden können, einen signifikanten Mehrwert bei der Fehleranalyse.
+\end{itemize}
