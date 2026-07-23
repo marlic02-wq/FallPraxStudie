@@ -1,0 +1,38 @@
+# LaTeX Hilfsdateien
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.lol
+
+# Bibliografie und Glossar
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.xdy
+
+# Build-Tools (z.B. Latexmk)
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.synctex(busy)
+*.pdfsync
+
+# Generierte PDF- und Metadaten
+*.pdf
+*.xmpi
+
+# OS generierte Dateien (optional, aber empfohlen)
+.DS_Store
+Thumbs.db
