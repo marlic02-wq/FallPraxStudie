@@ -1,0 +1,155 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{spillner2024basiswissen}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=58e3123e6a8cd02bbdaa0e86c09a9b61}{%
+           family={Spillner},
+           familyi={S\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1179c3246fee23f1879c2285201a2e76}{%
+           family={Linz},
+           familyi={L\bibinitperiod},
+           given={Tilo},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {dpunkt. verlag}%
+      }
+      \strng{namehash}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{fullhash}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{fullhashraw}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{bibnamehash}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{authorbibnamehash}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{authornamehash}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{authorfullhash}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \strng{authorfullhashraw}{9a77db97040fcb98a8110de1ae5f0b8a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Basiswissen Softwaretest: Aus-und Weiterbildung zum Certified Tester--Foundation Level nach ISTQB-Standard}
+      \field{year}{2024}
+    \endentry
+    \entry{Selenium}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=ec5b774c4ee53170e8825971d55f0bc7}{%
+           family={{Selenium Project}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{fullhash}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{fullhashraw}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{bibnamehash}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{authorbibnamehash}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{authornamehash}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{authorfullhash}{ec5b774c4ee53170e8825971d55f0bc7}
+      \strng{authorfullhashraw}{ec5b774c4ee53170e8825971d55f0bc7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.selenium.dev/documentation/}}
+      \field{note}{[Online; abgerufen am 13.05.2026]}
+      \field{title}{Selenium Documentation}
+      \field{year}{2024}
+    \endentry
+    \entry{Cypress}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e74e2d4379c352ecc1cb97cedb99fb8e}{%
+           family={{Cypress.io}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{fullhash}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{fullhashraw}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{bibnamehash}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{authorbibnamehash}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{authornamehash}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{authorfullhash}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \strng{authorfullhashraw}{e74e2d4379c352ecc1cb97cedb99fb8e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.cypress.io/}}
+      \field{note}{[Online; abgerufen am 13.05.2026]}
+      \field{title}{Cypress Documentation}
+      \field{year}{2024}
+    \endentry
+    \entry{Liggesmeyer2009}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=c953f181af8d4e3840e2af9c7059725f}{%
+           family={Liggesmeyer},
+           familyi={L\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Spektrum Akademischer Verlag}%
+      }
+      \strng{namehash}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{fullhash}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{fullhashraw}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{bibnamehash}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{authorbibnamehash}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{authornamehash}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{authorfullhash}{c953f181af8d4e3840e2af9c7059725f}
+      \strng{authorfullhashraw}{c953f181af8d4e3840e2af9c7059725f}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2.}
+      \field{title}{Software-Qualität: Testen, Analysieren und Verifizieren von Software}
+      \field{year}{2009}
+    \endentry
+    \entry{Kuehnapfel2021}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=551dda62a279a5695365b02e156d8405}{%
+           family={Kühnapfel},
+           familyi={K\bibinitperiod},
+           given={Jörg\bibnamedelima B.},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{551dda62a279a5695365b02e156d8405}
+      \strng{fullhash}{551dda62a279a5695365b02e156d8405}
+      \strng{fullhashraw}{551dda62a279a5695365b02e156d8405}
+      \strng{bibnamehash}{551dda62a279a5695365b02e156d8405}
+      \strng{authorbibnamehash}{551dda62a279a5695365b02e156d8405}
+      \strng{authornamehash}{551dda62a279a5695365b02e156d8405}
+      \strng{authorfullhash}{551dda62a279a5695365b02e156d8405}
+      \strng{authorfullhashraw}{551dda62a279a5695365b02e156d8405}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Scoring und Nutzwertanalysen: Ein Leitfaden für die Praxis}
+      \field{year}{2021}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

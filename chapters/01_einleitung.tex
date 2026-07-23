@@ -1,0 +1,44 @@
+% --------------------------------------------------
+% 1. Einleitung
+% --------------------------------------------------
+\section{Einleitung}
+
+\subsection{Problemstellung und Motivation}
+Das Testen von Software ist ein zentraler Bestandteil moderner Softwareentwicklung, um funktionale Anforderungen und einen zuverlässigen Betrieb von Anwendungen sicherzustellen. Historisch wurden Tests überwiegend manuell durchgeführt. Mit der zunehmenden Komplexität heutiger Softwaresysteme und steigenden Anforderungen an Entwicklungsgeschwindigkeit hat sich jedoch der Einsatz automatisierter Testverfahren etabliert \cite{spillner2024basiswissen}.
+
+Im betrieblichen Kontext der JUMO GmbH \& Co.\ KG wird die intern entwickelte Java-Webanwendung \glqq Puma\grqq\ (auch \glqq Workspace\grqq\ genannt) zur Prozessverwaltung fortlaufend durch Fehlerbehebungen und neue Funktionen erweitert. Trotz der Relevanz automatisierter Tests erfolgen die Prüfungen zentraler Nutzungsszenarien derzeit noch überwiegend manuell -- zunächst durch die Entwickler im Testsystem und anschließend als Abnahmetest durch die anfordernden Fachabteilungen. Dies geschieht häufig in Form explorativer Tests.
+
+Dieser manuelle Testaufwand ist zeitintensiv, bindet personelle Ressourcen auf beiden Seiten und erschwert eine strukturierte Absicherung von Änderungen. Zudem schwanken die Testergebnisse stark je nach durchführender Person, was die Reproduzierbarkeit einschränkt. Vor diesem Hintergrund entsteht der Bedarf, geeignete Ansätze zur teilweisen Automatisierung regressionskritischer End-to-End-Tests (E2E-Tests) systematisch zu untersuchen -- also jener Testszenarien, die nach Änderungen besonders anfällig für unerwünschte Seiteneffekte sind. 
+
+Erschwerend müssen bei der Werkzeugauswahl spezifische infrastrukturelle Rahmenbedingungen der JUMO GmbH \& Co.\ KG berücksichtigt werden. Dazu zählen die bestehende Entwicklungslandschaft (älteres JDK, Eclipse, Maven) sowie strikte Proxy- und Netzwerksperren des Unternehmens. Im Fokus dieser Arbeit stehen daher die E2E-Frameworks Selenium \cite{Selenium} und Cypress \cite{Cypress}.
+
+Die Motivation der Arbeit ergibt sich somit aus dem konkreten betrieblichen Bedarf, die Qualitätssicherung bei häufigen Softwareänderungen effizienter und reproduzierbarer zu gestalten. 
+
+\subsection{Zielsetzung der Arbeit}
+Ziel der vorliegenden Fallstudie ist es, auf Basis eines strukturierten Vergleichs eine fundierte Entscheidungshilfe für die Auswahl eines End-to-End-Test-Frameworks bei der JUMO GmbH \& Co.\ KG zu erarbeiten. 
+
+Dabei ist es nicht das Ziel, ein allgemein überlegenes Framework zu bestimmen, sondern das Werkzeug zu identifizieren, welches für den konkreten Unternehmenskontext und dessen technische Restriktionen am besten geeignet ist. Hierzu werden relevante Anforderungen aus dem Betrieb abgeleitet, ausgewählte Nutzungsszenarien der \glqq Puma\grqq-Webanwendung prototypisch in beiden Frameworks umgesetzt und die Ergebnisse anhand einer Nutzwertanalyse systematisch bewertet.
+
+\subsection{Forschungsfrage und Aufbau der Arbeit}
+Aus der formulierten Zielsetzung leitet sich die zentrale Forschungsfrage dieser Fallstudie ab:
+
+\begin{quote}
+\textit{Welches der beiden Frameworks (Selenium oder Cypress) ist für die Automatisierung ausgewählter repräsentativer regressionskritischer End-to-End-Testszenarien im gegebenen Unternehmenskontext besser geeignet, wenn Integrationsaufwand, Wartbarkeit, Stabilität, Ausführungseffizienz und Unterstützungsangebote systematisch berücksichtigt werden?}
+\end{quote}
+
+Zur präzisen Beantwortung der Hauptfrage werden folgende Teilfragen untersucht:
+\begin{itemize}
+    \item Welche Anforderungen ergeben sich aus dem betrieblichen Umfeld an ein End-to-End-Test-Framework?
+    \item Welche Nutzungsszenarien der Webanwendung eignen sich als repräsentative Testfälle für einen Framework-Vergleich?
+    \item Wie unterscheiden sich Selenium und Cypress hinsichtlich des technischen und organisatorischen Integrationsaufwands?
+    \item Welche Unterschiede zeigen sich in Bezug auf Verständlichkeit, Wartbarkeit und Änderbarkeit des Testcodes?
+    \item Wie unterscheiden sich die Frameworks bezüglich Stabilität, Laufzeit und Diagnosemöglichkeiten im Fehlerfall?
+\end{itemize}
+
+\textbf{Aufbau der Arbeit:}\\
+Im Anschluss an diese Einleitung werden in Kapitel 2 die theoretischen Grundlagen des End-to-End-Testings sowie der untersuchten Frameworks Selenium und Cypress erläutert. 
+Kapitel 3 widmet sich der Methodik und beschreibt das Vorgehen der Nutzwertanalyse inklusive der Entwicklung des Kriterienmodells. 
+In Kapitel 4 erfolgt die Beschreibung der prototypischen Umsetzung und der Datenerhebung anhand der ausgewählten Testszenarien. 
+Kapitel 5 präsentiert die Auswertung der Ergebnisse mittels der Nutzwertanalyse. Die Arbeit schließt in Kapitel 6 mit einer Diskussion der Erkenntnisse und einem zusammenfassenden Fazit.
+
+\clearpage
