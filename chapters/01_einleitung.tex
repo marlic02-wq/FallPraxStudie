@@ -4,15 +4,18 @@
 \section{Einleitung}
 
 \subsection{Problemstellung und Motivation}
-Das Testen von Software ist ein zentraler Bestandteil moderner Softwareentwicklung, um funktionale Anforderungen und einen zuverlässigen Betrieb von Anwendungen sicherzustellen. Historisch wurden Tests überwiegend manuell durchgeführt. Mit der zunehmenden Komplexität heutiger Softwaresysteme und steigenden Anforderungen an Entwicklungsgeschwindigkeit hat sich jedoch der Einsatz automatisierter Testverfahren etabliert \cite{spillner2024basiswissen}.
+Das Testen von Software ist ein zentraler Bestandteil der Softwareentwicklung. Es stellt sicher, dass Anwendungen den funktionalen Anforderungen entsprechen und zuverlässig arbeiten. Durch Tests lassen sich Fehler frühzeitig erkennen und Probleme vor dem produktiven Einsatz reduzieren.
 
-Im betrieblichen Kontext der JUMO GmbH \& Co.\ KG wird die intern entwickelte Java-Webanwendung \glqq Puma\grqq\ (auch \glqq Workspace\grqq\ genannt) zur Prozessverwaltung fortlaufend durch Fehlerbehebungen und neue Funktionen erweitert. Trotz der Relevanz automatisierter Tests erfolgen die Prüfungen zentraler Nutzungsszenarien derzeit noch überwiegend manuell -- zunächst durch die Entwickler im Testsystem und anschließend als Abnahmetest durch die anfordernden Fachabteilungen. Dies geschieht häufig in Form explorativer Tests.
+Softwaretests umfassen verschiedene Testarten und Vorgehensweisen. Während Tests früher häufig manuell durch direkte Interaktion mit der Anwendung durchgeführt wurden, hat sich aufgrund steigender Anforderungen an Qualität und Entwicklungsgeschwindigkeit der Einsatz automatisierter Testverfahren etabliert \cite{spillner2024}. 
 
-Dieser manuelle Testaufwand ist zeitintensiv, bindet personelle Ressourcen auf beiden Seiten und erschwert eine strukturierte Absicherung von Änderungen. Zudem schwanken die Testergebnisse stark je nach durchführender Person, was die Reproduzierbarkeit einschränkt. Vor diesem Hintergrund entsteht der Bedarf, geeignete Ansätze zur teilweisen Automatisierung regressionskritischer End-to-End-Tests (E2E-Tests) systematisch zu untersuchen -- also jener Testszenarien, die nach Änderungen besonders anfällig für unerwünschte Seiteneffekte sind. 
+Im Kontext der JUMO GmbH \& Co. KG wird eine interne Webanwendung (Puma) fortlaufend durch Fehlerbehebungen und funktionale Erweiterungen weiterentwickelt. Trotz der bekannten Vorteile der Automatisierung erfolgen Prüfungen zentraler Nutzungsszenarien derzeit noch manuell, häufig in Form explorativer Tests.
 
-Erschwerend müssen bei der Werkzeugauswahl spezifische infrastrukturelle Rahmenbedingungen der JUMO GmbH \& Co.\ KG berücksichtigt werden. Dazu zählen die bestehende Entwicklungslandschaft (älteres JDK, Eclipse, Maven) sowie strikte Proxy- und Netzwerksperren des Unternehmens. Im Fokus dieser Arbeit stehen daher die E2E-Frameworks Selenium \cite{Selenium} und Cypress \cite{Cypress}.
+Dieser manuelle Testaufwand ist zeitintensiv, bindet personelle Ressourcen und schränkt die Reproduzierbarkeit der Testergebnisse ein, da die Ausführung stark von der testenden Person abhängt. Daher besteht der betriebliche Bedarf, Ansätze zur Automatisierung regressionskritischer End-to-End-Tests systematisch zu untersuchen. Dies betrifft speziell solche Testszenarien, die nach Änderungen besonders anfällig für Fehler oder unerwünschte Seiteneffekte sind.
 
-Die Motivation der Arbeit ergibt sich somit aus dem konkreten betrieblichen Bedarf, die Qualitätssicherung bei häufigen Softwareänderungen effizienter und reproduzierbarer zu gestalten. 
+Im Fokus dieser Fallstudie stehen die Test-Frameworks Selenium \cite{selenium2024} und Cypress \cite{cypress2024}. Beide Werkzeuge automatisieren browserbasierte Tests, unterscheiden sich jedoch in ihrer technischen Architektur, der Integration in bestehende Entwicklungsumgebungen, der Wartbarkeit der Testimplementierung sowie den infrastrukturellen Voraussetzungen.
+
+Die Motivation dieser Arbeit ergibt sich aus dem konkreten Bedarf, die Qualitätssicherung bei JUMO im Kontext häufiger Änderungen effizienter zu gestalten. Ziel ist es nicht, ein allgemein überlegenes Framework zu bestimmen, sondern das für diesen spezifischen Unternehmenskontext am besten geeignete Werkzeug durch eine Nutzwertanalyse zu identifizieren.
+
 
 \subsection{Zielsetzung der Arbeit}
 Ziel der vorliegenden Fallstudie ist es, auf Basis eines strukturierten Vergleichs eine fundierte Entscheidungshilfe für die Auswahl eines End-to-End-Test-Frameworks bei der JUMO GmbH \& Co.\ KG zu erarbeiten. 
