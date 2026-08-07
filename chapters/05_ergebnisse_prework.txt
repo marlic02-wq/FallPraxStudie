@@ -1,14 +1,56 @@
-\section{Ergebnisse und Nutzwertberechnung}
-\label{sec:ergebnisse}
+% --------------------------------------------------
+% 5. Evaluation und Nutzwertanalyse
+% --------------------------------------------------
 
-\subsection{Präsentation der quantitativen Messdaten}
-\label{subsec:messdaten}
-% Gegenüberstellung der Scores (1-10) für alle Unterkriterien
+\section{Evaluation und Nutzwertanalyse}
+\label{ch:evaluation}
 
-\subsection{Mathematische Auswertung (Nutzwertmatrix)}
-\label{subsec:nutzwertmatrix}
-% Einbindung der LaTeX-Tabelle mit gewichteten Nutzwerten
+\subsection{Durchf\"uhrung und Testergebnisse}
+\label{sec:testergebnisse}
+\begin{itemize}
+    \item Ausf\"uhrungsgeschwindigkeiten: Initialer Lauf bei beiden ca. 45 Sekunden; Folgel\"aufe 22--32 Sekunden. Cypress ist beim vollst\"andigen Projekttest minimal schneller.
+    \item Fehlerquote und Flakiness bei 10 Durchl\"aufen: Cypress (1 Fehler); Selenium (4 Fehler).
+    \item Interpretation der Ergebnisse: Selenium reagiert empfindlicher auf Ladezeiten dynamischer Ajax-Elemente; Cypress ist hierbei durch integrierte Retry-Mechanismen robuster.
+\end{itemize}
 
-\subsection{Analyse und Diskussion der Ergebnisse}
-\label{subsec:diskussion}
-% Interpretation: Warum Cypress trotz Setup-Hürden gewinnt / Wo Selenium punktet
+\subsection{Auswertung des Kriterienmodells}
+\label{sec:kriterien_auswertung}
+\begin{itemize}
+    \item Hinweis: Bewertungen basieren auf der Matrix von K\"uhnapfel \cite{Kuehnapfel2021} mit einer Gesamtpunktzahl von 10 pro Kriterium.
+    \item \textbf{Integration in Infrastruktur (25\,\%):} Selenium (8/10 Punkte) dominiert durch die direkte Einbettung in das Java/Maven-Ökosystem. Cypress (5/10 Punkte) verliert stark durch Proxy-Blockaden und den administrativen npm-Zwang.
+    \item \textbf{Lernkurve \& Syntax (20\,\%):} Cypress (9/10 Punkte) siegt dank schnellem Einstieg und intuitiver API. Selenium (7/10 Punkte) erfordert ein h\"oheres technisches Java-Grundverst\"andnis.
+    \item \textbf{Test-Ausf\"uhrung (20\,\%):} Cypress (8/10 Punkte) bietet exzellentes Time-Travel-Debugging und schnelle lokale R\"uckmeldung. Selenium (7/10 Punkte) punktet durch bew\"ahrtes Eclipse-Debugging.
+    \item \textbf{Stabilit\"at (20\,\%):} Cypress (9/10 Punkte) erzeugt weitaus stabilere Tests. Selenium (6/10 Punkte) zeigt Flakiness bei asynchronen UI-Updates.
+    \item \textbf{Dokumentation \& Ökosystem (15\,\%):} Cypress (9/10 Punkte) punktet mit moderner, einsteigerfreundlicher Doku. Selenium (8/10 Punkte) liefert tiefe Best-Practices aufgrund langer Marktetablierung.
+\end{itemize}
+
+\subsection{Nutzwertanalyse und Gesamtauswertung}
+\label{sec:nutzwertanalyse}
+\begin{itemize}
+    \item Pr\"agnante, fachliche Begr\"undung der Prozent-Gewichtungen gem\"aß K\"uhnapfel \cite{Kuehnapfel2021} fehlt noch (z.\,B. Warum ist die Integration mit 25\,\% am h\"ochsten gewichtet?).
+    \item Fazit der Berechnung: Cypress ist fachlich, syntaktisch und hinsichtlich der Teststabilit\"at \"uberlegen. Die Einf\"uhrung im JUMO-Netzwerk wird jedoch durch infrastrukturelle Vorgaben gebremst.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Ergebnis der Nutzwertanalyse}
+\label{tab:nutzwert_ergebnis}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Kriterium} & \textbf{Gewichtung} & \textbf{Selenium (gew.)} & \textbf{Cypress (gew.)} \\ \hline
+Integration in Java/Eclipse & 25\,\% & 1,775 & 1,700 \\ \hline
+Lernkurve \& Syntax & 20\,\% & 1,330 & 1,750 \\ \hline
+Test-Ausf\"uhrung & 20\,\% & 1,400 & 1,520 \\ \hline
+Stabilit\"at & 20\,\% & 1,260 & 1,800 \\ \hline
+Dokumentation \& Community & 15\,\% & 1,200 & 1,305 \\ \hline\hline
+\textbf{Gesamtnutzwert} & \textbf{100\,\%} & \textbf{6,965} & \textbf{8,075} \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Kritische Reflexion und Methodengrenzen}
+\label{sec:reflexion}
+\begin{itemize}
+    \item Die Bewertung der CI/Reporting-Integration basiert teilweise auf theoretischen Annahmen, da innerhalb des Praxisprojekts keine vollst\"andige Pipeline aufgesetzt wurde.
+    \item Qualitative Kriterien wie "Lesbarkeit" und "Usability" unterliegen einer unweigerlich subjektiven Wahrnehmung.
+    \item Eine klare Differenzierung ist notwendig: Die gravierendsten Nachteile von Cypress (Setup/Installation) sind keine echten Schw\"achen des Tools, sondern resultieren maßgeblich aus den rigiden Sicherheits- und Proxy-Richtlinien der Unternehmensinfrastruktur.
+\end{itemize}

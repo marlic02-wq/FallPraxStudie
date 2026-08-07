@@ -6,13 +6,13 @@
 \subsection{Problemstellung und Motivation}
 Das Testen von Software ist ein zentraler Bestandteil der Softwareentwicklung. Es stellt sicher, dass Anwendungen den funktionalen Anforderungen entsprechen und zuverlässig arbeiten. Durch Tests lassen sich Fehler frühzeitig erkennen und Probleme vor dem produktiven Einsatz reduzieren.
 
-Softwaretests umfassen verschiedene Testarten und Vorgehensweisen. Während Tests früher häufig manuell durch direkte Interaktion mit der Anwendung durchgeführt wurden, hat sich aufgrund steigender Anforderungen an Qualität und Entwicklungsgeschwindigkeit der Einsatz automatisierter Testverfahren etabliert \cite{spillner2024}. 
+Softwaretests umfassen verschiedene Testarten und Vorgehensweisen. Während Tests früher häufig manuell durch direkte Interaktion mit der Anwendung durchgeführt wurden, hat sich aufgrund steigender Anforderungen an Qualität und Entwicklungsgeschwindigkeit der Einsatz automatisierter Testverfahren etabliert \cite{spillner2024basiswissen}. 
 
 Im Kontext der JUMO GmbH \& Co. KG wird eine interne Webanwendung (Puma) fortlaufend durch Fehlerbehebungen und funktionale Erweiterungen weiterentwickelt. Trotz der bekannten Vorteile der Automatisierung erfolgen Prüfungen zentraler Nutzungsszenarien derzeit noch manuell, häufig in Form explorativer Tests.
 
 Dieser manuelle Testaufwand ist zeitintensiv, bindet personelle Ressourcen und schränkt die Reproduzierbarkeit der Testergebnisse ein, da die Ausführung stark von der testenden Person abhängt. Daher besteht der betriebliche Bedarf, Ansätze zur Automatisierung regressionskritischer End-to-End-Tests systematisch zu untersuchen. Dies betrifft speziell solche Testszenarien, die nach Änderungen besonders anfällig für Fehler oder unerwünschte Seiteneffekte sind.
 
-Im Fokus dieser Fallstudie stehen die Test-Frameworks Selenium \cite{selenium2024} und Cypress \cite{cypress2024}. Beide Werkzeuge automatisieren browserbasierte Tests, unterscheiden sich jedoch in ihrer technischen Architektur, der Integration in bestehende Entwicklungsumgebungen, der Wartbarkeit der Testimplementierung sowie den infrastrukturellen Voraussetzungen.
+Im Fokus dieser Fallstudie stehen die Test-Frameworks Selenium \cite{Selenium} und Cypress \cite{Cypress}. Beide Werkzeuge automatisieren browserbasierte Tests, unterscheiden sich jedoch in ihrer technischen Architektur, der Integration in bestehende Entwicklungsumgebungen, der Wartbarkeit der Testimplementierung sowie den infrastrukturellen Voraussetzungen.
 
 Die Motivation dieser Arbeit ergibt sich aus dem konkreten Bedarf, die Qualitätssicherung bei JUMO im Kontext häufiger Änderungen effizienter zu gestalten. Ziel ist es nicht, ein allgemein überlegenes Framework zu bestimmen, sondern das für diesen spezifischen Unternehmenskontext am besten geeignete Werkzeug durch eine Nutzwertanalyse zu identifizieren.
 

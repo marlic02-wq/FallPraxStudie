@@ -1,56 +1,72 @@
-\section{Prototypische Umsetzung und Datenerhebung}
-\label{sec:durchfuehrung}
+% --------------------------------------------------
+% 4. Implementierung und Durchführung der Prototypen
+% --------------------------------------------------
+\section{Implementierung und Durchf\"uhrung der Prototypen}
+\label{ch:implementierung}
 
-% ==========================================
-% TODO-LISTE FÜR MARCEL (Vor finaler Abgabe löschen!)
-% ==========================================
-{\color{red}
-\textbf{TODO-Liste für dieses Kapitel:}
+\subsection{Testumgebung und Rahmenbedingungen}
+\label{sec:testumgebung}
 \begin{itemize}
-    \item \textbf{Umgebung:} Java-Version, Cypress- und Selenium-Version sowie den exakten Browser (Microsoft Edge) benennen.
-    \item \textbf{Messmethodik:} Die Art der Zeitmessung (z.\,B. IDE-Logs vs. Cypress Runner) und die Flakiness-Prüfung (Resultate der 10 Durchläufe) konkretisieren.
-    \item \textbf{Testdaten \& Architektur:} Den Umgang mit Testdaten (Setup/Teardown, Generierung dynamischer Projektnamen) beschreiben und die Architektur-Pattern (Page Object Model in Selenium vs. Custom Commands in Cypress) gegenüberstellen.
-    \item \textbf{Code-Beispiele:} Konkrete Snippets für Hilfsmethoden, Custom Commands und Assertions aus beiden Frameworks einfügen.
-    \item \textbf{Hürden:} Die Select2/CKEditor-Problematik (Selenium) und die Proxy-Lösung für \texttt{npm install} (Cypress) in 1-2 Sätzen prägnant ausformulieren.
-    \item \textbf{Visualisierung:} 1-2 aussagekräftige Screenshots ergänzen (z.\,B. das Cypress Time-Travel Feature oder ein fehlgeschlagener Selenium-Test zur Fehlerdiagnose).
+    \item Vorstellung der Webanwendung Puma (Projekt- und Kostenverwaltung, SAP-Schnittstelle) im betrieblichen Kontext der JUMO GmbH \& Co. KG.
+    \item Bestehender Technologie-Stack (Java, Eclipse, Maven) und Eigenschaften des Firmennetzwerks (Sicherheitsrichtlinien, Proxy).
+    \item Spezifikation der Hardware (z.\,B. Entwickler-Laptop) und des Betriebssystems zur Gew\"ahrleistung der Reproduzierbarkeit fehlt noch und muss erg\"anzt werden.
+    \item Verwendete Browser (z.\,B. Chrome v120, Edge v120) m\"ussen aufgef\"uhrt werden.
 \end{itemize}
-}
-% ==========================================
 
-In diesem Kapitel wird die praktische Erprobung der beiden Test-Frameworks beschrieben. Die prototypische Umsetzung erfolgte in der lokalen Entwicklungsumgebung der JUMO GmbH \& Co. KG, um die Werkzeuge unter den realen infrastrukturellen Bedingungen des Unternehmens zu evaluieren.
-
-\subsection{Das Testobjekt: Die Webanwendung „Puma“}
-\label{subsec:testobjekt_puma}
-Als Testobjekt dient die intern entwickelte Webanwendung „Puma“. Diese Anwendung wurde geschaffen, um firmeninterne Projekte und Arbeitspläne übersichtlich zu verwalten. Sie integriert komplexe Funktionen wie eine detaillierte Kosten- und Stundenplanung sowie eine SAP-Schnittstelle zur Datensynchronisation. Durch die Zuweisung von Teams und die Einbindung von Dokumenten weist die Benutzeroberfläche eine hohe Dynamik auf. Dies macht sie zu einem idealen, da anspruchsvollen Testobjekt für automatisierte End-to-End-Tests.
-
-\subsection{Testkonzeption und Vergleichbarkeit}
-\label{subsec:testszenarien}
-Um eine valide Datengrundlage für die Nutzwertanalyse zu schaffen, war es zwingend erforderlich, dass die Tests in beiden Frameworks exakt denselben Ablauf abbilden. Beide Implementierungen nutzen denselben Startzustand der Anwendung und führen identische Interaktionsketten durch. Folgende drei repräsentative und regressionskritische Szenarien wurden hierfür umgesetzt:
-
-\begin{enumerate}
-    \item \textbf{Authentifizierung (Login):} Überprüfung der Zugriffssteuerung als Basis für alle weiteren Aktionen.
-    \item \textbf{Aktivität anlegen (Einfaches Formular):} Test der grundlegenden Formularverarbeitung und Navigation.
-    \item \textbf{Projekt erstellen (Komplexer Prozess):} Ein mehrstufiger Ablauf mit dynamischen Elementen (z.\,B. \texttt{Select2}-Dropdowns, \texttt{CKEditor} für Rich-Text) und asynchronen Speicherprozessen.
-\end{enumerate}
-
-\subsection{Implementierung mit Selenium}
-\label{subsec:impl_selenium}
-Die Integration von Selenium erfolgte nativ in den bestehenden Java- und Maven-Stack des Unternehmens. Die Einbindung der Abhängigkeiten über die \texttt{pom.xml} verlief unkompliziert. Eine technische Hürde stellte die im Betrieb genutzte ältere JDK-Version dar, welche die Auswahl einer dazu kompatiblen Selenium-Version für das \texttt{ui-test}-Modul erforderte.
-
-Die Teststruktur wurde mit dem Test-Runner JUnit abgebildet. Bei der Implementierung zeigte sich, dass Selenium stark technisch orientiert ist. Web-Elemente mussten explizit über Selektoren gesucht und als \texttt{WebElement} instanziiert werden, bevor Aktionen darauf ausgeführt werden konnten. 
-Besonders bei dynamischen UI-Komponenten wie Select2-Feldern oder dem Rich-Text-Editor wurde der Code schnell unübersichtlich. Um die Wartbarkeit zu erhalten, war es zwingend notwendig, wiederkehrende Abläufe in eigene Hilfsmethoden (z.\,B. \texttt{selectDropdownByTextAndAssert()} oder \texttt{select2SearchAndAssert()}) auszulagern. Zudem musste intensiv mit expliziten Wartebedingungen (\texttt{wait.until()}) gearbeitet werden, um Timing-Probleme bei nachladenden Seitenelementen zu verhindern.
-
-\subsection{Implementierung mit Cypress}
-\label{subsec:impl_cypress}
-Im Gegensatz zu Selenium basiert Cypress auf Node.js und \texttt{npm}. Dies führte im stark reglementierten Firmennetzwerk der JUMO GmbH \& Co. KG direkt zu Beginn zu Problemen, da der Befehl \texttt{npm install} durch Proxy- und Sicherheitsrichtlinien blockiert wurde. Die Installation erforderte daher zunächst die Einbindung des IT-Services, was den initialen organisatorischen Integrationsaufwand erhöhte.
-
-Nach der Einrichtung überzeugte Cypress durch eine sehr direkte und deskriptive Syntax. Die Tests ließen sich stark an der tatsächlichen manuellen Nutzerinteraktion orientieren (z.\,B. Element suchen, tippen, prüfen über Befehlsketten). Dynamische Ladezeiten wurden durch das integrierte Auto-Waiting und das Abfangen von Ajax-Requests via \texttt{cy.intercept()} und \texttt{cy.wait()} robust gehandhabt, ohne dass statische Pausen im Code ergänzt werden mussten. Auch hier wurden zur Steigerung der Lesbarkeit wiederkehrende Schritte, wie der Login-Prozess, in Custom Commands (\texttt{cy.login()}) ausgelagert.
-
-\subsection{Datenerhebung und praktische Beobachtungen}
-\label{subsec:beobachtungen}
-Während der Testausführung wurden parallel quantitative und qualitative Daten für die Auswertung erhoben:
+\subsection{Beschreibung der Testszenarien}
+\label{sec:testszenarien}
 \begin{itemize}
-    \item \textbf{Laufzeit:} Beide Tools benötigten für den initialen Startlauf (inklusive Start der Testumgebung und Aufbau des Startzustands) rund 45 Sekunden. Bei einfachen Folgeausführungen (Aktivität anlegen) lagen beide Frameworks mit 22 bis 32 Sekunden eng beieinander. Beim vollständigen Erstellen eines Projekts wirkte Cypress durch die internen Retry-Mechanismen etwas performanter.
-    \item \textbf{Stabilität (Flakiness):} Bei zehn aufeinanderfolgenden Testläufen wies Selenium eine Fehlerquote von rund 40\,\% (4 von 10) auf. Die Abbrüche waren meist auf minimale Timing-Abweichungen oder nicht vollständig geladene Elemente zurückzuführen. Cypress hingegen lief deutlich stabiler mit lediglich einem Fehlschlag bei zehn Durchläufen.
-    \item \textbf{Fehlerdiagnose:} Tritt in Selenium ein Fehler auf, wird meist eine technische Exception (z.\,B. in Eclipse) ausgegeben. Cypress bot hier durch den grafischen Test Runner und die Time-Travel-Funktion, mit der Zustände der Anwendung zum Zeitpunkt des Fehlers visuell rekonstruiert werden können, einen signifikanten Mehrwert bei der Fehleranalyse.
+    \item Eindeutige Zuweisung, welche Testklassen aus dem Repository welches Testszenario abbilden, fehlt noch.
+    \item \textbf{Szenario 1: Login.} Ziel des Tests, Startbedingungen, Durchlauf (Eingabe Username/Passwort, Validierung des Redirects).
+    \item \textbf{Szenario 2: Neues Projekt anlegen.} Ziel, Ausf\"ullen des Stammblatts, korrekte Auswahl in Dropdowns (\texttt{select2}), Verifikation der Systemr\"uckmeldung.
+    \item \textbf{Szenario 3: Aktivit\"at bearbeiten.} Ziel, Navigation zur bestehenden Aktivit\"at, Modifikation von Werten (z.\,B. Fortschritt, Datum), Speicherung und Verifikation.
 \end{itemize}
+
+\subsection{Setup und technische Integration}
+\label{sec:setup}
+\begin{itemize}
+    \item \textbf{Selenium:} Reibungslose Einbindung via \texttt{pom.xml} und Maven; Umgehung des Kompatibilit\"atsproblems mit der im Unternehmen verwendeten, \"alteren JDK-Version.
+    \item \textbf{Cypress:} Installationsh\"urden via \texttt{npm} aufgrund der Proxy-Restriktionen des Unternehmens; zwingende Notwendigkeit eines IT-Tickets; Begründung, warum die lokale ZIP-Installation wegen fehlender CI-Skalierbarkeit verworfen wurde.
+\end{itemize}
+
+\subsection{Syntax- und Architekturvergleich}
+\label{sec:syntaxvergleich}
+\begin{itemize}
+    \item Architektonische Unterschiede (Selenium als integrierte Bibliothek in der Java/JUnit-Umgebung vs. Cypress als eigenst\"andiges Tooling auf Node.js-Basis) \cite{Spillner2024}.
+    \item Vergleich der Ausdrucksst\"arke (nat\"urliche Sprachn\"ahe und Chaining bei Cypress vs. technische Abstraktion bei Selenium).
+    \item Wartbarkeit: Notwendigkeit von Hilfsmethoden und Page-Object-Pattern bei Selenium, um Redundanzen im Code zu vermeiden \cite{Liggesmeyer2009}.
+    \item Synchronisation: Integrierte Auto-Waits bei Cypress vs. explizite \texttt{wait.until()}-Aufrufe bei dynamischen Elementen in Selenium.
+\end{itemize}
+
+\subsection{Code-Gegen\"uberstellung: Projektanlage}
+\begin{itemize}
+    \item Die nachfolgenden Listings verdeutlichen den reduzierten Code-Overhead bei Cypress.
+    \item In Selenium (Listing \ref{lst:selenium_form}) muss explizit auf die Sichtbarkeit oder Klickbarkeit der Elemente gewartet werden, was den Code aufbl\"aht.
+    \item Diese Pr\"ufungen sind bei Cypress (Listing \ref{lst:cypress_form}) im \texttt{get()}- und \texttt{type()}-Befehl bereits implizit gekapselt.
+\end{itemize}
+
+\begin{lstlisting}[language=Java, caption={Selenium: Projektname und Datum setzen}, label={lst:selenium_form}]
+// Selenium: Explizite Waits fuer jedes Element
+WebElement projektname = wait.until(
+    ExpectedConditions.visibilityOfElementLocated(By.id("project_name"))
+);
+projektname.clear();
+projektname.sendKeys(PROJEKTNAME);
+
+WebElement endDate = wait.until(
+    ExpectedConditions.elementToBeClickable(By.id("project_endDate"))
+);
+endDate.clear();
+endDate.sendKeys("17.08.2026");
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Cypress: Projektname und Datum setzen}, label={lst:cypress_form}]
+// Cypress: Implizite Waits durch Chaining
+cy.get('#project_name')
+  .type('Cypress Testprojekt')
+
+cy.get('#project_endDate')
+  .scrollIntoView()
+  .clear()
+  .type('17.08.2026')
+\end{lstlisting}
