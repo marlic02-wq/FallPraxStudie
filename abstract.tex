@@ -5,7 +5,15 @@
 \begin{abstract}
 \justifying % Setzt den Text im Blocksatz
 \noindent
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+
+
+Das Testen von Software, insbesondere von regressionskritischen Nutzungsszenarien, ist im Entwicklungsalltag häufig mit einem hohen manuellen und zeitintensiven Aufwand verbunden. Diese Fallstudie untersucht im Kontext der internen Webanwendung \glqq Puma\grqq\ der JUMO GmbH \& Co.\ KG, wie dieser Aufwand durch den Einsatz automatisierter End-to-End-Test-Frameworks zielgerichtet reduziert werden kann. Ziel der Arbeit ist es, auf Basis einer strukturierten Evaluierung das am besten geeignete Werkzeug für die spezifischen, stark reglementierten Unternehmensanforderungen zu identifizieren. Hierfür werden die etablierten Frameworks Selenium und Cypress einander gegenübergestellt.
+
+Die methodische Untersuchung kombiniert eine prototypische Implementierung dreier repräsentativer Testszenarien mit einer anschließenden Nutzwertanalyse nach Kühnapfel. Die Bewertung erfolgt anhand von fünf betrieblich gewichteten Kriterien: Integration in die Infrastruktur (25\,\%), Lernkurve und Syntax (20\,\%), Test-Ausführung und Debugging (20\,\%), Stabilität (20\,\%) sowie Dokumentation und Ökosystem (15\,\%).
+
+Die Ergebnisse der Analyse zeigen, dass Cypress mit einem Gesamtnutzwert von 7,800 aus rein entwicklungstechnischer Sicht dem Framework Selenium (7,200) überlegen ist. Cypress punktet maßgeblich durch eine intuitivere Syntax und signifikant höhere Teststabilität dank integriertem Auto-Waiting. Dennoch offenbart die prototypische Umsetzung gravierende infrastrukturelle Hürden für Cypress: Strenge Proxy-Vorgaben und das etablierte Java-Ökosystem des Unternehmens erschweren eine nahtlose Einbindung erheblich. Selenium lässt sich hingegen als Java-Bibliothek sofort und reibungslos in den bestehenden Maven-Buildprozess integrieren.
+
+Aus diesen Erkenntnissen wird die Handlungsempfehlung abgeleitet, kurzfristig Selenium für die Automatisierung der Tests zu nutzen, um zeitnah erste Automatisierungsgewinne zu erzielen. Mittelfristig sollte das Unternehmen jedoch prüfen, ob die CI/CD-Infrastruktur für Node.js-Umgebungen geöffnet werden kann, um zukünftig von der technischen Überlegenheit von Cypress zu profitieren.
+
 \end{abstract}

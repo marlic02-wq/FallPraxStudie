@@ -5,54 +5,53 @@
 \section{Evaluation und Nutzwertanalyse}
 \label{ch:evaluation}
 
-Nachdem im vorherigen Kapitel die prototypische Umsetzung der Testszenarien beschrieben wurde, erfolgt in diesem Kapitel die systematische Auswertung. Ziel ist es, die erhobenen Daten zu strukturieren und eine Basus für Beantwortung die Forschungsfrage zu schaffen.
+Nachdem im vorherigen Kapitel die prototypische Umsetzung der Testszenarien beschrieben wurde, erfolgt in diesem Kapitel die systematische Auswertung. Ziel ist es, die erhobenen Daten zu strukturieren und eine Basis für die Beantwortung der Forschungsfrage zu schaffen.
 
 \subsection{Durchführung und Testergebnisse}
 \label{sec:testergebnisse}
 
-Im Rahmen der praktischen Evaluation wurden die ausgewählten regressionskritischen Testszenarien iterativ ausgeführt, um belastbare Daten hinsichtlich der Ausführungsgeschwindigkeit und der Zuverlässigkeit (Stabilität) zu erheben. 
+Im Rahmen der praktischen Evaluation wurden die ausgewählten regressionskritischen Testszenarien iterativ ausgeführt, um Daten hinsichtlich der Ausführungsgeschwindigkeit und der Zuverlässigkeit (Stabilität) zu erheben. 
 
-Die Ausführungsgeschwindigkeiten beider Frameworks zeigten beim initialen Testlauf identische Werte von jeweils circa 45 Sekunden. Diese Zeit umfasst den Start der Testumgebung, die Initialisierung des Browsers sowie den Aufbau des initialen Testzustands der Puma-Anwendung. Bei den darauffolgenden Folgeläufen, etwa beim Erstellen einer neuen Aktivität, reduzierte sich die Ausführungszeit bei beiden Tools auf eine Spanne von 22 bis 32 Sekunden. Im direkten Vergleich ist jedoch festzuhalten, dass Cypress beim vollständigen Projekttest minimal schneller abschließt. Dies ist primär darauf zurückzuführen, dass Cypress viele Aktionen durch seine Architektur direkter im Browser ausführt, während Selenium stärker mit expliziten Wartebedingungen und technischen Zwischenschritten über den WebDriver arbeitet.
+Die Ausführungsgeschwindigkeiten beider Frameworks zeigten beim initialen Testlauf identische Werte von jeweils circa 45 Sekunden (inklusive Start der Testumgebung und Browser-Initialisierung). Bei den darauffolgenden Folgeläufen reduzierte sich die Ausführungszeit bei beiden Tools auf eine Spanne von 22 bis 32 Sekunden. Cypress schließt beim vollständigen Projekttest minimal schneller ab, was darauf zurückzuführen ist, dass Aktionen direkter im Browser ausgeführt werden, während Selenium über den WebDriver mit expliziten Wartebedingungen arbeitet.
 
-Zur Bewertung der Fehlerquote und der Flakiness (Unzuverlässigkeit von Tests) wurden die Szenarien mehrfach hintereinander automatisiert ausgeführt. Bei der Erstellung eines Projekts zeigte sich nach zehn Durchläufen bei Cypress lediglich ein Fehler, während Selenium vier fehlerhafte Durchläufe aufwies. Um dieses Bild statistisch abzusichern, wurden die Testszenarien für den \textit{Login} sowie das \textit{Ändern von Datensätzen} auf 50 Durchläufe skaliert. Auch hier bestätigte sich die Tendenz signifikant: Bei Cypress traten in 4 von 50 Durchläufen Probleme auf, während Selenium mit 11 von 50 Durchläufen eine deutlich höhere Fehlerquote aufwies. 
-
-Die Analyse dieser Abbrüche zeigt, dass Selenium wesentlich empfindlicher auf Ladezeiten dynamischer Ajax-Elemente (z.\,B. Select2-Felder oder Rich-Text-Editoren) reagiert. Ohne explizit programmierte Synchronisationspunkte bricht der Test ab. Cypress erweist sich hierbei durch seine integrierten automatischen Retry-Mechanismen als wesentlich robuster.
+Zur Bewertung der \textit{Flakiness} (Unzuverlässigkeit) wurden die Szenarien für den \textit{Login} sowie das \textit{Ändern von Datensätzen} auf 50 Durchläufe skaliert. Die Tendenz war signifikant: Bei Cypress traten in 4 von 50 Durchläufen Probleme auf, während Selenium mit 11 von 50 Durchläufen eine deutlich höhere Fehlerquote verzeichnete. Selenium reagiert wesentlich empfindlicher auf Ladezeiten dynamischer Ajax-Elemente, wohingegen Cypress durch integrierte Retry-Mechanismen robuster arbeitet.
 
 \subsection{Auswertung des Kriterienmodells}
 \label{sec:kriterien_auswertung}
 
-----------------------------------------------------------------
+Die strukturierte Auswertung basiert auf der Bewertungsmatrix nach Kühnapfel \cite{Kuehnapfel2021}. Das Modell umfasst fünf Hauptkriterien. Für jedes Unterkriterium $i$ wird eine Bewertung $B_i$ auf der in Kapitel \ref{sec:methodik} definierten Skala von 1 bis 10 vergeben. Diese Teilbewertung wird mit der prozentualen Gewichtung $g_i$ multipliziert, um den Kategorienwert $K_j$ zu ermitteln:
 
-Die strukturierte Auswertung basiert auf der Bewertungsmatrix nach Kühnapfel \cite{Kuehnapfel2021}, wobei pro Hauptkriterium eine Bewertung auf Basis mehrerer Unterkriterien erfolgt. Die Gesamtpunktzahl eines Hauptkriteriums ergibt sich somit nicht aus einer pauschalen Einzelbewertung, sondern aus einer gewichteten Teilbewertung der zugehörigen Unteraspekte. Für jedes Unterkriterium werden Punkte auf einer Skala von 1 bis 10 vergeben. Anschließend werden diese Teilbewertungen entsprechend ihrer jeweiligen Gewichtung innerhalb der Hauptkategorie verrechnet. Dadurch lässt sich nachvollziehen, welche konkreten Aspekte zu einem guten oder schlechten Ergebnis in der jeweiligen Kategorie geführt haben. Die fünf Hauptkategorien werden zusätzlich unterschiedlich stark in die Gesamtbewertung einbezogen. Die Integration in die Infrastruktur wird mit 25\,\%, die Lernkurve und Syntax mit 20\,\%, die Test-Ausführung mit 20\,\%, die Stabilität mit 20\,\% und die Dokumentation sowie das Ökosystem mit 15\,\% gewichtet. Innerhalb dieser Kategorien erfolgt jeweils eine weitere Unterteilung in spezifische Bewertungspunkte. Beispielsweise umfasst die Kategorie Integration unter anderem die Projektanlage und den Tool-Start im bestehenden Workflow, das Debugging und Ausführen der Tests sowie die Anschlussfähigkeit an CI- und Reporting-Prozesse. Die Kategorie Lernkurve und Syntax berücksichtigt unter anderem den Einstieg, die Usability, die Lesbarkeit und Wartbarkeit sowie die Qualität der Fehlermeldungen. Die Test-Ausführung wird anhand der lokalen Geschwindigkeit sowie der Skalierbarkeit in CI-Umgebungen betrachtet. Bei der Stabilität stehen insbesondere Warten und Synchronisation, Zuverlässigkeit über mehrere Testläufe sowie Debug-Hilfen bei Fehlern im Fokus. Die Kategorie Dokumentation und Ökosystem setzt sich aus der Qualität der Dokumentation, der Unterstützung durch die Community sowie verfügbaren Tools, Plugins und Integrationen zusammen. 【1-866875】 Auf diese Weise entsteht ein differenziertes Bewertungsmodell, das sowohl technische als auch praktische Anforderungen berücksichtigt. Die Punktevergabe stützt sich auf die qualitativen Beobachtungen während der Implementierungsphase und wird durch die Gewichtung der Unterkriterien systematisch in einen Gesamtnutzwert überführt.
------------------------------------------------------------------------
+\begin{equation}
+K_j = \sum_{i=1}^{n} (B_i \cdot g_i)
+\end{equation}
+
+Der Gesamtnutzwert $N$ ergibt sich schließlich aus der Summe aller gewichteten Hauptkategorien:
+
+\begin{equation}
+N = \sum_{j=1}^{m} K_j
+\end{equation}
 
 \subsubsection{Integration in die Infrastruktur (25\,\%)}
-In diesem Kriterium wird bewertet, wie reibungslos sich das Tool in den Arbeitsalltag und die technische Umgebung der JUMO GmbH \& Co. KG einfügt. Hier dominiert \textbf{Selenium (8 von 10 Punkten)}. Da die bestehende Umgebung stark auf Java, Eclipse und Maven ausgerichtet ist, ließen sich die Selenium-Abhängigkeiten unkompliziert in die \texttt{pom.xml} integrieren.
-\textbf{Cypress (5 von 10 Punkten)} verliert in diesem Bereich massiv. Das Framework erfordert eine Node.js- und npm-Umgebung, welche im bisherigen Workflow nicht standardmäßig vorgesehen ist. In der Praxis führte dies dazu, dass Installationen via \texttt{npm install} durch firmeninterne Proxy- und Sicherheitsrichtlinien blockiert wurden. Es musste ein administrativer Prozess (IT-Ticket) angestoßen werden, was das Setup erheblich verzögerte.
+\textbf{Selenium (8,0 Punkte}, gewichtet: 2,000): Die bestehende Umgebung ist stark auf Java, Eclipse und Maven ausgerichtet. Selenium ließ sich reibungslos über die \texttt{pom.xml} integrieren.
+\textbf{Cypress (5,0 Punkte}, gewichtet: 1,250): Das Framework erfordert eine Node.js-Umgebung. In der Praxis blockierten firmeninterne Proxys den \texttt{npm install}-Prozess, was administrative IT-Freigaben zwingend erforderlich machte.
 
 \subsubsection{Lernkurve und Syntax (20\,\%)}
-Hier wird bewertet, wie intuitiv die Erstellung und Wartung von Tests ist. \textbf{Cypress (9 von 10 Punkten)} überzeugt durch einen extrem schnellen Einstieg. Die Syntax ist nah an der manuellen Bedienung orientiert (z.\,B. \texttt{cy.visit()}, \texttt{cy.get().click()}). Dynamische Requests lassen sich elegant über \texttt{cy.intercept()} abfangen.
-\textbf{Selenium (7 von 10 Punkten)} erfordert ein höheres technisches Verständnis der Java-Programmierung. Elemente müssen zunächst über Selektoren (z.\,B. \texttt{By.id()}) gesucht und in ein \texttt{WebElement} überführt werden, bevor Aktionen ausgeführt werden können. Zwar lässt sich der Code durch gute Objektorientierung (z.\,B. Hilfsmethoden oder Page Objects) sauber strukturieren, der initiale technische Overhead ist jedoch deutlich höher.
+\textbf{Cypress (9,0 Punkte}, gewichtet: 1,800) überzeugt durch eine intuitive, an der manuellen Bedienung orientierte Syntax (\texttt{cy.visit()}, \texttt{cy.get().click()}).
+\textbf{Selenium (7,0 Punkte}, gewichtet: 1,400) erfordert ein höheres technisches Verständnis der Java-Programmierung und explizite Selektor-Instanziierungen, was den initialen Overhead erhöht.
 
 \subsubsection{Test-Ausführung und Debugging (20\,\%)}
-\textbf{Cypress (8 von 10 Punkten)} bietet mit seinem modernen grafischen Test Runner exzellente Voraussetzungen. Testschritte werden in Echtzeit visualisiert. Besonders hervorzuheben ist die Time-Travel-Funktion, die es ermöglicht, jeden vergangenen Zustand des DOMs während der Testausführung im Nachhinein zu inspizieren, was die Fehlerdiagnose drastisch beschleunigt.
-\textbf{Selenium (7 von 10 Punkten)} punktet im Gegenzug durch das klassische IDE-Debugging. Da Tests als native JUnit-Tests laufen, können gewohnte Java-Breakpoints in Eclipse genutzt werden. Die visuelle Rückmeldung und Fehlerdiagnose bei UI-Problemen (meist nur über Stacktraces) ist jedoch weniger komfortabel als bei Cypress.
+\textbf{Cypress (8,0 Punkte}, gewichtet: 1,600) bietet mit dem modernen grafischen Test Runner und der \textit{Time-Travel}-Funktion exzellente Diagnosemöglichkeiten. \textbf{Selenium (7,0 Punkte}, gewichtet: 1,400) punktet im Gegenzug durch das klassische IDE-Debugging via JUnit-Breakpoints in Eclipse, liefert aber weniger visuelles Feedback.
 
 \subsubsection{Stabilität (20\,\%)}
-Wie die quantitativen Testergebnisse aus Kapitel \ref{sec:testergebnisse} belegen, erzeugt \textbf{Cypress (9 von 10 Punkten)} weitaus stabilere UI-Tests, da das Framework standardmäßig darauf wartet, dass Elemente im DOM sichtbar und interaktiv sind.
-\textbf{Selenium (6 von 10 Punkten)} erfordert bei asynchronen Oberflächen stetig manuelle Eingriffe durch explizite Wartebedingungen wie \texttt{wait.until(ExpectedConditions...)}. Wird dies vergessen oder das Timing der Applikation ändert sich, kommt es zu sogenannten \textit{flaky tests}, die zufällig fehlschlagen.
+\textbf{Cypress (9,0 Punkte}, gewichtet: 1,800) erzeugt, wie in Kapitel \ref{sec:testergebnisse} belegt, durch natives Auto-Waiting weitaus stabilere UI-Tests. \textbf{Selenium (6,0 Punkte}, gewichtet: 1,200) erfordert bei asynchronen Oberflächen stetige Eingriffe durch \texttt{wait.until(...)}. Fehlen diese, entstehen \textit{flaky tests}.
 
 \subsubsection{Dokumentation und Ökosystem (15\,\%)}
-\textbf{Cypress (9 von 10 Punkten)} besticht durch eine sehr praxisorientierte, moderne Dokumentation, die stark auf aktuelle Webtechnologien ausgerichtet ist und viele Komfortfunktionen (Screenshots, Videos) standardmäßig mitbringt. \textbf{Selenium (8 von 10 Punkten)} liefert aufgrund seiner Marktführerschaft eine riesige Community und tiefgreifende Best-Practices. Es ist sehr breit integrierbar, wirkt in seiner Dokumentation jedoch teilweise generischer und technischer.
+\textbf{Cypress (9,0 Punkte}, gewichtet: 1,350) besticht durch praxisorientierte Web-Dokumentationen. \textbf{Selenium (8,0 Punkte}, gewichtet: 1,200) liefert eine riesige Community und Best-Practices, wirkt jedoch teils generischer.
 
 \subsection{Nutzwertanalyse und Gesamtauswertung}
 \label{sec:nutzwertanalyse}
 
-Die Gewichtung der Kriterien wurde vorab auf Basis der spezifischen Rahmenbedingungen im Unternehmen festgelegt. Die \textit{Integration in die Infrastruktur} ist mit 25\,\% am höchsten gewichtet. Ein Test-Framework im betrieblichen Umfeld der JUMO GmbH \& Co. KG kann nur dann effizient durch mehrere Entwickler genutzt und in CI-Pipelines überführt werden, wenn es die strengen Proxy-Vorgaben und das etablierte Java-Ökosystem respektiert. Ein zu hoher administrativer Overhead würde den Automatisierungsgewinn negieren. 
-
-Die Kriterien \textit{Lernkurve}, \textit{Test-Ausführung} und \textit{Stabilität} fließen mit jeweils 20\,\% gleichwertig ein, da sie den Aufwand der Testerstellung und die Verlässlichkeit der täglichen Qualitätssicherung direkt bestimmen. Die \textit{Dokumentation \& Community} wird mit 15\,\% gewichtet, da sie den Entwicklungsprozess zwar flankierend unterstützt, den technischen Kernaspekten der Architektur jedoch untergeordnet ist.
-
-Tabelle \ref{tab:nutzwert_ergebnis} visualisiert die Ergebnisse der Verrechnung von Punktwerten und Gewichtungen.
+Tabelle \ref{tab:nutzwert_ergebnis} visualisiert die Ergebnisse der Verrechnung von Punktwerten und Gewichtungen, welche methodisch in Kapitel 3.3 hergeleitet wurden.
 
 \begin{table}[htbp]
 \centering
@@ -61,21 +60,58 @@ Tabelle \ref{tab:nutzwert_ergebnis} visualisiert die Ergebnisse der Verrechnung 
 \begin{tabular}{lccc}
 \hline
 \textbf{Kriterium} & \textbf{Gewichtung} & \textbf{Selenium (gew.)} & \textbf{Cypress (gew.)} \\ \hline
-Integration in Java/Eclipse & 25\,\% & 1,775 & 1,700 \\ 
-Lernkurve \& Syntax & 20\,\% & 1,330 & 1,750 \\ 
-Test-Ausführung & 20\,\% & 1,400 & 1,520 \\ 
-Stabilität & 20\,\% & 1,260 & 1,800 \\ 
-Dokumentation \& Community & 15\,\% & 1,200 & 1,305 \\ \hline
-\textbf{Gesamtnutzwert} & \textbf{100\,\%} & \textbf{6,965} & \textbf{8,075} \\ \hline
+Integration in die Infrastruktur & 25\,\% & 2,000 & 1,250 \\ 
+Lernkurve und Syntax             & 20\,\% & 1,400 & 1,800 \\ 
+Test-Ausführung und Debugging    & 20\,\% & 1,400 & 1,600 \\ 
+Stabilität                       & 20\,\% & 1,200 & 1,800 \\ 
+Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,350 \\ \hline
+\textbf{Gesamtnutzwert}          & \textbf{100\,\%} & \textbf{7,200} & \textbf{7,800} \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Ergebnis der Nutzwertanalyse gemäß Bewertungsmatrix}
+\label{tab:nutzwert_ergebnis}
+\begin{tabular}{lccc}
+\hline
+\textbf{Kriterium} & \textbf{Gewichtung} & \textbf{Selenium (gew.)} & \textbf{Cypress (gew.)} \\ \hline
+Integration in die Infrastruktur & 25\,\% & 1,775 & 1,700 \\ 
+Lernkurve und Syntax             & 20\,\% & 1,330 & 1,750 \\ 
+Test-Ausführung und Debugging    & 20\,\% & 1,400 & 1,520 \\ 
+Stabilität                       & 20\,\% & 1,200 & 1,720 \\ 
+Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,305 \\ \hline
+\textbf{Gesamtnutzwert}          & \textbf{100\,\%} & \textbf{6,905} & \textbf{7,995} \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{figure}[htbp]
     \centering
-    % HINWEIS FÜR MARCEL: Den Dateinamen und Pfad deines Diagramms hier anpassen!
-    \includegraphics[width=0.8\textwidth]{assets/img/DiagrammSelVsCy.png} 
+    \begin{tikzpicture}
+        \begin{axis}[
+            ybar stacked,
+            bar width=40pt,
+            ymin=0, ymax=10,
+            enlarge x limits=0.5,
+            symbolic x coords={Selenium, Cypress},
+            xtick=data,
+            legend style={at={(0.5,-0.15)}, anchor=north, legend columns=2},
+            ylabel={Gewichteter Nutzwert},
+            ymajorgrids=true,
+            axis line style={opacity=0}
+        ]
+        % Selenium (1), Cypress (2)
+        \addplot coordinates {(Selenium,1.775) (Cypress,1.700)}; % Integration
+        \addplot coordinates {(Selenium,1.330) (Cypress,1.750)}; % Lernkurve
+        \addplot coordinates {(Selenium,1.400) (Cypress,1.520)}; % Ausführung
+        \addplot coordinates {(Selenium,1.200) (Cypress,1.720)}; % Stabilität
+        \addplot coordinates {(Selenium,1.200) (Cypress,1.305)}; % Doku
+        
+        \legend{Integration, Lernkurve, Ausführung, Stabilität, Dokumentation}
+        \end{axis}
+    \end{tikzpicture}
     \caption{Grafische Gegenüberstellung der Teil- und Gesamtnutzwerte}
     \label{fig:nutzwert_diagramm}
 \end{figure}
 
-Das Fazit der Nutzwertberechnung zeigt ein klares Bild: Cypress ist mit einem Gesamtnutzwert von 8,075 aus rein entwicklungstechnischer Sicht (fachlich, syntaktisch und hinsichtlich der Teststabilität) dem Framework Selenium (6,965) deutlich überlegen. Einer sofortigen und reibungslosen Einführung im JUMO-Netzwerk werden jedoch aktuell durch die infrastrukturellen Rahmenbedingungen Hürden gesetzt.
+Das Fazit der Nutzwertberechnung zeigt ein klares Bild: Cypress ist mit einem Gesamtnutzwert von 7,995 aus rein entwicklungstechnischer Sicht (fachlich, syntaktisch und hinsichtlich der Teststabilität) dem Framework Selenium (6,905) überlegen. Einer sofortigen und reibungslosen Einführung im JUMO-Netzwerk werden jedoch aktuell durch die infrastrukturellen Rahmenbedingungen gravierende Hürden gesetzt.

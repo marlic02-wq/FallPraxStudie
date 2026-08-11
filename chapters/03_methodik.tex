@@ -7,8 +7,7 @@
 Um die Eignung der Frameworks Selenium und Cypress für den Einsatz bei der JUMO GmbH \& Co.\ KG systematisch und objektiv zu vergleichen, wurde ein praxisorientiertes Forschungsdesign gewählt. Dieses Kapitel beschreibt den methodischen Aufbau der Fallstudie, die Auswahl der Testszenarien, die Definition der Bewertungskriterien sowie den Ablauf der praktischen Erprobung.
 
 \subsection{Forschungsdesign der Fallstudie}
-Die Untersuchung basiert auf einer Kombination aus prototypischer Implementierung und einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (NWA) nach Kühnapfel \cite{Kuehnapfel2021}. 
-Da ein rein theoretischer Vergleich der Frameworks den spezifischen infrastrukturellen Kontext des Unternehmens nicht ausreichend berücksichtigen würde, werden beide Werkzeuge in der realen Entwicklungsumgebung erprobt. 
+Die Untersuchung basiert auf einer Kombination aus prototypischer Implementierung und einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (NWA) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Vergleich der Frameworks den spezifischen infrastrukturellen Kontext des Unternehmens nicht ausreichend berücksichtigen würde, werden beide Werkzeuge in der realen Entwicklungsumgebung erprobt. 
 
 Die Ergebnisse dieser praktischen Umsetzung fließen in die Nutzwertanalyse ein. Diese Methode erlaubt es, qualitative und quantitative Beobachtungen in messbare Punktwerte zu übersetzen, diese mit unternehmensspezifischen Gewichtungen zu versehen und so zu einem nachvollziehbaren Gesamtergebnis zu gelangen.
 
@@ -17,30 +16,28 @@ Da eine vollständige Automatisierung aller Anwendungsfälle der \glqq Puma\grqq
 
 Für die prototypische Umsetzung wurden folgende drei Szenarien definiert:
 \begin{enumerate}
-    \item \textbf{Authentifizierung:} Ein Login-Vorgang zur Prüfung des Zugriffs auf geschützte Bereiche. Obwohl dieser Bereich bei funktionalen Erweiterungen der Anwendung selten direkt modifiziert wird, ist er aufgrund seiner hohen Kritikalität (Totalausfall bei Defekt) zwingend abzusichern. Zudem dient er im Framework-Vergleich als methodische Baseline zur Evaluation grundlegender Interaktions- und Warte-Mechanismen ohne überlagernde Geschäftslogik.
+    \item \textbf{Authentifizierung:} Ein Login-Vorgang zur Prüfung des Zugriffs auf geschützte Bereiche. Obwohl dieser Bereich bei funktionalen Erweiterungen der Anwendung selten direkt modifiziert wird, ist er aufgrund seiner hohen Kritikalität (Totalausfall bei Defekt) zwingend abzusichern. Zudem dient er im Framework-Vergleich als methodische Baseline zur Evaluation grundlegender Interaktions- und Warte-Mechanismen.
     
-    \item \textbf{Formularverarbeitung:} Das Ausfüllen, Validieren und Absenden eines typischen Eingabeformulars. Formulare stellen einen zentralen Interaktionspunkt der Anwendung dar. Dieses Szenario eignet sich besonders, um zu vergleichen, wie die Frameworks mit verschiedenen UI-Elementen (wie Dropdowns oder Pflichtfeldern) sowie mit der Auswertung von Validierungsmeldungen im Browser umgehen.
+    \item \textbf{Formularverarbeitung:} Das Ausfüllen, Validieren und Absenden eines typischen Eingabeformulars (Projekt-/Aktivitätsanlage). Dieses Szenario vergleicht, wie die Frameworks mit verschiedenen dynamischen UI-Elementen (z.\,B. Select2-Dropdowns) umgehen.
     
-    \item \textbf{Datensatzbearbeitung:} Ein mehrstufiger Prozess, bei dem ein Datensatz aufgerufen, modifiziert, gespeichert und die erfolgreiche Änderung im Anschluss verifiziert wird. Da die Prozessverwaltung den fachlichen Kernbereich der Anwendung darstellt, sind solche Abläufe nach Updates stark regressionsgefährdet. Dieses komplexe Szenario testet primär, wie zuverlässig die Werkzeuge asynchrone Ladezeiten (z.\,B. Warten auf das Speichern im Backend) und die zusammenhängende Navigation über mehrere Ansichten hinweg handhaben.
+    \item \textbf{Datensatzbearbeitung:} Ein mehrstufiger Prozess, bei dem ein Datensatz aufgerufen, modifiziert, gespeichert und verifiziert wird. Dies testet primär, wie zuverlässig die Werkzeuge asynchrone Ladezeiten und die zusammenhängende Navigation handhaben.
 \end{enumerate}
 
 \subsection{Ableitung und Gewichtung der Bewertungskriterien}
-Die Bewertungskriterien für die Nutzwertanalyse wurden direkt aus den fachlichen, technischen und organisatorischen Anforderungen des Ausbildungsbetriebs abgeleitet. Um der betrieblichen Realität gerecht zu werden, wurden folgende Hauptkriterien definiert:
+Die Bewertungskriterien für die Nutzwertanalyse wurden direkt aus den fachlichen, technischen und organisatorischen Anforderungen des Ausbildungsbetriebs abgeleitet. Die Gewichtung (in Klammern) erfolgt vor dem Hintergrund der Unternehmensziele:
 
 \begin{itemize}
-    \item \textbf{Integrationsaufwand:} Bewertung der initialen Einrichtung innerhalb der bestehenden Infrastruktur. Hierbei spielen insbesondere das vorhandene Build-Management (Maven), das genutzte JDK sowie der Umgang mit den strikten Proxy- und Netzwerksperren des Unternehmens eine zentrale Rolle.
-    \item \textbf{Verständlichkeit und Wartbarkeit:} Beurteilung der Syntax und Struktur des Testcodes. Es wird bewertet, wie schnell sich neue Entwickler einarbeiten können und wie aufwendig die Pflege der Tests bei zukünftigen UI-Anpassungen ist.
-    \item \textbf{Stabilität und Laufzeit:} Analyse der Ausführungsgeschwindigkeit sowie der Zuverlässigkeit der Tests (z.\,B. Anfälligkeit für sogenannte \textit{Flaky Tests}, die sporadisch ohne Code-Änderung fehlschlagen).
-    \item \textbf{Fehlerdiagnose und Dokumentation:} Bewertung der Möglichkeiten zur Fehlersuche (Debugging, Screenshots/Videos bei Fehlschlägen) sowie der Qualität der offiziellen Dokumentation und Community-Unterstützung.
+    \item \textbf{Integration in die Infrastruktur (25\,\%):} Bewertung der initialen Einrichtung. Ein Test-Framework im betrieblichen Umfeld der JUMO GmbH \& Co.\ KG kann nur effizient skaliert werden, wenn es die strengen Proxy-Vorgaben und das etablierte Java-Ökosystem respektiert. Ein zu hoher administrativer Overhead negiert den Automatisierungsgewinn, weshalb dieses Kriterium am höchsten gewichtet wird.
+    \item \textbf{Lernkurve und Syntax (20\,\%):} Beurteilung, wie intuitiv die Erstellung und Pflege von Tests ist, um eine schnelle Einarbeitung neuer Entwickler zu gewährleisten.
+    \item \textbf{Test-Ausführung und Debugging (20\,\%):} Analyse der Ausführungsgeschwindigkeit und der Möglichkeiten zur Fehlersuche.
+    \item \textbf{Stabilität (20\,\%):} Zuverlässigkeit der Tests (Minimierung von \textit{Flaky Tests}). Laufzeit und Stabilität bestimmen direkt den Erfolg der täglichen Qualitätssicherung.
+    \item \textbf{Dokumentation und Ökosystem (15\,\%):} Bewertung der offiziellen Hilfen und Community. Dies flankiert den Entwicklungsprozess, ist den technischen Kernaspekten jedoch untergeordnet.
 \end{itemize}
-Die Gewichtung dieser Kriterien erfolgt vor dem Hintergrund der Unternehmensziele: Da die Tests von den Entwicklern lokal ausgeführt werden sollen, erhalten Integrationsaufwand und Wartbarkeit eine entsprechend hohe Priorität.
 
 \subsection{Vorgehen der prototypischen Umsetzung}
-Die praktische Erprobung erfolgt schrittweise. Zunächst wird für beide Frameworks eine lokale Testumgebung aufgesetzt. Dabei wird dokumentiert, welche Konfigurationsschritte und Workarounds (beispielsweise bei Abhängigkeiten-Downloads über den Firmen-Proxy) notwendig sind.
-
-Anschließend werden die drei definierten Testszenarien (Login, Formular, Datensatzbearbeitung) nacheinander zunächst in Selenium und danach in Cypress implementiert. Um eine Vergleichbarkeit zu gewährleisten, wird für beide Frameworks derselbe Ausgangszustand der Anwendung genutzt. Während der Entwicklung wird notiert, wie viel Aufwand für das Auffinden von Web-Elementen (DOM-Selektoren), den Umgang mit asynchronen Ladezeiten und den Aufbau der Assertion-Logik (Prüfung der erwarteten Ergebnisse) benötigt wird.
+Die praktische Erprobung erfolgt schrittweise. Zunächst wird für beide Frameworks eine lokale Testumgebung aufgesetzt, wobei notwendige Konfigurationsschritte und Workarounds dokumentiert werden. Anschließend werden die drei definierten Testszenarien nacheinander in Selenium und Cypress implementiert. Um eine Vergleichbarkeit zu gewährleisten, wird für beide Werkzeuge derselbe Ausgangszustand der Anwendung genutzt. 
 
 \subsection{Datenerhebung und Auswertung}
-Die Datenerhebung findet parallel zur prototypischen Umsetzung statt. Quantitative Daten wie die Dauer der Testausführung und die Zeilenanzahl des Testcodes (als Indikator für Komplexität) werden direkt gemessen. Qualitative Daten, wie die Qualität der Fehlermeldungen oder Hürden bei der Netzwerkintegration, werden in Form eines Entwicklertagebuchs strukturiert festgehalten.
+Die Datenerhebung findet parallel zur prototypischen Umsetzung statt. Quantitative Daten (Dauer der Testausführung, Code-Struktur) und qualitative Daten (Hürden bei der Netzwerkintegration, Fehlermeldungen) werden strukturiert festgehalten.
 
-Nach Abschluss der Implementierung werden die erhobenen Daten in das Kriterienmodell der Nutzwertanalyse überführt. Jedes Framework erhält pro Kriterium eine Bewertung auf einer Skala von 1 bis 10. Diese Punktzahl wird mit der zuvor definierten Gewichtung multipliziert. Die Summe aller gewichteten Punkte ergibt den Gesamtnutzwert, welcher als fundierte Entscheidungsgrundlage für die abschließende Handlungsempfehlung im Fazit dient.
+Nach Abschluss der Implementierung werden die erhobenen Daten in das Kriterienmodell überführt. Jedes Framework erhält pro Kriterium eine Bewertung auf einer festen \textbf{Skala von 1 bis 10 Punkten}. Diese Punktzahl wird mit der zuvor definierten Gewichtung multipliziert. Die Summe aller gewichteten Punkte ergibt den Gesamtnutzwert.

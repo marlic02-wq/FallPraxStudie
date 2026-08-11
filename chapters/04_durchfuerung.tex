@@ -108,25 +108,77 @@ Der wesentliche Unterschied liegt darin, dass Selenium Wartebedingungen häufig 
 
 Anhand eines ausgewählten Codebeispiels wird im Folgenden der strukturelle Aufbau beider Frameworks bei typischen UI-Interaktionen gegenübergestellt. Der Schwerpunkt dieses Vergleichs liegt auf dem Befüllen von Formularfeldern, konkret dem Setzen des Projektnamens und des Enddatums bei der Projektanlage.
 
-% PLATZHALTER: Screenshot Selenium
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{assets/img/SeleniumCodeVs.png}
-    \caption{Ausführung der Projektanlage mittels Selenium}
-    \label{fig:selenium_projektanlage}
+\begin{figure}[htbp]
+    \begin{minipage}[t]{1\textwidth}
+\begin{lstlisting}[language=Java, caption={Projektanlage mit Selenium}, label={lst:selenium_form}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+// Projektname setzen + prüfen
+WebElement projektname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project_name")));
+assertNotNull(projektname, "Feld 'Projektname' wurde nicht gefunden.");
+projektname.clear();
+projektname.sendKeys(PROJEKTNAME);
+assertEquals(PROJEKTNAME, projektname.getAttribute("value"),
+    "Projektname wurde nicht korrekt gesetzt.");
+
+// Bereich
+selectDropdownByTextAndAssert("project_divisionId", "Informationstechnologie (IT)");
+
+// Projektprofil
+selectDropdownByTextAndAssert("project_sapProjectProfile", "ZEW");
+
+// Profitcenter
+selectDropdownByTextAndAssert("project_sapProfitCenter", "CC10100400 - Ausbildung");
+
+// Enddatum
+WebElement endDate = wait.until(ExpectedConditions.elementToBeClickable(By.id("project_endDate")));
+assertNotNull(endDate, "Feld 'Enddatum' wurde nicht gefunden.");
+endDate.clear();
+endDate.sendKeys("17.08.2026");
+assertEquals("17.08.2026", endDate.getAttribute("value"),
+    "Enddatum wurde nicht korrekt gesetzt.");
+\end{lstlisting}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{1\textwidth}
+        
+\begin{lstlisting}[language=JavaScript, caption={Projektanlage in Cypress}, label={lst:cypress_form}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+// Neues Projekt anlegen + Aktivität
+// Stammblatt ausfüllen (Pflichtfelder):
+
+// Projektname
+cy.get('#project_name').type('Cypress Testprojekt')
+
+// Bereich
+cy.get('#project_divisionId')
+  .scrollIntoView()
+  .select('Informationstechnologie (IT)', { force: true })
+
+// Projektprofil
+cy.get('#project_sapProjectProfile')
+  .select('ZEW', { force: true })
+
+// Profitcenter
+cy.get('#project_sapProfitCenter')
+  .select('CC10100400 - Ausbildung', { force: true })
+
+// Datum(Zeitspanne)
+  //Von
+  /*
+  cy.get('#project_startDate')
+    .clear()
+    .type('dd.mm.yyyy')
+  */
+
+  //Bis
+  cy.get('#project_endDate')
+    .scrollIntoView()
+    .clear()
+    .type('17.08.2026')
+\end{lstlisting}
+    \end{minipage}
 \end{figure}
 
-Wie im Quellcode erkennbar, wird für jedes relevante Element in Selenium zunächst ein explizites Warten (Wait) definiert. Beim Feld \texttt{project\_name} wird auf die Sichtbarkeit gewartet, beim Feld \texttt{project\_endDate} auf die Klickbarkeit. Erst danach können die Felder geleert und mit den Testdaten befüllt werden. Dies macht den Code zwar robust gegenüber dynamischen Ladezeiten, erhöht jedoch die Zeilenanzahl und verleiht dem Test einen stark technischen Charakter.
+Wie in Listing \ref{lst:selenium_form} erkennbar, wird für jedes relevante Element in Selenium zunächst ein explizites Warten (Wait) definiert. Beim Feld \texttt{project\_name} wird auf die Sichtbarkeit gewartet, beim Feld \texttt{project\_endDate} auf die Klickbarkeit. Erst danach können die Felder geleert und mit den Testdaten befüllt werden. Dies macht den Code zwar robust gegenüber dynamischen Ladezeiten, erhöht jedoch die Zeilenanzahl und verleiht dem Test einen stark technischen Charakter.
 
-% PLATZHALTER: Screenshot Cypress
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{assets/img/CypressCodeVs.png}
-    \caption{Ausführung der Projektanlage im Cypress Test Runner}
-    \label{fig:cypress_projektanlage}
-\end{figure}
-
-Cypress nutzt im Gegensatz dazu, wie in Quellcode \ref{lst:cypress_form} dargestellt, die Anweisung \texttt{cy.get()} zur Auswahl des Elements. Notwendige Wartebedingungen sind in den Cypress-Standardbefehlen bereits implizit integriert, sodass die Aktionen direkt verkettet (Chaining) werden können. Für das Datumsfeld wird zusätzlich \texttt{scrollIntoView()} verwendet, um sicherzustellen, dass sich das Element im sichtbaren Viewport befindet. 
+Cypress nutzt im Gegensatz dazu, wie in Listing \ref{lst:cypress_form} dargestellt, die Anweisung \texttt{cy.get()} zur Auswahl des Elements. Notwendige Wartebedingungen sind in den Cypress-Standardbefehlen bereits implizit integriert, sodass die Aktionen direkt verkettet (Chaining) werden können. Für das Datumsfeld wird zusätzlich \texttt{scrollIntoView()} verwendet, um sicherzustellen, dass sich das Element im sichtbaren Viewport befindet. 
 
 Aus dieser Gegenüberstellung lassen sich folgende Bewertungsaspekte für die Nutzwertanalyse ableiten:
 \begin{enumerate}

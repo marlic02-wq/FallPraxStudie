@@ -1,4 +1,8 @@
 %laden der Präambel mit Latexbefehlen/-klassen
+
+\pdfmajorversion=1
+\pdfminorversion=3
+
 \documentclass[a4paper, 12pt, openany]{article}
 
 % Font type
@@ -86,6 +90,23 @@
 \include{chapters/05_ergebnisse}
 \include{chapters/06_fazit}
 
+% Literatur
+\newpage
+\setstretch{1} % andere Zeilenhöhe
+\normalsize
+\printbibliography[title={Literaturverzeichnis}]
+\addcontentsline{toc}{section}{Literaturverzeichnis} 
+\markboth{Literaturverzeichnis}{Literaturverzeichnis}
+
+\section*{Eigenständigkeitserklärung}
+\addcontentsline{toc}{section}{Eigenständigkeitserklärung}
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe. 
+
+Alle sinngemäß und wörtlich übernommenen Textstellen aus fremden Quellen wurden kenntlich gemacht.\\[2cm]
+Fulda, den 17.08.2026 \\[1.5cm]
+\rule{6cm}{0.4pt}\\
+Marcel Licht
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%% ~~~~~ Anhang
@@ -96,22 +117,16 @@
 \appendix
 \addappheadtotoc
 
-\section{Anhang}
+
 \input{appendix/anhang_A}
-\include{appendix/acronyms}
-\include{appendix/glossar}
+%\include{appendix/acronyms}
+%\include{appendix/glossar}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% ~~~~~ Backmatter - Rückteil Anhang ~~~~~
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Literatur
-\newpage
-\setstretch{1} % andere Zeilenhöhe
-\normalsize
-\printbibliography[title={Literaturverzeichnis}]
-\addcontentsline{toc}{section}{Literaturverzeichnis} 
-\markboth{Literaturverzeichnis}{Literaturverzeichnis}
+
 
 % Ende Dokument
 \end{document}
