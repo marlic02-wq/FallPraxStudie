@@ -30,7 +30,6 @@
 *.pdfsync
 
 # Generierte PDF- und Metadaten
-*.pdf
 *.xmpi
 
 # OS generierte Dateien (optional, aber empfohlen)
