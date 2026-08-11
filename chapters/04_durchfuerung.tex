@@ -32,31 +32,32 @@ Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in d
     \label{fig:uml_komponenten}
 \end{figure}
 
-
 \subsection{Beschreibung der Testszenarien}
 \label{sec:testszenarien}
 
-Dieses Unterkapitel beschreibt die getesteten Anwendungsszenarien systematisch und ordnet diese den jeweiligen Testimplementierungen zu.
+Dieses Unterkapitel beschreibt die getesteten Anwendungsszenarien systematisch und ordnet diese den jeweiligen Testimplementierungen zu. Zur besseren Übersichtlichkeit wird im Folgenden auf die Angabe vollständiger Dateipfade verzichtet. Stattdessen werden die zugehörigen Testdateien direkt mit ihrem Dateinamen benannt. Die Namenskonvention orientiert sich an einer fortlaufenden Nummerierung der Szenarien (z.\,B. \texttt{01\_...} für das erste Szenario). Die vollständigen Pfade und Quellcodes sind im digitalen Anhang (Git-Repository) zu finden.
 
 \subsubsection{Szenario 1: Login}
 Das Ziel dieses Tests ist es zu prüfen, ob sich ein Benutzer erfolgreich an der Puma-Webanwendung anmelden kann. Die Startbedingungen setzen voraus, dass Puma lokal über den Tomcat-Server auf Port 8082 erreichbar ist und ein gültiger Benutzer mit Benutzername und Passwort zur Verfügung steht.
 
 Der Ablauf des Tests beginnt mit dem Öffnen der Login-Seite. Nach der Eingabe von Benutzername und Passwort wird der Login-Button betätigt. Anschließend wird geprüft, ob eine Weiterleitung auf die erwartete Zielseite erfolgt.
-Das erwartete Ergebnis ist, dass der Benutzer erfolgreich angemeldet wird und der Redirect im Test validiert wird.\footnote{\textbf{Testdateien:} Selenium: \path{.../_01_PumaLoginTest.java} | Cypress: \path{.../01_login-ui.cy.js}}
+
+Das erwartete Ergebnis ist, dass der Benutzer erfolgreich angemeldet wird und der Redirect im Test validiert wird. Die automatisierte Umsetzung erfolgte in den Testdateien \textbf{01\_PumaLoginTest.java} (Selenium) und \textbf{01\_login-ui.cy.js} (Cypress).
 
 \subsubsection{Szenario 2: Neues Projekt bzw. neue Aktivität anlegen}
 In diesem Szenario wird geprüft, ob ein neues Projekt bzw. eine neue Aktivität korrekt über die Benutzeroberfläche angelegt werden kann. Als Startbedingung muss der Benutzer erfolgreich angemeldet sein. Die Anwendung muss lokal erreichbar sein und die benötigten Dropdown-Werte müssen im System zur Verfügung stehen.
 
 Der Test navigiert zur Maske für die Projekt- bzw. Aktivitätsanlage. Das Stammblatt wird durch Eingabe der benötigten Projektdaten ausgefüllt. Eine Besonderheit bilden hier Dropdowns mit \textbf{select2}, die dynamisch reagieren und daher gezielt im Code angesprochen werden müssen. Nach dem Ausfüllen wird das Formular gespeichert und die Systemrückmeldung geprüft.
 
-Als erwartetes Ergebnis wird das Projekt oder die Aktivität erfolgreich angelegt. Die Anwendung zeigt eine korrekte Bestätigung an, und die Daten sind im System vorhanden.\footnote{\textbf{Testdateien:} Selenium: \path{.../_02_NewActivityAnlegenTest.java} \& \path{.../_02_NewProjektTest.java} | Cypress: \path{.../02_newActivity.cy.js} \& \path{.../02_newProjekt.cy.js}}
+Als erwartetes Ergebnis wird das Projekt oder die Aktivität erfolgreich angelegt. Die Anwendung zeigt eine korrekte Bestätigung an, und die Daten sind im System vorhanden. Die zugehörigen Testdateien sind \textbf{02\_NewProjektTest.java} und \textbf{02\_NewActivityAnlegenTest.java} für Selenium sowie \textbf{02\_newProjekt.cy.js} und \textbf{02\_newActivity.cy.js} für Cypress.
 
 \subsubsection{Szenario 3: Aktivität bearbeiten}
 Das Ziel des dritten Szenarios ist die Prüfung, ob eine bestehende Aktivität geöffnet, geändert, gespeichert und anschließend korrekt validiert werden kann. Die Startbedingungen erfordern, dass der Benutzer angemeldet ist und eine bestehende Aktivität aufgerufen werden kann.
 
 Der Ablauf sieht die Navigation zur Aktivität sowie das Öffnen der Bearbeitungsansicht vor. Es folgt die Änderung definierter Werte (z.\,B. Fortschritt oder Datum). Nach dem Speichern wird die Aktivität erneut aufgerufen, um zu validieren, ob die Änderungen korrekt übernommen wurden.
 
-Es wird erwartet, dass die Aktivität erfolgreich gespeichert wird und die geänderten Werte korrekt in der Oberfläche angezeigt werden.\footnote{\textbf{Testdateien:} Selenium: \path{.../_03_EditActivityTest.java} \& \path{.../_03_ControlEditedActivityTest.java} | Cypress: \path{.../03_editActivity.cy.js} \& \path{.../03_controlEditedActivity.cy.js}}
+Es wird erwartet, dass die Aktivität erfolgreich gespeichert wird und die geänderten Werte korrekt in der Oberfläche angezeigt werden. Die Umsetzung für dieses Szenario befindet sich in \textbf{03\_EditActivityTest.java} und \textbf{03\_ControlEditedActivityTest.java} (Selenium) sowie \textbf{03\_editActivity.cy.js} und \textbf{03\_controlEditedActivity.cy.js} (Cypress).
+
 
 \subsection{Setup und technische Integration}
 \label{sec:setup}
