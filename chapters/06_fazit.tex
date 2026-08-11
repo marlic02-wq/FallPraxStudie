@@ -1,13 +1,35 @@
-\section{Fazit und Handlungsempfehlung}
-\label{sec:fazit}
+% --------------------------------------------------
+% 6. Fazit und Ausblick
+% --------------------------------------------------
 
-\subsection{Zusammenfassung der Erkenntnisse}
-\label{subsec:zusammenfassung}
+\section{Fazit und Ausblick}
+\label{ch:fazit}
 
-\subsection{Handlungsempfehlung für die JUMO GmbH \& Co. KG}
-\label{subsec:empfehlung}
-% Klare Empfehlung basierend auf dem Gewinner der Nutzwertanalyse
+\subsection{Beantwortung der Forschungsfrage und Handlungsempfehlung}
+\label{sec:beantwortung_forschungsfrage}
 
-\subsection{Ausblick und zukünftige Schritte}
-\label{subsec:ausblick}
-% CI/CD-Pipeline-Anbindung, organisatorische Freigaben für npm/Node.js
+Ziel dieser Fallstudie war es zu evaluieren, welches End-to-End-Test-Framework -- Selenium oder Cypress -- sich besser für die Automatisierung regressionskritischer Testszenarien im Umfeld der JUMO GmbH \& Co. KG eignet. Die durchgeführte Nutzwertanalyse liefert hierauf eine differenzierte Antwort.
+
+Aus rein technischer und entwicklungsorientierter Perspektive erweist sich \textbf{Cypress} als das überlegene Tool. Es punktet durch eine intuitive Syntax, exzellente Debugging-Möglichkeiten und eine signifikant höhere Stabilität bei dynamischen Webanwendungen. Die integrierten Retry-Mechanismen reduzieren die Fehleranfälligkeit bei Ladezeiten drastisch. 
+
+Dennoch führt diese Überlegenheit nicht zu einer uneingeschränkten Empfehlung. Die infrastrukturellen Voraussetzungen der JUMO GmbH \& Co. KG basieren stark auf einem Java-Ökosystem, während Cypress eine Node.js-Umgebung erfordert. Die in der Evaluierung aufgetretenen Konflikte mit den strengen Proxy- und Sicherheitsrichtlinien des Unternehmens bremsen den Automatisierungsgewinn derzeit aus.
+
+\textbf{Selenium} hingegen ist durch seine Java-Kompatibilität direkt und ohne administrativen Zusatzaufwand in die bestehende Infrastruktur integrierbar. Es erfordert zwar einen höheren Programmieraufwand zur Sicherstellung der Teststabilität, stellt aber unter den aktuellen Rahmenbedingungen die pragmatischere Lösung dar.
+
+Die \textbf{Handlungsempfehlung} für das Unternehmen lautet daher: Kurzfristig sollte Selenium für die Automatisierung der regressionskritischen Tests der Puma-Anwendung genutzt werden, da die Integration in das bestehende Java-/Maven-Umfeld sofort möglich ist. Mittelfristig sollte jedoch geprüft werden, ob die IT-Infrastruktur so angepasst werden kann (z.\,B. durch Freigaben im Proxy und die Bereitstellung von Node.js in der CI/CD-Pipeline), dass ein Wechsel auf Cypress möglich wird, um von dessen überlegener Teststabilität und Entwicklerfreundlichkeit zu profitieren.
+
+\subsection{Kritische Reflexion und Methodengrenzen}
+\label{sec:reflexion}
+
+Die in dieser Fallstudie angewandte Methodik und die daraus abgeleiteten Ergebnisse unterliegen gewissen Einschränkungen, die bei der abschließenden Bewertung zu berücksichtigen sind. 
+
+Zunächst basiert die Bewertung der CI- und Reporting-Integration für beide Tools teilweise auf theoretischen Annahmen. Im Rahmen des zeitlich begrenzten Praxisprojekts lag der Fokus auf der prototypischen Erstellung lokaler Tests; eine vollständige Integration in eine automatisierte Build-Pipeline wurde nicht abschließend praktisch umgesetzt. Des Weiteren ist zu beachten, dass qualitative Bewertungskriterien wie \textit{Lesbarkeit der Syntax} und \textit{Usability des Test Runners} zwangsläufig einer subjektiven Wahrnehmung des Evaluierenden unterliegen, auch wenn sie durch konkrete Implementierungserfahrungen untermauert wurden.
+
+Abschließend ist eine klare fachliche Differenzierung bezüglich der identifizierten Schwächen von Cypress notwendig: Die gravierendsten Punktabzüge, welche bei der Projekterstellung und Installation auftraten, stellen keine originären Schwächen des Tools dar. Sie resultieren vielmehr maßgeblich aus den rigiden Sicherheits- und Proxy-Richtlinien der Unternehmensinfrastruktur. Würde das Unternehmen standardmäßig Node.js-Umgebungen und entsprechende Paket-Freigaben unterstützen, fiele die Nutzwertanalyse noch deutlicher zugunsten von Cypress aus.
+
+\subsection{Ausblick}
+\label{sec:ausblick}
+
+Zukünftige Arbeiten könnten die in dieser Fallstudie identifizierten Einschränkungen aufgreifen. Eine logische Fortführung wäre die praktische Implementierung beider Frameworks in einer vollständigen CI/CD-Pipeline (z.\,B. Jenkins oder GitLab CI), um die theoretischen Annahmen zur Reporting- und Ausführungsfähigkeit im automatisierten Build-Prozess empirisch zu belegen. 
+
+Darüber hinaus sollte das Unternehmen die strategische Entscheidung treffen, inwiefern moderne JavaScript-/TypeScript-basierte Testing-Tools zukünftig gefördert werden sollen, um langfristig die Effizienz in der Qualitätssicherung von Webanwendungen zu steigern.
