@@ -121,8 +121,11 @@ style=ieee,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OPTIONAL ggf. auskommentieren
 % Paket für Glossar
-\usepackage[acronym,xindy,toc]{glossaries}
-\makeglossaries
+%\usepackage[acronym,xindy,toc]{glossaries} ALT
+%\usepackage[acronym,toc,automake]{glossaries}
+\usepackage[acronym,toc]{glossaries}
+\makenoidxglossaries
+%\makeglossaries ALT
 % Binde die Dateien ein
 \loadglsentries{appendix/acronyms.tex}
 \loadglsentries{appendix/glossar.tex}
@@ -197,4 +200,20 @@ style=ieee,
     {ü}{{\"u}}1
     {ä}{{\"a}}1
     {ö}{{\"o}}1
+}
+
+
+\definecolor{logbg}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{logStyle}{
+    backgroundcolor=\color{logbg},
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    breakatwhitespace=false,
+    showspaces=false,
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{gray},
+    captionpos=b,
+    tabsize=2
 }

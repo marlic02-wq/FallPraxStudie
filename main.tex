@@ -20,12 +20,13 @@
 
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% ~~~~~ Frontmatter - Vorderteil ~~~~~
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-
 
 % Titelseitenlayout laden
 \pagestyle{empty}
@@ -40,6 +41,8 @@
 % top=25mm, bottom=25mm, inner=30mm, outer=30mm, headsep=10mm, footskip=12mm
 \restoregeometry
 
+\glsaddall
+
 % Abstrakt
 \input{abstract}
 \clearpage
@@ -47,12 +50,6 @@
 % Inhaltsverzeichnis
 \begin{spacing}{1.3}
 \tableofcontents
-
-% Glossar und Abkürzungsverzeichnis drucken
-\phantomsection
-\printglossary[title=Glossar, toctitle=Glossar]
-\clearpage
-\printglossary[type=\acronymtype, title=Abkürzungsverzeichnis, toctitle=Abkürzungsverzeichnis]
 \clearpage
 
 % Abbildungsverzeichnis
@@ -98,6 +95,15 @@
 \addcontentsline{toc}{section}{Literaturverzeichnis} 
 \markboth{Literaturverzeichnis}{Literaturverzeichnis}
 
+% Glossar und Abkürzungsverzeichn
+
+\printnoidxglossary[title=Glossar, toctitle=Glossar]
+
+\printnoidxglossary[type=\acronymtype, title=Abkürzungsverzeichnis, toctitle=Abkürzungsverzeichnis]
+
+
+
+
 \section*{Eigenständigkeitserklärung}
 \addcontentsline{toc}{section}{Eigenständigkeitserklärung}
 Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe. 
@@ -106,6 +112,7 @@ Alle sinngemäß und wörtlich übernommenen Textstellen aus fremden Quellen wur
 Fulda, den 17.08.2026 \\[1.5cm]
 \rule{6cm}{0.4pt}\\
 Marcel Licht
+\clearpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -117,16 +124,7 @@ Marcel Licht
 \appendix
 \addappheadtotoc
 
-
 \input{appendix/anhang_A}
-%\include{appendix/acronyms}
-%\include{appendix/glossar}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% ~~~~~ Backmatter - Rückteil Anhang ~~~~~
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 % Ende Dokument
 \end{document}

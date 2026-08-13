@@ -6,14 +6,12 @@
 \justifying % Setzt den Text im Blocksatz
 \noindent
 
-
-
-Das Testen von Software, insbesondere von regressionskritischen Nutzungsszenarien, ist im Entwicklungsalltag häufig mit einem hohen manuellen und zeitintensiven Aufwand verbunden. Diese Fallstudie untersucht im Kontext der internen Webanwendung \glqq Puma\grqq\ der JUMO GmbH \& Co.\ KG, wie dieser Aufwand durch den Einsatz automatisierter End-to-End-Test-Frameworks zielgerichtet reduziert werden kann. Ziel der Arbeit ist es, auf Basis einer strukturierten Evaluierung das am besten geeignete Werkzeug für die spezifischen, stark reglementierten Unternehmensanforderungen zu identifizieren. Hierfür werden die etablierten Frameworks Selenium und Cypress einander gegenübergestellt.
-
-Die methodische Untersuchung kombiniert eine prototypische Implementierung dreier repräsentativer Testszenarien mit einer anschließenden Nutzwertanalyse nach Kühnapfel. Die Bewertung erfolgt anhand von fünf betrieblich gewichteten Kriterien: Integration in die Infrastruktur (25\,\%), Lernkurve und Syntax (20\,\%), Test-Ausführung und Debugging (20\,\%), Stabilität (20\,\%) sowie Dokumentation und Ökosystem (15\,\%).
-
-Die Ergebnisse der Analyse zeigen, dass Cypress mit einem Gesamtnutzwert von 7,800 aus rein entwicklungstechnischer Sicht dem Framework Selenium (7,200) überlegen ist. Cypress punktet maßgeblich durch eine intuitivere Syntax und signifikant höhere Teststabilität dank integriertem Auto-Waiting. Dennoch offenbart die prototypische Umsetzung gravierende infrastrukturelle Hürden für Cypress: Strenge Proxy-Vorgaben und das etablierte Java-Ökosystem des Unternehmens erschweren eine nahtlose Einbindung erheblich. Selenium lässt sich hingegen als Java-Bibliothek sofort und reibungslos in den bestehenden Maven-Buildprozess integrieren.
-
-Aus diesen Erkenntnissen wird die Handlungsempfehlung abgeleitet, kurzfristig Selenium für die Automatisierung der Tests zu nutzen, um zeitnah erste Automatisierungsgewinne zu erzielen. Mittelfristig sollte das Unternehmen jedoch prüfen, ob die CI/CD-Infrastruktur für Node.js-Umgebungen geöffnet werden kann, um zukünftig von der technischen Überlegenheit von Cypress zu profitieren.
-
+Diese Fallstudie untersucht die Automatisierung von End-to-End-Tests für die interne Webanwendung „Puma“ der JUMO GmbH \& Co. KG, um den zeitintensiven, manuellen Testaufwand im Entwicklungsalltag zu reduzieren. 
+Im Mittelpunkt der Untersuchung steht der strukturierte Vergleich der beiden Test-Frameworks Selenium und Cypress hinsichtlich ihrer Eignung in einer stark reglementierten Unternehmens-Infrastruktur.  
+Als Methodik diente die prototypische Implementierung von drei repräsentativen, regressionskritischen Testszenarien (Login, Formularverarbeitung und Datensatzbearbeitung). 
+Die daraus gewonnenen praktischen Erkenntnisse wurden anschließend mittels einer Nutzwertanalyse anhand von fünf praxisnahen Kriterien systematisch ausgewertet.  
+Die Ergebnisse der Analyse zeigen, dass Cypress dem Framework Selenium aus rein entwicklungstechnischer Sicht überlegen ist. 
+Cypress überzeugt insbesondere durch eine intuitivere Syntax und eine signifikant höhere Teststabilität durch integriertes Auto-Waiting. 
+Einer sofortigen Einführung stehen jedoch Hürden im Weg, da strenge Proxy-Vorgaben und das etablierte Java-Ökosystem des Unternehmens die benötigte Node.js-Umgebung blockieren.  
+Die Arbeit kommt zu der Handlungsempfehlung, kurzfristig Selenium für die Automatisierung zu nutzen, da es sich als Java-Bibliothek reibungslos in den bestehenden Build-Prozess integrieren lässt. Mittelfristig wird dem Unternehmen jedoch geraten, die IT-Infrastruktur für Cypress zu öffnen, um von dessen technischen Vorteilen zu profitieren
 \end{abstract}

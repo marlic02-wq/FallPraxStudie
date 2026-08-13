@@ -5,7 +5,7 @@
 \section{Evaluation und Nutzwertanalyse}
 \label{ch:evaluation}
 
-Nachdem im vorherigen Kapitel die prototypische Umsetzung der Testszenarien beschrieben wurde, erfolgt in diesem Kapitel die systematische Auswertung. Ziel ist es, die erhobenen Daten zu strukturieren und eine Basis für die Beantwortung der Forschungsfrage zu schaffen.
+Nachdem im vorherigen Kapitel die prototypische Umsetzung der Testszenarien beschrieben wurde, erfolgt in diesem Kapitel die systematische Auswertung. Ziel ist es, die erhobenen Daten zu strukturieren und eine nachvollziehbare Basis für die Beantwortung der Forschungsfrage zu schaffen.
 
 \subsection{Durchführung und Testergebnisse}
 \label{sec:testergebnisse}
@@ -14,73 +14,117 @@ Im Rahmen der praktischen Evaluation wurden die ausgewählten regressionskritisc
 
 Die Ausführungsgeschwindigkeiten beider Frameworks zeigten beim initialen Testlauf identische Werte von jeweils circa 45 Sekunden (inklusive Start der Testumgebung und Browser-Initialisierung). Bei den darauffolgenden Folgeläufen reduzierte sich die Ausführungszeit bei beiden Tools auf eine Spanne von 22 bis 32 Sekunden. Cypress schließt beim vollständigen Projekttest minimal schneller ab, was darauf zurückzuführen ist, dass Aktionen direkter im Browser ausgeführt werden, während Selenium über den WebDriver mit expliziten Wartebedingungen arbeitet.
 
-Zur Bewertung der \textit{Flakiness} (Unzuverlässigkeit) wurden die Szenarien für den \textit{Login} sowie das \textit{Ändern von Datensätzen} auf 50 Durchläufe skaliert. Die Tendenz war signifikant: Bei Cypress traten in 4 von 50 Durchläufen Probleme auf, während Selenium mit 11 von 50 Durchläufen eine deutlich höhere Fehlerquote verzeichnete. Selenium reagiert wesentlich empfindlicher auf Ladezeiten dynamischer Ajax-Elemente, wohingegen Cypress durch integrierte Retry-Mechanismen robuster arbeitet.
+Zur Bewertung der Unzuverlässigkeit (\textit{Flakiness}) wurden die Szenarien für den \textit{Login} sowie das \textit{Ändern von Datensätzen} auf 50 Durchläufe skaliert. Die Tendenz war signifikant: Bei Cypress traten in 4 von 50 Durchläufen Probleme auf, während Selenium mit 11 von 50 Durchläufen eine deutlich höhere Fehlerquote verzeichnete. Selenium reagiert wesentlich empfindlicher auf Ladezeiten dynamischer Ajax-Elemente, wohingegen Cypress durch integrierte Retry-Mechanismen robuster arbeitet.
 
 \subsection{Auswertung des Kriterienmodells}
 \label{sec:kriterien_auswertung}
 
-Die strukturierte Auswertung basiert auf der Bewertungsmatrix nach Kühnapfel \cite{Kuehnapfel2021}. Das Modell umfasst fünf Hauptkriterien. Für jedes Unterkriterium $i$ wird eine Bewertung $B_i$ auf der in Kapitel \ref{sec:methodik} definierten Skala von 1 bis 10 vergeben. Diese Teilbewertung wird mit der prozentualen Gewichtung $g_i$ multipliziert, um den Kategorienwert $K_j$ zu ermitteln:
+Die strukturierte Auswertung basiert auf der Bewertungsmatrix nach Kühnapfel \cite{Kuehnapfel2021}. Das Modell umfasst fünf Hauptkriterien, die sich jeweils in gewichtete Unterkriterien aufteilen. Für jedes Unterkriterium $i$ wird eine Bewertung auf einer Skala von 1 bis 10 vergeben. Diese Teilbewertung ($B_i$) wird mit der prozentualen Gewichtung innerhalb der Kategorie ($g_i$) multipliziert und anschließend mit der Gewichtung der Hauptkategorie ($G_j$) verrechnet, um den finalen Kategoriewert ($K_j$) zu erhalten:
 
 \begin{equation}
-K_j = \sum_{i=1}^{n} (B_i \cdot g_i)
+K_j = \left( \sum_{i=1}^{n} B_i \cdot g_i \right) \cdot G_j
 \end{equation}
 
-Der Gesamtnutzwert $N$ ergibt sich schließlich aus der Summe aller gewichteten Hauptkategorien:
+Im Folgenden werden die Punktevergaben für sämtliche Unterkriterien detailliert begründet und die resultierenden Teilnutzwerte transparent berechnet.
 
-\begin{equation}
-N = \sum_{j=1}^{m} K_j
-\end{equation}
+\subsubsection{Integration in die Infrastruktur (Gewichtung: 25\,\%)}
+\label{sec:eval_integration}
+Dieses Kriterium bewertet, wie nahtlos sich das Tool in die bestehende Java-/Eclipse-Umgebung bei JUMO integrieren lässt.
+\begin{itemize}
+    \item \textbf{Projekt-Anlage \& Tool-Start (40\,\%):} Selenium (8 Punkte) ließ sich problemlos über die \texttt{pom.xml} in den Maven-Build integrieren. Cypress (5 Punkte) benötigt eine separate Node.js-Umgebung, deren \texttt{npm install}-Prozess zunächst durch firmeninterne Proxys blockiert wurde und IT-Freigaben erforderte.
+    \item \textbf{Debugging \& Ausführen (30\,\%):} Cypress (9 Punkte) punktet durch den grafischen Test Runner und die Time-Travel-Funktion, die Fehler sofort visuell nachvollziehbar machen. Selenium (6 Punkte) stützt sich auf klassisches IDE-Debugging, was funktional, aber visuell weniger intuitiv ist.
+    \item \textbf{CI-/Reporting-Anschlussfähigkeit (30\,\%):} Beide Tools (jeweils 7 Punkte) lassen sich gut in Pipelines integrieren, wobei Selenium naturgemäß besser zum bestehenden Java-Standard-Workflow passt.
+\end{itemize}
 
-\subsubsection{Integration in die Infrastruktur (25\,\%)}
-\textbf{Selenium (8,0 Punkte}, gewichtet: 2,000): Die bestehende Umgebung ist stark auf Java, Eclipse und Maven ausgerichtet. Selenium ließ sich reibungslos über die \texttt{pom.xml} integrieren.
-\textbf{Cypress (5,0 Punkte}, gewichtet: 1,250): Das Framework erfordert eine Node.js-Umgebung. In der Praxis blockierten firmeninterne Proxys den \texttt{npm install}-Prozess, was administrative IT-Freigaben zwingend erforderlich machte.
+\textbf{Berechnung des Teilnutzwerts:}
+\begin{itemize}
+    \item[] \textbf{Selenium:} $((8 \cdot 0{,}40) + (6 \cdot 0{,}30) + (7 \cdot 0{,}30)) \cdot 0{,}25 = 7{,}10 \cdot 0{,}25 = \mathbf{1{,}775}$
+    \item[] \textbf{Cypress:} $((5 \cdot 0{,}40) + (9 \cdot 0{,}30) + (7 \cdot 0{,}30)) \cdot 0{,}25 = 6{,}80 \cdot 0{,}25 = \mathbf{1{,}700}$
+\end{itemize}
 
-\subsubsection{Lernkurve und Syntax (20\,\%)}
-\textbf{Cypress (9,0 Punkte}, gewichtet: 1,800) überzeugt durch eine intuitive, an der manuellen Bedienung orientierte Syntax (\texttt{cy.visit()}, \texttt{cy.get().click()}).
-\textbf{Selenium (7,0 Punkte}, gewichtet: 1,400) erfordert ein höheres technisches Verständnis der Java-Programmierung und explizite Selektor-Instanziierungen, was den initialen Overhead erhöht.
 
-\subsubsection{Test-Ausführung und Debugging (20\,\%)}
-\textbf{Cypress (8,0 Punkte}, gewichtet: 1,600) bietet mit dem modernen grafischen Test Runner und der \textit{Time-Travel}-Funktion exzellente Diagnosemöglichkeiten. \textbf{Selenium (7,0 Punkte}, gewichtet: 1,400) punktet im Gegenzug durch das klassische IDE-Debugging via JUnit-Breakpoints in Eclipse, liefert aber weniger visuelles Feedback.
+\subsubsection{Lernkurve und Syntax (Gewichtung: 20\,\%)}
+\label{sec:eval_lernkurve}
+Hier wird bewertet, wie schnell das Team produktiv wird und wie lesbar sowie wartbar der geschriebene Testcode ist.
+\begin{itemize}
+    \item \textbf{Einstieg / erster Test (40\,\%):} Cypress (9 Punkte) ermöglicht durch sprechende Befehle einen extrem schnellen Start. Selenium (7 Punkte) setzt solides Java-Verständnis und Boilerplate-Code voraus.
+    \item \textbf{Usability (10\,\%):} Cypress (9 Punkte) fühlt sich durch das \textit{Chaining} sehr intuitiv und nah am manuellen Test an. Selenium (6 Punkte) erfordert mehr technische Zwischenschritte zur Element-Instanziierung.
+    \item \textbf{Lesbarkeit \& Wartbarkeit (25\,\%):} Die Cypress-Syntax (8 Punkte) bleibt auch bei längeren Tests gut verständlich. Selenium (7 Punkte) erfordert konsequent die Nutzung von Patterns (wie Page Objects), um nicht unübersichtlich zu werden.
+    \item \textbf{Fehlermeldungen / Diagnose (25\,\%):} Cypress (9 Punkte) zeigt die genaue Ursache direkt im DOM an. Selenium (6 Punkte) wirft oftmals Stacktraces aus, deren Fehlerursache schwerer zu lokalisieren ist.
+\end{itemize}
 
-\subsubsection{Stabilität (20\,\%)}
-\textbf{Cypress (9,0 Punkte}, gewichtet: 1,800) erzeugt, wie in Kapitel \ref{sec:testergebnisse} belegt, durch natives Auto-Waiting weitaus stabilere UI-Tests. \textbf{Selenium (6,0 Punkte}, gewichtet: 1,200) erfordert bei asynchronen Oberflächen stetige Eingriffe durch \texttt{wait.until(...)}. Fehlen diese, entstehen \textit{flaky tests}.
+\textbf{Berechnung des Teilnutzwerts:}
+\begin{itemize}
+    \item[] \textbf{Selenium:} $((7 \cdot 0{,}40) + (6 \cdot 0{,}10) + (7 \cdot 0{,}25) + (6 \cdot 0{,}25)) \cdot 0{,}20 = 6{,}65 \cdot 0{,}20 = \mathbf{1{,}330}$
+    \item[] \textbf{Cypress:} $((9 \cdot 0{,}40) + (9 \cdot 0{,}10) + (8 \cdot 0{,}25) + (9 \cdot 0{,}25)) \cdot 0{,}20 = 8{,}75 \cdot 0{,}20 = \mathbf{1{,}750}$
+\end{itemize}
 
-\subsubsection{Dokumentation und Ökosystem (15\,\%)}
-\textbf{Cypress (9,0 Punkte}, gewichtet: 1,350) besticht durch praxisorientierte Web-Dokumentationen. \textbf{Selenium (8,0 Punkte}, gewichtet: 1,200) liefert eine riesige Community und Best-Practices, wirkt jedoch teils generischer.
+
+\subsubsection{Test-Ausführung (Gewichtung: 20\,\%)}
+\label{sec:eval_ausfuehrung}
+Diese Kategorie bewertet die Geschwindigkeit im Entwicklungsalltag und bei potenzieller Skalierung.
+\begin{itemize}
+    \item \textbf{Geschwindigkeit lokal (60\,\%):} Cypress (8 Punkte) lief bei der Projekterstellung lokal flüssiger und direkter. Selenium (7 Punkte) wies durch den WebDriver-Overhead eine minimal langsamere Ausführung auf.
+    \item \textbf{Geschwindigkeit in CI / Skalierung (40\,\%):} Beide Frameworks (jeweils 7 Punkte) bieten die Möglichkeit zur parallelen und Headless-Ausführung, wofür bei großen Suiten eine entsprechende Infrastruktur bereitgestellt werden muss.
+\end{itemize}
+
+\textbf{Berechnung des Teilnutzwerts:}
+\begin{itemize}
+    \item[] \textbf{Selenium:} $((7 \cdot 0{,}60) + (7 \cdot 0{,}40)) \cdot 0{,}20 = 7{,}00 \cdot 0{,}20 = \mathbf{1{,}400}$
+    \item[] \textbf{Cypress:} $((8 \cdot 0{,}60) + (7 \cdot 0{,}40)) \cdot 0{,}20 = 7{,}60 \cdot 0{,}20 = \mathbf{1{,}520}$
+\end{itemize}
+
+
+\subsubsection{Stabilität (Gewichtung: 20\,\%)}
+\label{sec:eval_stabilitaet}
+Die Zuverlässigkeit der Ergebnisse und das Abfangen von Timing-Problemen sind kritisch für die Akzeptanz im Team.
+\begin{itemize}
+    \item \textbf{Warten \& Synchronisation (40\,\%):} Cypress (8 Punkte) nutzt ein integriertes Auto-Waiting für dynamische Seiten. Selenium (6 Punkte) erfordert bei asynchronen Oberflächen stetig explizite Eingriffe (z.\,B. \texttt{wait.until(...)}).
+    \item \textbf{Zuverlässigkeit über mehrere Läufe (55\,\%):} Cypress (9 Punkte) bewies im Stresstest eine sehr niedrige Fehlerrate. Selenium (6 Punkte) schlug ohne Code-Änderungen signifikant häufiger durch Timing-Probleme fehl.
+    \item \textbf{Debug-Hilfen bei Fehlern (5\,\%):} Cypress (9 Punkte) visualisiert Fehlzustände durch Snapshots perfekt. Selenium (6 Punkte) ist hier primär auf Trace-Logs angewiesen.
+\end{itemize}
+
+\textbf{Berechnung des Teilnutzwerts:}
+\begin{itemize}
+    \item[] \textbf{Selenium:} $((6 \cdot 0{,}40) + (6 \cdot 0{,}55) + (6 \cdot 0{,}05)) \cdot 0{,}20 = 6{,}00 \cdot 0{,}20 = \mathbf{1{,}200}$
+    \item[] \textbf{Cypress:} $((8 \cdot 0{,}40) + (9 \cdot 0{,}55) + (9 \cdot 0{,}05)) \cdot 0{,}20 = 8{,}60 \cdot 0{,}20 = \mathbf{1{,}720}$
+\end{itemize}
+
+
+\subsubsection{Dokumentation und Community (Gewichtung: 15\,\%)}
+\label{sec:eval_doku}
+Hier wird geprüft, wie gut die Frameworks durch offizielle Webseiten und die Community unterstützt werden.
+\begin{itemize}
+    \item \textbf{Doku-Qualität (70\,\%):} Die Cypress-Dokumentation (9 Punkte) ist herausragend, aktuell und stark auf konkrete Use-Cases fokussiert. Selenium (8 Punkte) bietet ebenfalls eine sehr gute, wenn auch teils technischere und generischere Dokumentation.
+    \item \textbf{Hilfe durch Community (10\,\%):} Für beide Tools (jeweils 8 Punkte) finden sich schnell Lösungsansätze für blockierende Probleme.
+    \item \textbf{Ökosystem / Tools (20\,\%):} Beide (jeweils 8 Punkte) bieten eine breite Palette an Plugins und Integrationen für Reporter und CI-Systeme.
+\end{itemize}
+
+\textbf{Berechnung des Teilnutzwerts:}
+\begin{itemize}
+    \item[] \textbf{Selenium:} $((8 \cdot 0{,}70) + (8 \cdot 0{,}10) + (8 \cdot 0{,}20)) \cdot 0{,}15 = 8{,}00 \cdot 0{,}15 = \mathbf{1{,}200}$
+    \item[] \textbf{Cypress:} $((9 \cdot 0{,}70) + (8 \cdot 0{,}10) + (8 \cdot 0{,}20)) \cdot 0{,}15 = 8{,}70 \cdot 0{,}15 = \mathbf{1{,}305}$
+\end{itemize}
+
 
 \subsection{Nutzwertanalyse und Gesamtauswertung}
 \label{sec:nutzwertanalyse}
 
-Tabelle \ref{tab:nutzwert_ergebnis} visualisiert die Ergebnisse der Verrechnung von Punktwerten und Gewichtungen, welche methodisch in Kapitel 3.3 hergeleitet wurden.
-
-\begin{table}[htbp]
-\centering
-\caption{Ergebnis der Nutzwertanalyse}
-\label{tab:nutzwert_ergebnis}
-\begin{tabular}{lccc}
-\hline
-\textbf{Kriterium} & \textbf{Gewichtung} & \textbf{Selenium (gew.)} & \textbf{Cypress (gew.)} \\ \hline
-Integration in die Infrastruktur & 25\,\% & 2,000 & 1,250 \\ 
-Lernkurve und Syntax             & 20\,\% & 1,400 & 1,800 \\ 
-Test-Ausführung und Debugging    & 20\,\% & 1,400 & 1,600 \\ 
-Stabilität                       & 20\,\% & 1,200 & 1,800 \\ 
-Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,350 \\ \hline
-\textbf{Gesamtnutzwert}          & \textbf{100\,\%} & \textbf{7,200} & \textbf{7,800} \\ \hline
-\end{tabular}
-\end{table}
+Der finale Gesamtnutzwert ($N$) ergibt sich aus der Addition der zuvor berechneten Kategoriewerte. Tabelle \ref{tab:nutzwert_ergebnis} fasst die exakten Ergebnisse der Verrechnung zusammen.
 
 \begin{table}[htbp]
 \centering
 \caption{Ergebnis der Nutzwertanalyse gemäß Bewertungsmatrix}
 \label{tab:nutzwert_ergebnis}
+\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lccc}
 \hline
 \textbf{Kriterium} & \textbf{Gewichtung} & \textbf{Selenium (gew.)} & \textbf{Cypress (gew.)} \\ \hline
 Integration in die Infrastruktur & 25\,\% & 1,775 & 1,700 \\ 
 Lernkurve und Syntax             & 20\,\% & 1,330 & 1,750 \\ 
-Test-Ausführung und Debugging    & 20\,\% & 1,400 & 1,520 \\ 
+Test-Ausführung                  & 20\,\% & 1,400 & 1,520 \\ 
 Stabilität                       & 20\,\% & 1,200 & 1,720 \\ 
-Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,305 \\ \hline
+Dokumentation und Community      & 15\,\% & 1,200 & 1,305 \\ \hline
 \textbf{Gesamtnutzwert}          & \textbf{100\,\%} & \textbf{6,905} & \textbf{7,995} \\ \hline
 \end{tabular}
 \end{table}
@@ -90,7 +134,7 @@ Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,305 \\ \hline
     \begin{tikzpicture}
         \begin{axis}[
             ybar stacked,
-            bar width=40pt,
+            bar width=45pt,
             ymin=0, ymax=10,
             enlarge x limits=0.5,
             symbolic x coords={Selenium, Cypress},
@@ -100,7 +144,7 @@ Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,305 \\ \hline
             ymajorgrids=true,
             axis line style={opacity=0}
         ]
-        % Selenium (1), Cypress (2)
+        % Koordinaten für Selenium und Cypress
         \addplot coordinates {(Selenium,1.775) (Cypress,1.700)}; % Integration
         \addplot coordinates {(Selenium,1.330) (Cypress,1.750)}; % Lernkurve
         \addplot coordinates {(Selenium,1.400) (Cypress,1.520)}; % Ausführung
@@ -114,4 +158,4 @@ Dokumentation und Ökosystem      & 15\,\% & 1,200 & 1,305 \\ \hline
     \label{fig:nutzwert_diagramm}
 \end{figure}
 
-Das Fazit der Nutzwertberechnung zeigt ein klares Bild: Cypress ist mit einem Gesamtnutzwert von 7,995 aus rein entwicklungstechnischer Sicht (fachlich, syntaktisch und hinsichtlich der Teststabilität) dem Framework Selenium (6,905) überlegen. Einer sofortigen und reibungslosen Einführung im JUMO-Netzwerk werden jedoch aktuell durch die infrastrukturellen Rahmenbedingungen gravierende Hürden gesetzt.
+Das Fazit der Nutzwertberechnung zeigt ein klares Bild: Cypress ist mit einem Gesamtnutzwert von \textbf{7,995} aus rein entwicklungstechnischer Sicht (fachlich, syntaktisch und hinsichtlich der Teststabilität) dem Framework Selenium (\textbf{6,905}) überlegen. Einer sofortigen und reibungslosen Einführung im JUMO-Netzwerk werden jedoch aktuell durch die infrastrukturellen Rahmenbedingungen (erforderliche Node.js-Umgebung, Proxy-Restriktionen) gravierende Hürden gesetzt.

@@ -102,6 +102,15 @@ Cypress verfügt über integrierte Auto-Waits. Viele Wartebedingungen sind berei
 
 Der wesentliche Unterschied liegt darin, dass Selenium Wartebedingungen häufig explizit formuliert, während Cypress viele Synchronisationsaufgaben automatisch übernimmt.
 
+\subsubsection{Benutzeroberfläche und Test-Logging}
+Selenium bietet keine eigene Benutzeroberfläche, sondern wird typischerweise als klassischer JUnit-Test aus der IDE heraus gestartet. Zudem fehlt ein integriertes Logging der einzelnen Testschritte. Log-Ausgaben müssen manuell implementiert werden, andernfalls erhält man bei Fehlern oft nur komplexe Java-Stacktraces.
+
+Cypress stellt dagegen einen interaktiven grafischen Test Runner bereit. Dieser beinhaltet ein automatisches \textit{Command-Log}, das jede Interaktion in Echtzeit am Bildschirmrand protokolliert. Über eine integrierte Time-Travel-Funktion lässt sich der visuelle Zustand des Browsers zu jedem vergangenen Testschritt exakt prüfen, was manuellen Log-Aufwand vollständig überflüssig macht.
+
+Es sei an dieser Stelle angemerkt, dass sich das fehlende visuelle Reporting und Logging in Selenium durch die Integration diverser Drittanbieter-Tools (wie beispielsweise Allure Reports oder kommerziellen Cloud-Lösungen) aufrüsten ließe, um ein ähnliches Komfortniveau wie bei Cypress zu erreichen. In dieser Fallstudie werden solche Erweiterungen jedoch nicht berücksichtigt. Die Beschaffung, Lizenzierung und administrative Freigabe externer Tools ist im stark reglementierten Unternehmenskontext häufig mit zusätzlichen Kosten, Datenschutzprüfungen und langwierigen IT-Prozessen verbunden. Daher fokussiert sich dieser Vergleich bewusst auf die \textit{Out-of-the-box}-Funktionalitäten der beiden Frameworks.
+
+Zusammenfassend: Während Selenium in der Standardausführung auf manuelle Log-Implementierungen und IDE-Konsolen angewiesen ist, bietet Cypress durch seinen Test Runner und automatisches Logging von Haus aus eine deutlich bessere visuelle Nachvollziehbarkeit.
+
 
 \subsection{Code-Gegenüberstellung: Projektanlage}
 \label{sec:code_gegenueberstellung}

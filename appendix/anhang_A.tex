@@ -16,8 +16,7 @@ Verwendete Tools: Google Gemini 3.1 Pro
 \section{Bewertungsmatrix (Excel)}
 \label{sec:anhang_bewertungsmatrix}
 
-In diesem Abschnitt ist die vollständige Bewertungsmatrix der Nutzwertanalyse abgebildet, die als Grundlage für die finale Auswertung diente. Aufgrund des Umfangs der Kriterien und Begründungen wurde die Darstellung der Excel-Datei in zwei Abbildungen aufgeteilt.
-
+In diesem Abschnitt ist die vollständige Bewertungsmatrix der Nutzwertanalyse abgebildet, die als Grundlage für die finale Auswertung diente. 
 \begin{figure}[htbp]
     \centering
     % Passe den Dateinamen an deine Screenshots an
@@ -34,4 +33,911 @@ In diesem Abschnitt ist die vollständige Bewertungsmatrix der Nutzwertanalyse a
     \label{fig:bewertungsmatrix_2}
 \end{figure}
 
-\section{TestLog}
+\clearpage
+
+\section{Testprotokolle (Testlogs)}
+\label{sec:anhang_testlogs}
+
+In diesem Abschnitt sind die detaillierten Testprotokolle der automatisierten Testdurchläufe für Selenium und Cypress dokumentiert. Sie umfassen sowohl erfolgreiche Durchläufe als auch exemplarische Fehlerausgaben, die im Rahmen der Prototyp-Evaluation protokolliert wurden. 
+Dieser Abschnitt dient dem Nachweis der Systemstabilität, der Transparenz bei Fehlerdiagnosen und unterstreicht die praktischen Ergebnisse der Nutzwertanalyse.
+
+
+\subsection{Testprotokolle: Selenium}
+\label{subsec:testlogs_selenium}
+
+\begin{lstlisting}[caption={Selenium -- Login (Erfolgreich)}, label={lst:sel_login}, style=logStyle]
+[SELENIUM] Login-Test gestartet
+[SELENIUM] Login-Seite geöffnet
+[SELENIUM] Passwort eingegeben
+[SELENIUM] Login-Button geklickt
+[SELENIUM] Home-Seite wurde erreicht
+[SELENIUM] Login erfolgreich geprüft
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Selenium -- Neues Projekt (Exemplarische Fehlerausgabe)}, label={lst:sel_new_proj_err}, style=logStyle]
+_02_NewProjektTest
+ui.pumaTests.new_Projekt._02_NewProjektTest
+sollteNeuesProjektErstellen(ui.pumaTests.new_Projekt._02_NewProjektTest)
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element found by By.cssSelector: #project-dropdown-menu a[href='createProject'] to be clickable, but the element was not found: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#project-dropdown-menu a[href='createProject']"}.
+(tried for 10 seconds with 500 milliseconds interval)
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25.0.2'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 151.0.4129.72, fedcm:accounts: true, goog:processID: 33636, ms:edgeOptions: {debuggerAddress: localhost:49771}, msedge: {msedgedriverVersion: 151.0.4129.78 (dd5b3842e0c9..., userDataDir: C:\Users\MARCEL~1.LIC\AppDa...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49771/devtoo..., se:cdpVersion: 151.0.4129.72, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 2899188fbc0ff7b8b592e7b0aa6c9f27
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+	at ui.pumaTests.new_Projekt._02_NewProjektTest.sollteNeuesProjektErstellen(_02_NewProjektTest.java:53)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Selenium -- Neues Projekt (Erfolgreich)}, label={lst:sel_new_proj_ok}, style=logStyle]
+[SELENIUM] Setup gestartet: Anmeldung wird bei Bedarf durchgeführt und implizite Wartezeit deaktiviert.
+Aug. 12, 2026 10:43:11 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNUNG: Unable to find an exact match for CDP version 151, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 151
+[SELENIUM] Login-Seite geöffnet
+[SELENIUM] Passwort eingegeben
+[SELENIUM] Login-Button geklickt
+[SELENIUM] Home-Seite wurde erreicht
+[SELENIUM] Setup abgeschlossen: Benutzer ist angemeldet und explizite Waits werden verwendet.
+[SELENIUM] Projektanlage gestartet: Projekt-Dropdown wird geöffnet.
+[SELENIUM] Navigation zur Maske 'Neues Projekt': Link im Projekt-Dropdown wird ausgewählt.
+[SELENIUM] Prüfung der Navigation: URL muss die Projekt-Erfassungsseite 'createProject' enthalten.
+[SELENIUM] Projektname wird eingetragen und direkt gegen den Feldwert geprüft.
+[SELENIUM] Bereich wird ausgewählt: Informationstechnologie (IT).
+[SELENIUM] Dropdown 'project_divisionId' wird geöffnet und Option mit Text 'Informationstechnologie (IT)' ausgewählt.
+[SELENIUM] Dropdown 'project_divisionId' wurde erfolgreich gesetzt auf: Informationstechnologie (IT)
+[SELENIUM] Projektprofil wird ausgewählt: ZEW.
+[SELENIUM] Dropdown 'project_sapProjectProfile' wird geöffnet und Option mit Text 'ZEW' ausgewählt.
+[SELENIUM] Dropdown 'project_sapProjectProfile' wurde erfolgreich gesetzt auf: ZEW - Entwicklungsprojekt
+[SELENIUM] Profitcenter wird ausgewählt: CC10100400 - Ausbildung.
+[SELENIUM] Dropdown 'project_sapProfitCenter' wird geöffnet und Option mit Text 'CC10100400 - Ausbildung' ausgewählt.
+[SELENIUM] Dropdown 'project_sapProfitCenter' wurde erfolgreich gesetzt auf: CC10100400 - Ausbildung
+[SELENIUM] Enddatum wird eingetragen und gegen den Feldwert geprüft.
+[SELENIUM] Auftraggeber wird über Select2 gesucht und ausgewählt: Marcel Licht.
+[SELENIUM] Select2-Feld '#project_sponsor_id' wird geöffnet und nach 'Marcel Licht' durchsucht.
+[SELENIUM] Select2-Feld '#project_sponsor_id' wurde erfolgreich gesetzt auf: Marcel Licht (Duales Studium)
+[SELENIUM] Projektleiter wird über Select2 gesucht und ausgewählt: Marcel Licht.
+[SELENIUM] Select2-Feld '#project_manager_id' wird geöffnet und nach 'Marcel Licht' durchsucht.
+[SELENIUM] Select2-Feld '#project_manager_id' wurde erfolgreich gesetzt auf: Marcel Licht (Duales Studium)
+[SELENIUM] Projekttyp wird ausgewählt: Verbesserungsprojekt.
+[SELENIUM] Dropdown 'project_projectType' wird geöffnet und Option mit Text 'Verbesserungsprojekt' ausgewählt.
+[SELENIUM] Dropdown 'project_projectType' wurde erfolgreich gesetzt auf: Verbesserungsprojekt
+[SELENIUM] Projektkategorie wird ausgewählt: Prozessoptimierung (Ablauforganisation).
+[SELENIUM] Dropdown 'project_projectCategory' wird geöffnet und Option mit Text 'Prozessoptimierung (Ablauforganisation)' ausgewählt.
+[SELENIUM] Dropdown 'project_projectCategory' wurde erfolgreich gesetzt auf: Prozessoptimierung (Ablauforganisation)
+[SELENIUM] Beschreibung wird im CKEditor beziehungsweise im passenden Fallback-Feld gesetzt und geprüft.
+[SELENIUM] Rich-Text-Beschreibung wird über die CKEditor-API gesetzt, falls verfügbar.
+[SELENIUM] Beschreibung wurde erfolgreich über die CKEditor-API gesetzt.
+[SELENIUM] Formularzustand wird vor dem Speichern gesammelt geprüft.
+[SELENIUM] Projekt wird gespeichert: Speichern-Button wird gesucht, sichtbar positioniert und geklickt.
+[SELENIUM] Speicher-Erfolg wird geprüft: Anwendung darf nicht mehr auf der Erfassungsseite stehen.
+[SELENIUM] Speicher-Erfolg wird geprüft: Projektname muss auf der Folgeseite angezeigt werden.
+[SELENIUM] Projektanlage erfolgreich abgeschlossen.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Selenium -- Neue Activity (Erfolgreich)}, label={lst:sel_new_act_ok}, style=logStyle]
+[SELENIUM] Basis-Setup gestartet: Login wird bei Bedarf durchgeführt und implizite Selenium-Wartezeit deaktiviert.
+Aug. 12, 2026 10:44:47 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNUNG: Unable to find an exact match for CDP version 151, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 151
+[SELENIUM] Login-Seite geöffnet
+[SELENIUM] Passwort eingegeben
+[SELENIUM] Login-Button geklickt
+[SELENIUM] Home-Seite wurde erreicht
+[SELENIUM] Basis-Setup abgeschlossen: Test verwendet explizite Waits für stabile UI-Interaktionen.
+[SELENIUM] Activity-Anlage gestartet: Seite zum Anlegen einer neuen Activity im Projektplan wird geöffnet.
+[SELENIUM] Neue Activity anlegen gestartet: Projekt wird gesucht. Projektname: Selenium Testprojekt
+[SELENIUM] Projektsuche gestartet: Projekt-Suchseite wird geöffnet. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt-Suchseite wird geöffnet: Startseite öffnen, Projekt-Dropdown öffnen und Menüpunkt 'Suche' auswählen.
+[SELENIUM] Startseite wird geöffnet und anschließend über die URL geprüft.
+[SELENIUM] Base-URL wird ermittelt: zuerst System-Property 'baseUrl', danach Umgebungsvariable 'BASE_URL', sonst Default-URL.
+[SELENIUM] Base-URL wurde ermittelt: http://localhost:8082/puma
+[SELENIUM] Startseite wurde erfolgreich geöffnet: http://localhost:8082/puma/home
+[SELENIUM] Projekt-Dropdown wird geöffnet: Toggle, Menü und geöffneter Zustand werden geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird gesucht und auf Klickbarkeit geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird robust geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Warten, bis das Projekt-Dropdown geöffnet ist und das Menü sichtbar angezeigt wird.
+[SELENIUM] Projekt-Dropdown-Menü wird nach dem Öffnen auf Sichtbarkeit geprüft.
+[SELENIUM] Geöffneter Zustand des Projekt-Dropdowns wird anhand von CSS-Klasse und aria-expanded validiert.
+[SELENIUM] Projekt-Dropdown wurde erfolgreich geöffnet und validiert.
+[SELENIUM] Menüpunkt 'Suche' im Projekt-Dropdown wird gesucht.
+[SELENIUM] Menüpunkt 'Suche' wird geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Navigation zur Projektliste wird geprüft: URL muss 'projectList' enthalten.
+[SELENIUM] Projekt-Suchseite wurde erfolgreich geöffnet.
+[SELENIUM] Projektname wird in das Suchfeld eingetragen. Projektname: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Projekt-Suchfeld '#query_name' mit Wert: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird geleert: Projekt-Suchfeld '#query_name'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Projekt-Suchfeld '#query_name'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Projekt-Suchfeld '#query_name'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Projekt-Suchfeld '#query_name' = Selenium Testprojekt
+[SELENIUM] Suche wird über den Button 'Suchen' gestartet.
+[SELENIUM] Button wird anhand des sichtbaren Textes gesucht und geklickt: Suchen
+[SELENIUM] Button wird in den sichtbaren Bereich gescrollt: Suchen
+[SELENIUM] Button wird mit normalem Selenium-Klick geklickt: Suchen
+[SELENIUM] Button wurde erfolgreich geklickt: Suchen
+[SELENIUM] Warten auf die Ergebnistabelle der Projektsuche.
+[SELENIUM] Prüfung, ob die Anwendung nach der Suche weiterhin auf der Projektliste ist.
+[SELENIUM] Suchfeld wird nach der Suche geprüft: Der eingegebene Projektname muss weiterhin enthalten sein.
+[SELENIUM] Suchergebnis wird geprüft: Das gesuchte Projekt muss in der Ergebnistabelle vorhanden sein.
+[SELENIUM] Prüfung der Projektsuchergebnisse gestartet: Erwartetes Projekt: Selenium Testprojekt
+[SELENIUM] Ergebnistabelle '#searchResult' wird gesucht und auf Sichtbarkeit geprüft.
+[SELENIUM] Tabellenkörper der Ergebnistabelle wird erwartet.
+[SELENIUM] Passende Tabellenzelle mit dem exakten Projektnamen wird gesucht: Selenium Testprojekt
+[SELENIUM] Gefundener Projektname wird gegen den erwarteten Projektnamen geprüft.
+[SELENIUM] Projekt wurde in der Ergebnistabelle gefunden und erfolgreich geprüft: Selenium Testprojekt
+[SELENIUM] Projektsuche erfolgreich abgeschlossen. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet und die Projektseite wird geprüft. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet: Ergebniszeile und Öffnen-Link werden gesucht. Projektname: Selenium Testprojekt
+[SELENIUM] Ergebniszeile für das gesuchte Projekt wird gesucht.
+[SELENIUM] Öffnen-Link in der Ergebniszeile wird gesucht.
+[SELENIUM] Öffnen-Link wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Projekt wird über den Öffnen-Link geöffnet. Falls der normale Klick fehlschlägt, wird JavaScript verwendet.
+[SELENIUM] Warten, bis die Projektansicht geöffnet ist und die Suchseite verlassen wurde.
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: searchResult
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: searchResult, sichtbar: false
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: query_name
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: query_name, sichtbar: false
+[SELENIUM] Projekt wurde erfolgreich aus dem Suchergebnis geöffnet: Selenium Testprojekt
+[SELENIUM] Link zum Anlegen einer neuen Activity wird gesucht.
+[SELENIUM] Link zum Anlegen einer neuen Activity wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Link zum Anlegen einer neuen Activity wird per JavaScript geklickt.
+[SELENIUM] Warten auf Activity-Editor und Prüfung, ob das Titelfeld vorhanden ist.
+[SELENIUM] Activity-Editor wurde erfolgreich geöffnet.
+[SELENIUM] Activity-Formular wird geladen und auf Verfügbarkeit geprüft.
+[SELENIUM] Warten auf Activity-Formular: Titelfeld muss sichtbar sein.
+[SELENIUM] Activity-Formular ist sichtbar.
+[SELENIUM] Aktivität-Bezeichnung wird eingetragen: Test Projekt Plan.
+[SELENIUM] Textfeld wird befüllt: Feld 'Aktivität Bezeichnung' mit Wert: Test Projekt Plan
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Aktivität Bezeichnung' mit Wert: Test Projekt Plan
+[SELENIUM] Eingabefeld wird geleert: Feld 'Aktivität Bezeichnung'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Aktivität Bezeichnung'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Aktivität Bezeichnung'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Aktivität Bezeichnung' = Test Projekt Plan
+[SELENIUM] Textfeld wurde erfolgreich befüllt: Feld 'Aktivität Bezeichnung'
+[SELENIUM] Activity-Beschreibung wird im CKEditor eingetragen.
+[SELENIUM] CKEditor-Beschreibung wird befüllt: sichtbares Editor-iframe wird gesucht.
+[SELENIUM] In das sichtbare CKEditor-iframe wird gewechselt.
+[SELENIUM] Body des CKEditors wird gesucht und fokussiert.
+[SELENIUM] CKEditor-Inhalt wird über vorhandenen Absatz oder Body aktiviert.
+[SELENIUM] Beschreibungstext wird in den CKEditor geschrieben.
+[SELENIUM] CKEditor-Beschreibung wurde erfolgreich geschrieben und geprüft.
+[SELENIUM] Zurück in den Hauptinhalt der Seite wechseln.
+[SELENIUM] Startdatum der Activity wird gesetzt: 30.06.2026.
+[SELENIUM] Textfeld wird befüllt: Feld 'Startdatum' mit Wert: 30.06.2026
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Startdatum' mit Wert: 30.06.2026
+[SELENIUM] Eingabefeld wird geleert: Feld 'Startdatum'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Startdatum'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Startdatum'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Startdatum' = 30.06.2026
+[SELENIUM] Textfeld wurde erfolgreich befüllt: Feld 'Startdatum'
+[SELENIUM] Enddatum der Activity wird gesetzt: 16.08.2026.
+[SELENIUM] Textfeld wird befüllt: Feld 'Enddatum' mit Wert: 16.08.2026
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Enddatum' mit Wert: 16.08.2026
+[SELENIUM] Eingabefeld wird geleert: Feld 'Enddatum'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Enddatum'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Enddatum'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Enddatum' = 16.08.2026
+[SELENIUM] Textfeld wurde erfolgreich befüllt: Feld 'Enddatum'
+[SELENIUM] Geplante Stunden werden eingetragen: 14.
+[SELENIUM] Zahlenfeld wird befüllt: Feld 'Geplante Stunden' mit Wert: 14
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Geplante Stunden' mit Wert: 14
+[SELENIUM] Eingabefeld wird geleert: Feld 'Geplante Stunden'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Geplante Stunden'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Geplante Stunden'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Geplante Stunden' = 14
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt: Feld 'Geplante Stunden'
+[SELENIUM] Arbeitsplatz wird ausgewählt: PS06110 - Globale IT-Services Administration.
+[SELENIUM] Dropdown wird gesucht und sichtbarer Text wird ausgewählt: Feld 'Arbeitsplatz' = PS06110 - Globale IT-Services Administration
+[SELENIUM] Dropdown wurde erfolgreich ausgewählt und geprüft: Feld 'Arbeitsplatz' = PS06110 - Globale IT-Services Administration
+[SELENIUM] Wirkliches Startdatum wird gesetzt: 15.06.2026.
+[SELENIUM] Textfeld wird befüllt: Feld 'Wirkliches Startdatum' mit Wert: 15.06.2026
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Wirkliches Startdatum' mit Wert: 15.06.2026
+[SELENIUM] Eingabefeld wird geleert: Feld 'Wirkliches Startdatum'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Wirkliches Startdatum'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Wirkliches Startdatum'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Wirkliches Startdatum' = 15.06.2026
+[SELENIUM] Textfeld wurde erfolgreich befüllt: Feld 'Wirkliches Startdatum'
+[SELENIUM] Wirkliches Enddatum wird gesetzt: 17.08.2026.
+[SELENIUM] Textfeld wird befüllt: Feld 'Wirkliches Enddatum' mit Wert: 17.08.2026
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Wirkliches Enddatum' mit Wert: 17.08.2026
+[SELENIUM] Eingabefeld wird geleert: Feld 'Wirkliches Enddatum'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Wirkliches Enddatum'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Wirkliches Enddatum'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Wirkliches Enddatum' = 17.08.2026
+[SELENIUM] Textfeld wurde erfolgreich befüllt: Feld 'Wirkliches Enddatum'
+[SELENIUM] Verbliebene Stunden werden eingetragen: 13.
+[SELENIUM] Zahlenfeld wird befüllt: Feld 'Verbliebene Stunden' mit Wert: 13
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Verbliebene Stunden' mit Wert: 13
+[SELENIUM] Eingabefeld wird geleert: Feld 'Verbliebene Stunden'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Verbliebene Stunden'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Verbliebene Stunden'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Verbliebene Stunden' = 13
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt: Feld 'Verbliebene Stunden'
+[SELENIUM] Fortschritt der Activity wird eingetragen: 4 Prozent.
+[SELENIUM] Zahlenfeld wird befüllt: Feld 'Fortschritt in %' mit Wert: 4
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Fortschritt in %' mit Wert: 4
+[SELENIUM] Eingabefeld wird geleert: Feld 'Fortschritt in %'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Fortschritt in %'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Fortschritt in %'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Fortschritt in %' = 4
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt: Feld 'Fortschritt in %'
+[SELENIUM] Offene Kosten werden eingetragen: 0.
+[SELENIUM] Zahlenfeld wird befüllt: Feld 'Offene Kosten' mit Wert: 0
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Feld 'Offene Kosten' mit Wert: 0
+[SELENIUM] Eingabefeld wird geleert: Feld 'Offene Kosten'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Feld 'Offene Kosten'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Feld 'Offene Kosten'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Feld 'Offene Kosten' = 0
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt: Feld 'Offene Kosten'
+[SELENIUM] Neue Activity wird gespeichert und Abschluss der Speicherung wird abgewartet.
+[SELENIUM] Speichern der Activity gestartet: Speichern-Button wird gesucht.
+[SELENIUM] Speichern-Button wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Speichern-Button wird per JavaScript geklickt.
+[SELENIUM] Nach dem Speichern wird gewartet, bis das Formular verschwindet oder die Seite sich ändert.
+[SELENIUM] Speichern der Activity abgeschlossen: Folgezustand wurde erkannt.
+[SELENIUM] Activity-Anlage erfolgreich abgeschlossen.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Selenium -- Activity bearbeiten (Exemplarische Fehlerausgabe)}, label={lst:sel_edit_act_err}, style=logStyle]
+_03_EditActivityTest (1)
+ui.pumaTests._edit_Data._03_EditActivityTest
+editActivity(ui.pumaTests._edit_Data._03_EditActivityTest)
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element found by By.cssSelector: a.openEntry
+(tried for 10 seconds with 500 milliseconds interval)
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25.0.2'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 151.0.4129.72, fedcm:accounts: true, goog:processID: 27668, ms:edgeOptions: {debuggerAddress: localhost:55075}, msedge: {msedgedriverVersion: 151.0.4129.78 (dd5b3842e0c9..., userDataDir: C:\Users\MARCEL~1.LIC\AppDa...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55075/devtoo..., se:cdpVersion: 151.0.4129.72, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d478c127beb97af33d87aaff87c0482b
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+	at ui.pumaTests.common.BaseEditActivity.openActivityFromProject(BaseEditActivity.java:32)
+	at ui.pumaTests._edit_Data._03_EditActivityTest.editActivity(_03_EditActivityTest.java:16)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Selenium -- Activity bearbeiten (Erfolgreich)}, label={lst:sel_edit_act_ok}, style=logStyle]
+[SELENIUM] Basis-Setup gestartet: Login wird bei Bedarf durchgeführt und implizite Selenium-Wartezeit deaktiviert.
+Aug. 12, 2026 10:59:05 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNUNG: Unable to find an exact match for CDP version 151, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 151
+[SELENIUM] Login-Seite geöffnet
+[SELENIUM] Passwort eingegeben
+[SELENIUM] Login-Button geklickt
+[SELENIUM] Home-Seite wurde erreicht
+[SELENIUM] Basis-Setup abgeschlossen: Test verwendet explizite Waits für stabile UI-Interaktionen.
+[SELENIUM] Activity-Bearbeitung gestartet: Activity wird aus dem Projekt geöffnet.
+[SELENIUM] Activity öffnen gestartet: Das Projekt wird gesucht, geöffnet und anschließend die erste vorhandene Activity geöffnet.
+[SELENIUM] Projekt wird gesucht: Selenium Testprojekt
+[SELENIUM] Projektsuche gestartet: Projekt-Suchseite wird geöffnet. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt-Suchseite wird geöffnet: Startseite öffnen, Projekt-Dropdown öffnen und Menüpunkt 'Suche' auswählen.
+[SELENIUM] Startseite wird geöffnet und anschließend über die URL geprüft.
+[SELENIUM] Base-URL wird ermittelt: zuerst System-Property 'baseUrl', danach Umgebungsvariable 'BASE_URL', sonst Default-URL.
+[SELENIUM] Base-URL wurde ermittelt: http://localhost:8082/puma
+[SELENIUM] Startseite wurde erfolgreich geöffnet: http://localhost:8082/puma/home
+[SELENIUM] Projekt-Dropdown wird geöffnet: Toggle, Menü und geöffneter Zustand werden geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird gesucht und auf Klickbarkeit geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird robust geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Warten, bis das Projekt-Dropdown geöffnet ist und das Menü sichtbar angezeigt wird.
+[SELENIUM] Projekt-Dropdown-Menü wird nach dem Öffnen auf Sichtbarkeit geprüft.
+[SELENIUM] Geöffneter Zustand des Projekt-Dropdowns wird anhand von CSS-Klasse und aria-expanded validiert.
+[SELENIUM] Projekt-Dropdown wurde erfolgreich geöffnet und validiert.
+[SELENIUM] Menüpunkt 'Suche' im Projekt-Dropdown wird gesucht.
+[SELENIUM] Menüpunkt 'Suche' wird geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Navigation zur Projektliste wird geprüft: URL muss 'projectList' enthalten.
+[SELENIUM] Projekt-Suchseite wurde erfolgreich geöffnet.
+[SELENIUM] Projektname wird in das Suchfeld eingetragen. Projektname: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Projekt-Suchfeld '#query_name' mit Wert: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird geleert: Projekt-Suchfeld '#query_name'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Projekt-Suchfeld '#query_name'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Projekt-Suchfeld '#query_name'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Projekt-Suchfeld '#query_name' = Selenium Testprojekt
+[SELENIUM] Suche wird über den Button 'Suchen' gestartet.
+[SELENIUM] Button wird anhand des sichtbaren Textes gesucht und geklickt: Suchen
+[SELENIUM] Button wird in den sichtbaren Bereich gescrollt: Suchen
+[SELENIUM] Button wird mit normalem Selenium-Klick geklickt: Suchen
+[SELENIUM] Button wurde erfolgreich geklickt: Suchen
+[SELENIUM] Warten auf die Ergebnistabelle der Projektsuche.
+[SELENIUM] Prüfung, ob die Anwendung nach der Suche weiterhin auf der Projektliste ist.
+[SELENIUM] Suchfeld wird nach der Suche geprüft: Der eingegebene Projektname muss weiterhin enthalten sein.
+[SELENIUM] Suchergebnis wird geprüft: Das gesuchte Projekt muss in der Ergebnistabelle vorhanden sein.
+[SELENIUM] Prüfung der Projektsuchergebnisse gestartet: Erwartetes Projekt: Selenium Testprojekt
+[SELENIUM] Ergebnistabelle '#searchResult' wird gesucht und auf Sichtbarkeit geprüft.
+[SELENIUM] Tabellenkörper der Ergebnistabelle wird erwartet.
+[SELENIUM] Passende Tabellenzelle mit dem exakten Projektnamen wird gesucht: Selenium Testprojekt
+[SELENIUM] Gefundener Projektname wird gegen den erwarteten Projektnamen geprüft.
+[SELENIUM] Projekt wurde in der Ergebnistabelle gefunden und erfolgreich geprüft: Selenium Testprojekt
+[SELENIUM] Projektsuche erfolgreich abgeschlossen. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet und auf korrekte Anzeige geprüft: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet: Ergebniszeile und Öffnen-Link werden gesucht. Projektname: Selenium Testprojekt
+[SELENIUM] Ergebniszeile für das gesuchte Projekt wird gesucht.
+[SELENIUM] Öffnen-Link in der Ergebniszeile wird gesucht.
+[SELENIUM] Öffnen-Link wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Projekt wird über den Öffnen-Link geöffnet. Falls der normale Klick fehlschlägt, wird JavaScript verwendet.
+[SELENIUM] Warten, bis die Projektansicht geöffnet ist und die Suchseite verlassen wurde.
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: searchResult
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: searchResult, sichtbar: false
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: query_name
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: query_name, sichtbar: false
+[SELENIUM] Projekt wurde erfolgreich aus dem Suchergebnis geöffnet: Selenium Testprojekt
+[SELENIUM] Link zur Activity-Übersicht wird gesucht.
+[SELENIUM] Activity-Übersicht wird geöffnet.
+[SELENIUM] Warten auf vorhandene Activity-Einträge in der Übersicht.
+[SELENIUM] Erste vorhandene Activity wird aus der Übersicht geöffnet.
+[SELENIUM] Activity wurde erfolgreich aus dem Projekt geöffnet.
+[SELENIUM] Bearbeitungsmodus wird geöffnet.
+[SELENIUM] Bearbeitungsmodus wird gestartet: Bearbeiten-Button wird gesucht, sichtbar positioniert und geklickt.
+[SELENIUM] Bearbeiten-Button wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Bearbeiten-Button wird per JavaScript geklickt.
+[SELENIUM] Bearbeitungsmodus wurde erfolgreich geöffnet.
+[SELENIUM] Fortschritt wird auf 15 Prozent gesetzt.
+[SELENIUM] Zahlenfeld wird befüllt. Locator: By.id: activity.progress, Wert: 15
+[SELENIUM] Feld wird befüllt: Element wird gesucht. Locator: By.id: activity.progress, Wert: 15
+[SELENIUM] Feld wird geleert. Locator: By.id: activity.progress
+[SELENIUM] Wert wird in das Feld geschrieben. Locator: By.id: activity.progress, Wert: 15
+[SELENIUM] Feld wurde erfolgreich befüllt. Locator: By.id: activity.progress
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt. Locator: By.id: activity.progress, Wert: 15
+[SELENIUM] Tatsächliches Enddatum wird auf den 17.08.2026 gesetzt.
+[SELENIUM] Feld wird befüllt: Element wird gesucht. Locator: By.id: activity.actualEndDate, Wert: 17.08.2026
+[SELENIUM] Feld wird geleert. Locator: By.id: activity.actualEndDate
+[SELENIUM] Wert wird in das Feld geschrieben. Locator: By.id: activity.actualEndDate, Wert: 17.08.2026
+[SELENIUM] Feld wurde erfolgreich befüllt. Locator: By.id: activity.actualEndDate
+[SELENIUM] Verbleibende Kosten werden auf 50 gesetzt.
+[SELENIUM] Zahlenfeld wird befüllt. Locator: By.id: activityRemainingCosts, Wert: 50
+[SELENIUM] Feld wird befüllt: Element wird gesucht. Locator: By.id: activityRemainingCosts, Wert: 50
+[SELENIUM] Feld wird geleert. Locator: By.id: activityRemainingCosts
+[SELENIUM] Wert wird in das Feld geschrieben. Locator: By.id: activityRemainingCosts, Wert: 50
+[SELENIUM] Feld wurde erfolgreich befüllt. Locator: By.id: activityRemainingCosts
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt. Locator: By.id: activityRemainingCosts, Wert: 50
+[SELENIUM] Arbeitsplatz wird ausgewählt: PS02080.
+[SELENIUM] Auswahlliste wird geöffnet: Option mit enthaltenem Text wird gesucht. Locator: By.id: activity_workplace, Suchtext: PS02080
+[SELENIUM] Passende Option wurde gefunden und wird ausgewählt: PS02080 - Software II
+[SELENIUM] Option wurde erfolgreich ausgewählt: PS02080 - Software II
+[SELENIUM] Erster Checklistenpunkt wird ergänzt: Alle Testfälle für Cypress implementieren.
+[SELENIUM] Checklistenpunkt wird hinzugefügt: Button wird gesucht. Index: 0, Text: Alle Testfälle für Cypress implementieren
+[SELENIUM] Button zum Hinzufügen eines Checklistenpunktes wird per JavaScript geklickt.
+[SELENIUM] Warten, bis der neue Checklistenpunkt in der Tabelle vorhanden ist. Index: 0
+[SELENIUM] Text des Checklistenpunktes wird eingetragen. Index: 0, Text: Alle Testfälle für Cypress implementieren
+[SELENIUM] Checklistenpunkt wurde erfolgreich hinzugefügt. Index: 0, Text: Alle Testfälle für Cypress implementieren
+[SELENIUM] Zweiter Checklistenpunkt wird ergänzt: Mit schriftlicher Ausarbeitung der Fallstudie beginnen.
+[SELENIUM] Checklistenpunkt wird hinzugefügt: Button wird gesucht. Index: 1, Text: Mit schriftlicher Ausarbeitung der Fallstudie beginnen
+[SELENIUM] Button zum Hinzufügen eines Checklistenpunktes wird per JavaScript geklickt.
+[SELENIUM] Warten, bis der neue Checklistenpunkt in der Tabelle vorhanden ist. Index: 1
+[SELENIUM] Text des Checklistenpunktes wird eingetragen. Index: 1, Text: Mit schriftlicher Ausarbeitung der Fallstudie beginnen
+[SELENIUM] Checklistenpunkt wurde erfolgreich hinzugefügt. Index: 1, Text: Mit schriftlicher Ausarbeitung der Fallstudie beginnen
+[SELENIUM] Geänderte Activity wird gespeichert.
+[SELENIUM] Activity speichern gestartet: Speichern-Button wird gesucht, sichtbar positioniert und geklickt.
+[SELENIUM] Speichern-Button wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Speichern-Button wird per JavaScript geklickt.
+[SELENIUM] Activity wurde gespeichert.
+[SELENIUM] Activity-Bearbeitung erfolgreich abgeschlossen.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Selenium -- Kontrolllauf Activity bearbeiten (Erfolgreich)}, label={lst:sel_ctrl_act_ok}, style=logStyle]
+[SELENIUM] Login-Seite geöffnet
+[SELENIUM] Passwort eingegeben
+[SELENIUM] Login-Button geklickt
+[SELENIUM] Home-Seite wurde erreicht
+[SELENIUM] Basis-Setup abgeschlossen: Test verwendet explizite Waits für stabile UI-Interaktionen.
+[SELENIUM] Validierung der bearbeiteten Activity gestartet: Activity wird aus dem Projekt geöffnet.
+[SELENIUM] Activity öffnen gestartet: Das Projekt wird gesucht, geöffnet und anschließend die erste vorhandene Activity geöffnet.
+[SELENIUM] Projekt wird gesucht: Selenium Testprojekt
+[SELENIUM] Projektsuche gestartet: Projekt-Suchseite wird geöffnet. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt-Suchseite wird geöffnet: Startseite öffnen, Projekt-Dropdown öffnen und Menüpunkt 'Suche' auswählen.
+[SELENIUM] Startseite wird geöffnet und anschließend über die URL geprüft.
+[SELENIUM] Base-URL wird ermittelt: zuerst System-Property 'baseUrl', danach Umgebungsvariable 'BASE_URL', sonst Default-URL.
+[SELENIUM] Base-URL wurde ermittelt: http://localhost:8082/puma
+[SELENIUM] Startseite wurde erfolgreich geöffnet: http://localhost:8082/puma/home
+[SELENIUM] Projekt-Dropdown wird geöffnet: Toggle, Menü und geöffneter Zustand werden geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird gesucht und auf Klickbarkeit geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird robust geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Warten, bis das Projekt-Dropdown geöffnet ist und das Menü sichtbar angezeigt wird.
+[SELENIUM] Projekt-Dropdown-Menü wird nach dem Öffnen auf Sichtbarkeit geprüft.
+[SELENIUM] Geöffneter Zustand des Projekt-Dropdowns wird anhand von CSS-Klasse und aria-expanded validiert.
+[SELENIUM] Projekt-Dropdown wurde erfolgreich geöffnet und validiert.
+[SELENIUM] Menüpunkt 'Suche' im Projekt-Dropdown wird gesucht.
+[SELENIUM] Menüpunkt 'Suche' wird geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Navigation zur Projektliste wird geprüft: URL muss 'projectList' enthalten.
+[SELENIUM] Projekt-Suchseite wurde erfolgreich geöffnet.
+[SELENIUM] Projektname wird in das Suchfeld eingetragen. Projektname: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Projekt-Suchfeld '#query_name' mit Wert: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird geleert: Projekt-Suchfeld '#query_name'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Projekt-Suchfeld '#query_name'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Projekt-Suchfeld '#query_name'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Projekt-Suchfeld '#query_name' = Selenium Testprojekt
+[SELENIUM] Suche wird über den Button 'Suchen' gestartet.
+[SELENIUM] Button wird anhand des sichtbaren Textes gesucht und geklickt: Suchen
+[SELENIUM] Button wird in den sichtbaren Bereich gescrollt: Suchen
+[SELENIUM] Button wird mit normalem Selenium-Klick geklickt: Suchen
+[SELENIUM] Button wurde erfolgreich geklickt: Suchen
+[SELENIUM] Warten auf die Ergebnistabelle der Projektsuche.
+[SELENIUM] Prüfung, ob die Anwendung nach der Suche weiterhin auf der Projektliste ist.
+[SELENIUM] Suchfeld wird nach der Suche geprüft: Der eingegebene Projektname muss weiterhin enthalten sein.
+[SELENIUM] Suchergebnis wird geprüft: Das gesuchte Projekt muss in der Ergebnistabelle vorhanden sein.
+[SELENIUM] Prüfung der Projektsuchergebnisse gestartet: Erwartetes Projekt: Selenium Testprojekt
+[SELENIUM] Ergebnistabelle '#searchResult' wird gesucht und auf Sichtbarkeit geprüft.
+[SELENIUM] Tabellenkörper der Ergebnistabelle wird erwartet.
+[SELENIUM] Passende Tabellenzelle mit dem exakten Projektnamen wird gesucht: Selenium Testprojekt
+[SELENIUM] Gefundener Projektname wird gegen den erwarteten Projektnamen geprüft.
+[SELENIUM] Projekt wurde in der Ergebnistabelle gefunden und erfolgreich geprüft: Selenium Testprojekt
+[SELENIUM] Projektsuche erfolgreich abgeschlossen. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet und auf korrekte Anzeige geprüft: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet: Ergebniszeile und Öffnen-Link werden gesucht. Projektname: Selenium Testprojekt
+[SELENIUM] Ergebniszeile für das gesuchte Projekt wird gesucht.
+[SELENIUM] Öffnen-Link in der Ergebniszeile wird gesucht.
+[SELENIUM] Öffnen-Link wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Projekt wird über den Öffnen-Link geöffnet. Falls der normale Klick fehlschlägt, wird JavaScript verwendet.
+[SELENIUM] Warten, bis die Projektansicht geöffnet ist und die Suchseite verlassen wurde.
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: searchResult
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: searchResult, sichtbar: false
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: query_name
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: query_name, sichtbar: false
+[SELENIUM] Projekt wurde erfolgreich aus dem Suchergebnis geöffnet: Selenium Testprojekt
+[SELENIUM] Link zur Activity-Übersicht wird gesucht.
+[SELENIUM] Activity-Übersicht wird geöffnet.
+[SELENIUM] Warten auf vorhandene Activity-Einträge in der Übersicht.
+[SELENIUM] Erste vorhandene Activity wird aus der Übersicht geöffnet.
+[SELENIUM] Activity wurde erfolgreich aus dem Projekt geöffnet.
+[SELENIUM] Fortschritt der Activity wird ausgelesen.
+[SELENIUM] Fortschritt wird geprüft: Erwarteter Wert ist 15.
+[SELENIUM] Validierung der bearbeiteten Activity erfolgreich abgeschlossen.
+[SELENIUM] Cleanup gestartet: Activity-Testdaten werden zurückgesetzt.
+[SELENIUM] Reset der Activity-Testdaten gestartet: Activity wird geöffnet, bearbeitet und auf definierte Standardwerte zurückgesetzt.
+[SELENIUM] Activity öffnen gestartet: Das Projekt wird gesucht, geöffnet und anschließend die erste vorhandene Activity geöffnet.
+[SELENIUM] Projekt wird gesucht: Selenium Testprojekt
+[SELENIUM] Projektsuche gestartet: Projekt-Suchseite wird geöffnet. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt-Suchseite wird geöffnet: Startseite öffnen, Projekt-Dropdown öffnen und Menüpunkt 'Suche' auswählen.
+[SELENIUM] Startseite wird geöffnet und anschließend über die URL geprüft.
+[SELENIUM] Base-URL wird ermittelt: zuerst System-Property 'baseUrl', danach Umgebungsvariable 'BASE_URL', sonst Default-URL.
+[SELENIUM] Base-URL wurde ermittelt: http://localhost:8082/puma
+[SELENIUM] Startseite wurde erfolgreich geöffnet: http://localhost:8082/puma/home
+[SELENIUM] Projekt-Dropdown wird geöffnet: Toggle, Menü und geöffneter Zustand werden geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird gesucht und auf Klickbarkeit geprüft.
+[SELENIUM] Projekt-Dropdown-Toggle wird robust geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.id: project-dropdown-toggle
+[SELENIUM] Warten, bis das Projekt-Dropdown geöffnet ist und das Menü sichtbar angezeigt wird.
+[SELENIUM] Projekt-Dropdown-Menü wird nach dem Öffnen auf Sichtbarkeit geprüft.
+[SELENIUM] Geöffneter Zustand des Projekt-Dropdowns wird anhand von CSS-Klasse und aria-expanded validiert.
+[SELENIUM] Projekt-Dropdown wurde erfolgreich geöffnet und validiert.
+[SELENIUM] Menüpunkt 'Suche' im Projekt-Dropdown wird gesucht.
+[SELENIUM] Menüpunkt 'Suche' wird geklickt.
+[SELENIUM] Robuster Klick gestartet: Element wird gesucht und bei Bedarf per JavaScript angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wurde gefunden und wird in den sichtbaren Bereich gescrollt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Element wird mit normalem Selenium-Klick angeklickt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Robuster Klick wurde erfolgreich ausgeführt. Locator: By.xpath: //li[@id='project-dropdown']//ul[@id='project-dropdown-menu']//a[@href='projectList' and normalize-space()='Suche']
+[SELENIUM] Navigation zur Projektliste wird geprüft: URL muss 'projectList' enthalten.
+[SELENIUM] Projekt-Suchseite wurde erfolgreich geöffnet.
+[SELENIUM] Projektname wird in das Suchfeld eingetragen. Projektname: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird befüllt und geprüft: Projekt-Suchfeld '#query_name' mit Wert: Selenium Testprojekt
+[SELENIUM] Eingabefeld wird geleert: Projekt-Suchfeld '#query_name'
+[SELENIUM] Wert wird in das Eingabefeld geschrieben: Projekt-Suchfeld '#query_name'
+[SELENIUM] Input-, Change- und Blur-Events werden ausgelöst, damit die Anwendung den Wert verarbeitet: Projekt-Suchfeld '#query_name'
+[SELENIUM] Eingabefeld wurde erfolgreich befüllt und geprüft: Projekt-Suchfeld '#query_name' = Selenium Testprojekt
+[SELENIUM] Suche wird über den Button 'Suchen' gestartet.
+[SELENIUM] Button wird anhand des sichtbaren Textes gesucht und geklickt: Suchen
+[SELENIUM] Button wird in den sichtbaren Bereich gescrollt: Suchen
+[SELENIUM] Button wird mit normalem Selenium-Klick geklickt: Suchen
+[SELENIUM] Button wurde erfolgreich geklickt: Suchen
+[SELENIUM] Warten auf die Ergebnistabelle der Projektsuche.
+[SELENIUM] Prüfung, ob die Anwendung nach der Suche weiterhin auf der Projektliste ist.
+[SELENIUM] Suchfeld wird nach der Suche geprüft: Der eingegebene Projektname muss weiterhin enthalten sein.
+[SELENIUM] Suchergebnis wird geprüft: Das gesuchte Projekt muss in der Ergebnistabelle vorhanden sein.
+[SELENIUM] Prüfung der Projektsuchergebnisse gestartet: Erwartetes Projekt: Selenium Testprojekt
+[SELENIUM] Ergebnistabelle '#searchResult' wird gesucht und auf Sichtbarkeit geprüft.
+[SELENIUM] Tabellenkörper der Ergebnistabelle wird erwartet.
+[SELENIUM] Passende Tabellenzelle mit dem exakten Projektnamen wird gesucht: Selenium Testprojekt
+[SELENIUM] Gefundener Projektname wird gegen den erwarteten Projektnamen geprüft.
+[SELENIUM] Projekt wurde in der Ergebnistabelle gefunden und erfolgreich geprüft: Selenium Testprojekt
+[SELENIUM] Projektsuche erfolgreich abgeschlossen. Projektname: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet und auf korrekte Anzeige geprüft: Selenium Testprojekt
+[SELENIUM] Projekt wird aus dem Suchergebnis geöffnet: Ergebniszeile und Öffnen-Link werden gesucht. Projektname: Selenium Testprojekt
+[SELENIUM] Ergebniszeile für das gesuchte Projekt wird gesucht.
+[SELENIUM] Öffnen-Link in der Ergebniszeile wird gesucht.
+[SELENIUM] Öffnen-Link wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Projekt wird über den Öffnen-Link geöffnet. Falls der normale Klick fehlschlägt, wird JavaScript verwendet.
+[SELENIUM] Warten, bis die Projektansicht geöffnet ist und die Suchseite verlassen wurde.
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: searchResult
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: searchResult, sichtbar: false
+[SELENIUM] Sichtbarkeit eines Elements wird geprüft. Locator: By.id: query_name
+[SELENIUM] Sichtbarkeitsprüfung abgeschlossen. Locator: By.id: query_name, sichtbar: false
+[SELENIUM] Projekt wurde erfolgreich aus dem Suchergebnis geöffnet: Selenium Testprojekt
+[SELENIUM] Link zur Activity-Übersicht wird gesucht.
+[SELENIUM] Activity-Übersicht wird geöffnet.
+[SELENIUM] Warten auf vorhandene Activity-Einträge in der Übersicht.
+[SELENIUM] Erste vorhandene Activity wird aus der Übersicht geöffnet.
+[SELENIUM] Activity wurde erfolgreich aus dem Projekt geöffnet.
+[SELENIUM] Bearbeitungsmodus wird gestartet: Bearbeiten-Button wird gesucht, sichtbar positioniert und geklickt.
+[SELENIUM] Bearbeiten-Button wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Bearbeiten-Button wird per JavaScript geklickt.
+[SELENIUM] Bearbeitungsmodus wurde erfolgreich geöffnet.
+[SELENIUM] Fortschritt wird auf Standardwert 0 zurückgesetzt.
+[SELENIUM] Zahlenfeld wird befüllt. Locator: By.id: activity.progress, Wert: 0
+[SELENIUM] Feld wird befüllt: Element wird gesucht. Locator: By.id: activity.progress, Wert: 0
+[SELENIUM] Feld wird geleert. Locator: By.id: activity.progress
+[SELENIUM] Wert wird in das Feld geschrieben. Locator: By.id: activity.progress, Wert: 0
+[SELENIUM] Feld wurde erfolgreich befüllt. Locator: By.id: activity.progress
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt. Locator: By.id: activity.progress, Wert: 0
+[SELENIUM] Offene Kosten werden auf Standardwert 0 zurückgesetzt.
+[SELENIUM] Zahlenfeld wird befüllt. Locator: By.id: activityRemainingCosts, Wert: 0
+[SELENIUM] Feld wird befüllt: Element wird gesucht. Locator: By.id: activityRemainingCosts, Wert: 0
+[SELENIUM] Feld wird geleert. Locator: By.id: activityRemainingCosts
+[SELENIUM] Wert wird in das Feld geschrieben. Locator: By.id: activityRemainingCosts, Wert: 0
+[SELENIUM] Feld wurde erfolgreich befüllt. Locator: By.id: activityRemainingCosts
+[SELENIUM] Zahlenfeld wurde erfolgreich befüllt. Locator: By.id: activityRemainingCosts, Wert: 0
+[SELENIUM] Tatsächliches Enddatum wird auf den definierten Testwert zurückgesetzt: 17.08.2026.
+[SELENIUM] Feld wird befüllt: Element wird gesucht. Locator: By.id: activity.actualEndDate, Wert: 17.08.2026
+[SELENIUM] Feld wird geleert. Locator: By.id: activity.actualEndDate
+[SELENIUM] Wert wird in das Feld geschrieben. Locator: By.id: activity.actualEndDate, Wert: 17.08.2026
+[SELENIUM] Feld wurde erfolgreich befüllt. Locator: By.id: activity.actualEndDate
+[SELENIUM] Zurückgesetzte Activity wird gespeichert.
+[SELENIUM] Activity speichern gestartet: Speichern-Button wird gesucht, sichtbar positioniert und geklickt.
+[SELENIUM] Speichern-Button wird in den sichtbaren Bereich gescrollt.
+[SELENIUM] Speichern-Button wird per JavaScript geklickt.
+[SELENIUM] Activity wurde gespeichert.
+[SELENIUM] Reset der Activity-Testdaten erfolgreich abgeschlossen.
+[SELENIUM] Cleanup abgeschlossen: Activity-Testdaten wurden zurückgesetzt.
+\end{lstlisting}
+
+\clearpage
+\subsection{Testprotokolle: Cypress}
+\label{subsec:testlogs_cypress}
+
+\begin{lstlisting}[caption={Cypress -- Login (Erfolgreich)}, label={lst:cy_login}, style=logStyle]
+1   visit/login
+2   getinput[name="username"]
+3   typeMarcel Licht
+4   getinput[name="password"]
+5   getform#mainForm button[type="submit"]
+6   click
+7   url
+8   assertexpected http://localhost:8082/puma/home to not include /login
+(new url)http://localhost:8082/puma/home
+(xhr)GET 200 /puma/widgets/projectajax?action=loadFavouritesMenu
+(xhr)GET 200 /puma/widgets/activityajax?formatterType=HOME&projectsOnly=true&timeFilter=CURRENT&userIdForFavouriteActivities=667f55b2b71aed06733fe8c3&_=1786525710319
+(xhr)GET 200 /puma/widgets/projectajax?action=loadProjectsHome&formatterType=CURRENT_PROJECTS&statusFilter=&_=1786525710320
+9   get#mainForm
+10  assertexpected #mainForm not to exist in the DOM
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Cypress -- Neues Projekt (Erfolgreich)}, label={lst:cy_new_proj}, style=logStyle]
+1   session["Marcel Licht"]
+created
+14  visit/home
+15  get#project-dropdown-toggle
+16  click
+(xhr)GET 200 /puma/widgets/projectajax?action=loadFavouritesMenu
+(xhr)GET 200 /puma/widgets/activityajax?formatterType=HOME&projectsOnly=true&timeFilter=CURRENT&userIdForFavouriteActivities=667f55b2b71aed06733fe8c3&_=1786525976825
+17  get#project-dropdown-menu a[href="createProject"]
+18  click
+19  url
+20  assertexpected http://localhost:8082/puma/createProject to include createProject
+(xhr)GET /puma/widgets/projectajax?action=loadProjectsHome&formatterType=CURRENT_PROJECTS&statusFilter=&_=1786525976826
+21  get#project_name
+(new url)http://localhost:8082/puma/createProject
+22  typeCypress Testprojekt
+(xhr)GET 200 /puma/widgets/projecttypeajax?locale=de_DE&divisionIds=
+(xhr)GET 200 /puma/widgets/projectcategoryajax?locale=de_DE&divisionIds=&projectType=
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&projectCategory=
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=PROFIT_CENTER&term=&withKeyPrefix=true&sortByKey=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=
+(xhr)GET 200 /puma/widgets/projectcategoryajax?locale=de_DE&divisionIds=&projectType=
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&divisionIds=&projectCategory=
+23  get#project_divisionId
+24  scrollIntoView
+25  select{force: true}
+26  get#project_sapProjectProfile
+27  select{force: true}
+(xhr)GET 200 /puma/widgets/projecttypeajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/fieldvaluesajax?project.id=&divisionId=576a3663a77320dc361b41e1
+28  get#project_sapProfitCenter
+29  select{force: true}
+30  get#project_endDate
+31  scrollIntoView
+32  clear
+33  type17.08.2026
+34  get#project_sponsor_id
+35  next.select2
+36  find.select2-selection--single
+37  scrollIntoView
+38  click{force: true}
+(xhr)GET 200 /puma/widgets/durationajax?endDate=2026-08-17T00%3A00%3A00.000Z&startDate=2026-08-12T00%3A00%3A00.000Z
+39  get.select2-search__field:visible
+40  assertexpected <input.select2-search__field> to have a length of 1
+41  typeMarcel Licht
+(xhr)GET 200 /puma/widgets/projectcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectType=
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectCategory=
+42  contains.select2-results__option, Marcel Licht
+43  assertexpected <li.select2-results__option.select2-results__option--highlighted> to be visible
+(xhr)GET 200 /puma/widgets/userajax?term=Marcel%20Licht
+44  click
+45  get#project_manager_id
+46  next.select2
+47  find.select2-selection--single
+48  scrollIntoView
+49  click{force: true}
+50  get.select2-search__field:visible
+51  assertexpected <input.select2-search__field> to have a length of 1
+52  typeMarcel Licht
+53  contains.select2-results__option, Marcel Licht
+54  assertexpected <li.select2-results__option.select2-results__option--highlighted> to be visible
+(xhr)GET 200 /puma/widgets/userajax?term=Marcel%20Licht
+55  click
+56  get#project_projectType
+57  select{force: true}
+58  wait@projectCategoryAjax1
+(xhr)GET 200 /puma/widgets/projectcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectType=IMPROVEMENT
+projectCategoryAjax
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectCategory=
+projectSubcategoryAjax
+59  get#project_projectCategory
+60  select{force: true}
+61  getiframe.cke_wysiwyg_frame
+62  filter:visible
+63  first
+64  its.0.contentDocument.body
+65  assertexpected <body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders> not to be empty
+66  wrap<body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders>
+67  findp
+68  first
+69  click
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectCategory=OPTIMIZATION
+projectSubcategoryAjax
+70  typeDieses Testprojekt dient im Rahmen einer Fallstudie zur Erprobung und Bewertung von automatisierten Tests mit Cypress. Ziel ist es, typische Eingabe- und Prüfprozesse in der Anwendung realitätsnah nachzustellen und die Stabilität, Zuverlässigkeit sowie Benutzerfreundlichkeit der Testautomatisierung zu untersuchen. Die Ergebnisse sollen als Grundlage für eine Nutzwertanalyse dienen, um den praktischen Mehrwert von Cypress im Vergleich zu Selenium zu bewerten., {force: true}
+71  containsbutton, Speichern
+72  click{force: true}
+(xhr)POST 200 /puma/widgets/projectajax?action=loadRelatedProjects&formatterType=RELATED_PROJECTS
+(new url)http://localhost:8082/puma/projectEditor?project.id=6a7c393072e2b75d4fc9f518&projectTypes=PRODUCT&projectTypes=PRODUCT_MAINTENANCE&projectTypes=INVESTMENT&projectTypes=COMPLAINT&projectTypes=IMPROVEMENT&projectTypes=FIXED_COSTS&projectTypes=TECHNOLOGY_PROJECT&projectCategories=DEVELOPMENT&projectCategories=MINOR&projectCategories=MAJOR&projectCategories=SUSPENSION&projectCategories=COLLECTING&projectCategories=RIGHTS&projectCategories=LICENSES&projectCategories=COMMON&projectCategories=DRAWING_CHANGE&projectCategories=PURCHASING&projectCategories=RENOVATION&projectCategories=RESOURCES&projectCategories=PROPERTIES&projectCategories=INTERNAL&projectCategories=EXTERNAL&projectCategories=OPTIMIZATION&projectCategories=ORGANISATION&projectCategories=MARKETING&projectSubCategories=JUMO_PRODUCT&projectSubCategories=CUSTOMER_PRODUCT&projectSubCategories=TECHNOLOGY_IDEA&projectSubCategories=PRODCUT_IDEA&projectSubCategories=COMPETITION_ANALYSIS&projectSubCategories=RIGHTS_DESIGN&projectSubCategories=RIGHTS_TRADE_MARK&projectSubCategories=RIGHTS_PATENT&projectSubCategories=LICENSES_CERTIFICATE&projectSubCategories=NPZ&projectSubCategories=NEW_BEGINNINGS&projectSubCategories=SUPPLIER_QUALIFICATION&projectSubCategories=MODULE_DISCONTINUATION&projectSubCategories=SECOND_SOURCE
+(xhr)GET 200 /puma/widgets/commentajax?action=LOAD_LIST&project.id=6a7c393072e2b75d4fc9f518&originClassName=Project&originId=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/projectcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectType=IMPROVEMENT
+projectCategoryAjax
+(xhr)GET 200 /puma/widgets/projecttypeajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&projectCategory=OPTIMIZATION
+projectSubcategoryAjax
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=PROFIT_CENTER&term=&withKeyPrefix=true&sortByKey=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/foldersajax?project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/projectcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectType=IMPROVEMENT
+projectCategoryAjax
+(xhr)GET 200 /puma/widgets/documentsajax?formatType=EXTERNAL&projectId=6a7c393072e2b75d4fc9f518&showInProjectEditor=true&_=1786526000914
+(xhr)GET 200 /puma/widgets/projectsubcategoryajax?locale=de_DE&divisionIds=576a3663a77320dc361b41e1&projectCategory=OPTIMIZATION
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Cypress -- Neue Activity (Erfolgreich)}, label={lst:cy_new_act}, style=logStyle]
+1   session["Marcel Licht"]
+created
+14  visit/home
+15  get#project-dropdown-toggle
+16  click
+(xhr)GET 200 /puma/widgets/projectajax?action=loadFavouritesMenu
+17  get#project-dropdown-menu a[href="projectList"]
+18  click
+19  url
+20  assertexpected http://localhost:8082/puma/projectList to include projectList
+(xhr)GET /puma/widgets/projectajax?action=loadProjectsHome&formatterType=CURRENT_PROJECTS&statusFilter=&_=1786526049987
+(xhr)GET /puma/widgets/activityajax?formatterType=HOME&projectsOnly=true&timeFilter=CURRENT&userIdForFavouriteActivities=667f55b2b71aed06733fe8c3&_=1786526049986
+(new url)http://localhost:8082/puma/projectList
+21  get#query_name
+22  clear
+23  typeCypress Testprojekt
+24  containsbutton, Suchen
+25  click{force: true}
+(xhr)POST 200 /puma/widgets/projectajax?action=loadProjects&formatterType=SEARCH_RESULT
+26  contains#searchResult tbody tr, Cypress Testprojekt
+27  finda.openEntry
+28  click
+29  get#createNewActivity
+(new url)http://localhost:8082/puma/projectOverview?project.id=6a7c393072e2b75d4fc9f518
+30  click{force: true}
+31  getinput[id="activity.title"]
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET /puma/widgets/memberajax?formatterType=MEMBERLIST_OVERVIEW&action=loadMembers&project.id=6a7c393072e2b75d4fc9f518&_=1786526054036
+(xhr)GET /puma/widgets/activityajax?formatterType=ACTIVITIES_OVERVIEW&projectId=6a7c393072e2b75d4fc9f518&type=&_=1786526054037
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=ACTIVITY_WORKPLACE&term=&withKeyPrefix=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=COSTPLANNING_MATERIALGROUP&term=&withKeyPrefix=true
+(xhr)GET 200 /puma/widgets/lock?objectId=6a7c393072e2b75d4fc9f518&type=PROJECT
+(xhr)POST 200 /puma/widgets/lock
+(new url)http://localhost:8082/puma/activityEditor?action=createNew&project.id=6a7c393072e2b75d4fc9f518
+32  scrollIntoView
+33  clear
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+34  typeTest Projekt Plan
+35  getiframe.cke_wysiwyg_frame
+36  filter:visible
+37  first
+38  its.0.contentDocument.body
+39  assertexpected <body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders> not to be empty
+40  wrap<body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders>
+41  findp
+42  first
+43  click
+44  typeDieses Testprojekt dient im Rahmen einer Fallstudie zur Erprobung und Bewertung automatisierter Tests mit Cypress. Ziel ist es, typische Eingabe- und Prüfprozesse in der Anwendung realitätsnah nachzustellen sowie die Stabilität, Zuverlässigkeit und Benutzerfreundlichkeit der Testautomatisierung zu untersuchen. Die Ergebnisse sollen als Grundlage für eine Nutzwertanalyse dienen, um den praktischen Mehrwert von Cypress im Vergleich zu Selenium zu bewerten., {force: true}
+45  scrollIntoView
+46  getinput[id="activityStart"]
+47  scrollIntoView
+48  clear
+49  type13.08.2026
+50  getinput[id="activityEnd"]
+51  scrollIntoView
+52  clear
+53  type17.08.2026
+(xhr)GET 200 /puma/widgets/durationajax?startDate=2026-08-12T22%3A00%3A00.000Z&endDate=2026-08-16T22%3A00%3A00.000Z
+54  getinput[id="activityEstimation"]
+55  scrollIntoView
+56  clear
+57  type14
+58  get#activity_workplace
+59  select{force: true}
+60  getinput[id="activity.actualStartDate"]
+61  scrollIntoView
+62  clear
+63  type15.06.2026
+64  getinput[id="activity.actualEndDate"]
+65  scrollIntoView
+66  clear
+67  type17.08.2026
+68  getinput[id="activityRemainingHours"]
+69  scrollIntoView
+70  clear
+71  type13
+72  getinput[id="activity.progress"]
+73  scrollIntoView
+74  clear
+75  type4
+76  getinput[id="activityRemainingCosts"]
+77  scrollIntoView
+78  clear
+79  type0
+80  containsbutton, Speichern
+81  click{force: true}
+(xhr)POST 200 /puma/widgets/lock
+(xhr)GET 200 /puma/widgets/commentajax?action=LOAD_LIST&project.id=6a7c393072e2b75d4fc9f518&originClassName=Activity&originId=6a7c397672e2b75d4fc9f51c
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=ACTIVITY_WORKPLACE&term=&withKeyPrefix=true
+(new url)http://localhost:8082/puma/activityEditor?project.id=6a7c393072e2b75d4fc9f518&id=6a7c397672e2b75d4fc9f51c
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=COSTPLANNING_MATERIALGROUP&term=&withKeyPrefix=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/foldersajax?project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/documentsajax?formatType=EXTERNAL&activityIds=6a7c397672e2b75d4fc9f51c&_=1786526070932
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Cypress -- Activity bearbeiten \& kontrollieren (Erfolgreich)}, label={lst:cy_edit_act}, style=logStyle]
+1   session["Marcel Licht"]
+created
+14  visit/home
+15  get#project-dropdown-toggle
+16  click
+(xhr)GET 200 /puma/widgets/projectajax?action=loadFavouritesMenu
+17  get#project-dropdown-menu a[href="projectList"]
+18  click
+19  url
+20  assertexpected http://localhost:8082/puma/projectList to include projectList
+(xhr)GET 200 /puma/widgets/activityajax?formatterType=HOME&projectsOnly=true&timeFilter=CURRENT&userIdForFavouriteActivities=667f55b2b71aed06733fe8c3&_=1786526170442
+(xhr)GET /puma/widgets/projectajax?action=loadProjectsHome&formatterType=CURRENT_PROJECTS&statusFilter=&_=1786526170443
+(new url)http://localhost:8082/puma/projectList
+21  get#query_name
+22  clear
+23  typeCypress Testprojekt
+24  containsbutton, Suchen
+25  click{force: true}
+(xhr)POST 200 /puma/widgets/projectajax?action=loadProjects&formatterType=SEARCH_RESULT
+26  contains#searchResult tbody tr, Cypress Testprojekt
+27  finda.openEntry
+28  click
+29  containsa[href*="activityList"], Übersicht
+(new url)http://localhost:8082/puma/projectOverview?project.id=6a7c393072e2b75d4fc9f518
+30  click{force: true}
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+31  geta.openEntry[title="Eintrag öffnen"]
+(xhr)GET 200 /puma/widgets/memberajax?formatterType=MEMBERLIST_OVERVIEW&action=loadMembers&project.id=6a7c393072e2b75d4fc9f518&_=1786526174230
+(xhr)GET /puma/widgets/activityajax?formatterType=ACTIVITIES_OVERVIEW&projectId=6a7c393072e2b75d4fc9f518&type=&_=1786526174231
+(xhr)GET 200 /puma/widgets/activityajax?action=ACTIVITYCOPYPOSITONS
+(new url)http://localhost:8082/puma/activityList?project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/activityajax?formatterType=DEFAULT&projectId=6a7c393072e2b75d4fc9f518&type=&_=1786526175381
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+32  click
+33  get#activity.progress
+34  assertexpected <input#activity.progress.form-control> to have value '15'
+(xhr)GET 200 /puma/widgets/commentajax?action=LOAD_LIST&project.id=6a7c393072e2b75d4fc9f518&originClassName=Activity&originId=6a7c397672e2b75d4fc9f51c
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=ACTIVITY_WORKPLACE&term=&withKeyPrefix=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=COSTPLANNING_MATERIALGROUP&term=&withKeyPrefix=true
+(new url)http://localhost:8082/puma/activityEditor?project.id=6a7c393072e2b75d4fc9f518&id=6a7c397672e2b75d4fc9f51c
+35  get#activity.actualEndDate
+36  assertexpected <input#activity.actualEndDate.form-control> to have value 17.08.2026
+37  get#activityRemainingCosts
+38  assertexpected <input#activityRemainingCosts.form-control> to have value '50'
+39  get#activity_workplace
+40  assertexpected <select#activity_workplace.form-control.prefetch-select.select2-hidden-accessible> to have value PS02080
+41  gettr.task .task_description
+42  eq0
+43  assertexpected <textarea.form-control.task_description> to have value Alle Testfälle für Cypress implementieren
+44  gettr.task .task_description
+45  eq1
+46  assertexpected <textarea.form-control.task_description> to have value Mit schriftlicher Ausarbeitung der Fallstudie beginnen
+47  containsbutton, Bearbeiten
+48  click{force: true}
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/lock?objectId=6a7c393072e2b75d4fc9f518&type=PROJECT
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/foldersajax?project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/documentsajax?formatType=EXTERNAL&activityIds=6a7c397672e2b75d4fc9f51c&_=1786526177300
+(xhr)POST 200 /puma/widgets/lock
+49  get#activity.progress
+50  scrollIntoView
+51  clear
+52  type4
+53  get#activity.actualEndDate
+54  scrollIntoView
+55  clear
+56  type17.08.2026
+57  get#activityRemainingCosts
+58  scrollIntoView
+59  type0, {force: true}
+60  get#activity_workplace
+61  select{force: true}
+62  getbody
+63  wrap[ <tr.task.odd>, 1 more... ]
+64  first
+65  find.deleteEntry
+66  click{force: true}
+67  containsbutton, Löschen
+68  assertexpected <button.btn.btn-danger.btn-ok> to be visible
+69  click{force: true}
+70  getbody
+71  wrap<tr.task.odd>
+72  first
+73  find.deleteEntry
+74  click{force: true}
+75  containsbutton, Löschen
+76  assertexpected <button.btn.btn-danger.btn-ok> to be visible
+77  click{force: true}
+78  getbody
+79  logKeine Tasks mehr vorhanden
+80  containsbutton, Speichern
+81  click{force: true}
+(xhr)POST 200 /puma/widgets/lock
+(xhr)GET 200 /puma/widgets/commentajax?action=LOAD_LIST&project.id=6a7c393072e2b75d4fc9f518&originClassName=Activity&originId=6a7c397672e2b75d4fc9f51c
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=ACTIVITY_WORKPLACE&term=&withKeyPrefix=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=COSTPLANNING_MATERIALGROUP&term=&withKeyPrefix=true
+(xhr)GET 200 /puma/widgets/keyajax?keyContext.context=SHARE_CATEGORY&divisionId=576a3663a77320dc361b41e1
+(xhr)GET 200 /puma/widgets/userprojectroleajax?action=LOAD_PREDEFINED_RECEIVERS&project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/foldersajax?project.id=6a7c393072e2b75d4fc9f518
+(xhr)GET 200 /puma/widgets/documentsajax?formatType=EXTERNAL&activityIds=6a7c397672e2b75d4fc9f51c&_=1786526183348
+(xhr)GET 200 /puma/widgets/projectajax?action=loadFavouritesMenu
+\end{lstlisting}
+
