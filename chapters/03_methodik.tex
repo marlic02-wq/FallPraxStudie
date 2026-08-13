@@ -7,9 +7,9 @@
 Um die Eignung der Frameworks Selenium und Cypress für den Einsatz bei der JUMO GmbH \& Co.\ KG systematisch und objektiv zu vergleichen, wurde ein praxisorientiertes Forschungsdesign gewählt. Dieses Kapitel beschreibt den methodischen Aufbau der Fallstudie, die Auswahl der Testszenarien, die Definition der Bewertungskriterien sowie den Ablauf der praktischen Erprobung.
 
 \subsection{Forschungsdesign der Fallstudie}
-Die Untersuchung basiert auf einer Kombination aus prototypischer Implementierung und einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (NWA) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Vergleich der Frameworks den spezifischen infrastrukturellen Kontext des Unternehmens nicht ausreichend berücksichtigen würde, werden beide Werkzeuge in der realen Entwicklungsumgebung erprobt. 
+Um zu diesem Ergebnis zu gelangen, kombiniert die vorliegende Untersuchung eine prototypische Implementierung mit einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (NWA) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Abgleich der Frameworks die speziellen IT-Rahmenbedingungen des Unternehmens nicht ausreichend berücksichtigen würde, wurden beide Werkzeuge direkt in der realen Entwicklungsumgebung erprobt. 
 
-Die Ergebnisse dieser praktischen Umsetzung fließen in die Nutzwertanalyse ein. Diese Methode erlaubt es, qualitative und quantitative Beobachtungen in messbare Punktwerte zu übersetzen, diese mit unternehmensspezifischen Gewichtungen zu versehen und so zu einem nachvollziehbaren Gesamtergebnis zu gelangen.
+Die Ergebnisse dieser Implementierung fließen in die Nutzwertanalyse ein. Diese Methode erlaubt es, qualitative und quantitative Beobachtungen in messbare Punktwerte zu übersetzen, diese mit unternehmensspezifischen Gewichtungen zu versehen und so zu einem nachvollziehbaren Gesamtergebnis zu gelangen.
 
 \subsection{Auswahl repräsentativer regressionskritischer Testszenarien}
 Da eine vollständige Automatisierung aller Anwendungsfälle der \glqq Puma\grqq-Webanwendung den Rahmen dieser Studie sprengen würde, wurden repräsentative und regressionskritische Nutzungsszenarien ausgewählt. Diese Szenarien bilden die Kernfunktionalitäten der Anwendung ab und sind nach funktionalen Erweiterungen besonders fehleranfällig. 
@@ -36,7 +36,7 @@ Die Bewertungskriterien für die Nutzwertanalyse wurden direkt aus den fachliche
     \item \textbf{Test-Ausführung (20\,\%):} Analyse der Ausführungsgeschwindigkeit im Entwicklungsalltag. Schnelle Feedback-Zyklen sind essenziell für die Akzeptanz bei den Entwicklern.\\
     \textit{Hierbei werden die lokale Ausführungsgeschwindigkeit (60\,\%) und die theoretische Skalierbarkeit in einer CI-Pipeline (40\,\%) betrachtet.}
 
-    \item \textbf{Stabilität (20\,\%):} Zuverlässigkeit der Tests zur Minimierung von \textit{Flaky Tests}. Laufzeit und Stabilität bestimmen direkt den Erfolg der täglichen Qualitätssicherung.\\
+    \item \textbf{Stabilität (20\,\%):} Konsistente Stabilität der Tests zur Minimierung von \textit{Flaky Tests}.\\
     \textit{Die Unterkriterien umfassen das systemseitige Warten \& die Synchronisation dynamischer Inhalte (40\,\%), die Zuverlässigkeit über mehrere Testläufe hinweg (55\,\%) sowie die integrierten Debug-Hilfen im Fehlerfall (5\,\%).}
 
     \item \textbf{Dokumentation und Community (15\,\%):} Bewertung der offiziellen Hilfen und des Ökosystems. Dies flankiert den Entwicklungsprozess, ist den technischen Kernaspekten jedoch untergeordnet.\\
@@ -49,4 +49,4 @@ Die praktische Erprobung erfolgt schrittweise. Zunächst wird für beide Framewo
 \subsection{Datenerhebung und Auswertung}
 Die Datenerhebung findet parallel zur prototypischen Umsetzung statt. Quantitative Daten (Dauer der Testausführung, Code-Struktur) und qualitative Daten (Hürden bei der Netzwerkintegration, Fehlermeldungen) werden strukturiert festgehalten.
 
-Nach Abschluss der Implementierung werden die erhobenen Daten in das Kriterienmodell überführt. Jedes Framework erhält pro Kriterium eine Bewertung auf einer festen \textbf{Skala von 1 bis 10 Punkten}. Diese Punktzahl wird mit der zuvor definierten Gewichtung multipliziert. Die Summe aller gewichteten Punkte ergibt den Gesamtnutzwert.
+Nach Abschluss der Implementierung werden die erhobenen Daten in das Kriterienmodell überführt. Jedes Framework erhält pro Kriterium eine Bewertung auf einer festen \textbf{Skala von 1 bis 10 Punkten}. Dabei repräsentiert 1 die geringste Erfüllung (ungenügend/nicht nutzbar) und 10 die maximal mögliche Zielerfüllung (exzellent/ohne Einschränkungen).Diese Punktzahl wird mit der zuvor definierten Gewichtung multipliziert. Die Summe aller gewichteten Punkte ergibt den Gesamtnutzwert.

@@ -8,23 +8,6 @@ Dieses Kapitel stellt die praktische Testumgebung, die ausgeführten Testszenari
 
 Die Tests wurden im betrieblichen Kontext der JUMO GmbH \& Co. KG durchgeführt. Untersuchungsgegenstand ist die interne Webanwendung \textit{Puma}, die aus einem konkreten betrieblichen Bedarf heraus entstanden ist. Da die vorherige Verwaltung firmeninterner Projekte zunehmend unübersichtlich und schwer nachvollziehbar wurde, dient Puma nun als zentrale Lösung zur Projekt- und Kostenverwaltung. Ein Projekt entspricht in der Anwendung im Wesentlichen einem Arbeitsplan, der um eine detaillierte Kosten- und Stundenplanung erweitert wurde. Darüber hinaus bietet das System Funktionen gängiger Projektplanungstools: Es lassen sich Personen und Teams zuordnen, relevante Dokumente zentral hinterlegen und Projektdaten über eine Schnittstelle direkt mit dem SAP-System synchronisieren.
 
-Das in Abbildung \textbf{\ref{fig:uml_komponenten}} dargestellte vereinfachte Komponentendiagramm veranschaulicht die fachliche und technische Struktur der Anwendung. Im Mittelpunkt steht die Projektverwaltung als zentrale Entität. Ein Projekt ist mit Modulen für Kosten- und Stundenplanungen, Ressourcen, Teams sowie der Dokumentenverwaltung verknüpft. Zur Sicherstellung der Nachvollziehbarkeit von Änderungen werden Aktivitäten, Kommentare, Benachrichtigungen und Historieneinträge erfasst. Die Suchfunktionen werden über Apache Solr abgebildet. Technische Basisdienste wie Logging, Caching, Fehlerbehandlung und allgemeine Hilfsklassen unterstützen die fachlichen Komponenten im Hintergrund.
-
-Der Technologie-Stack der Anwendung basiert auf Java. Als Entwicklungsumgebung kam Eclipse zum Einsatz, während Maven für das Build-Management verwendet wurde. Die Bereitstellung der Anwendung für die lokale Testausführung erfolgte über einen lokalen Tomcat-Server. Der verwendete Port für die Testausführung ist \textbf{8082}. Ohne diesen laufenden Tomcat-Server ist keine Testausführung möglich, da die Webanwendung lokal ansonsten nicht erreichbar ist.
-
-Die Ausführung der Tests unterlag den strengen Sicherheitsrichtlinien des Firmennetzwerks. Aufgrund der unternehmensinternen Proxy-Vorgaben war die Installation externer Komponenten (wie beispielsweise npm-Pakete für Node.js) nur eingeschränkt möglich. 
-
-Die Tests wurden lokal auf einem Entwickler-Laptop durchgeführt. Die Spezifikationen des Systems lauten wie folgt:
-\begin{itemize}
-    \item \textbf{Betriebssystem:} Windows 11 Enterprise
-    \item \textbf{Version:} 24H2
-    \item \textbf{Installationsdatum:} 29.08.2025
-    \item \textbf{Betriebssystembuild:} 26100.8457
-\end{itemize}
-% TODO: Genaue Hardwaredaten des Entwickler-Laptops ergänzen (CPU, RAM)
-
-Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in der Version 120 verwendet.
-
 \begin{figure}[htbp]
     \centering
     \fbox{\includegraphics[width=1\textwidth]{assets/img/REALUMLFallPrax.png}}
@@ -32,31 +15,68 @@ Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in d
     \label{fig:uml_komponenten}
 \end{figure}
 
+Das in Abbildung~\ref{fig:uml_komponenten} dargestellte vereinfachte Komponentendiagramm veranschaulicht die fachliche und technische Struktur der Anwendung. Im Mittelpunkt steht die Projektverwaltung als zentrale Entität. Ein Projekt ist mit Modulen für Kosten- und Stundenplanungen, Ressourcen, Teams sowie der Dokumentenverwaltung verknüpft. Zur Sicherstellung der Nachvollziehbarkeit von Änderungen werden Aktivitäten, Kommentare, Benachrichtigungen und Historieneinträge erfasst. Die Suchfunktionen werden über Apache Solr abgebildet. Technische Basisdienste wie Logging, Caching, Fehlerbehandlung und allgemeine Hilfsklassen unterstützen die fachlichen Komponenten im Hintergrund.
+
+Der Technologie-Stack der Anwendung basiert auf Java. Als Entwicklungsumgebung kam Eclipse zum Einsatz, während Maven für das Build-Management verwendet wurde. Die Bereitstellung der Anwendung für die lokale Testausführung erfolgte über einen lokalen Tomcat-Server. Der verwendete Port für die Testausführung ist 8082. Ohne diesen laufenden Tomcat-Server ist keine Testausführung möglich, da die Webanwendung lokal ansonsten nicht erreichbar ist.
+
+Die Ausführung der Tests unterlag den strengen Sicherheitsrichtlinien des Firmennetzwerks. Aufgrund der unternehmensinternen Proxy-Vorgaben war die Installation externer Komponenten (wie beispielsweise npm-Pakete für Node.js) nur eingeschränkt möglich. Dies stellt insbesondere bei der Tool-Auswahl ein praxisrelevantes Bewertungskriterium dar.
+
+Die Tests wurden lokal auf einem Entwickler-Laptop durchgeführt. Die Spezifikationen des Systems lauten wie folgt:
+\begin{itemize}
+    \item \textbf{Betriebssystem:} Windows 11 Enterprise (Build 26100.8457)
+    \item \textbf{Prozessor (CPU):} Intel Core i7 
+    \item \textbf{Arbeitsspeicher (RAM):} 16 GB 
+\end{itemize}
+
+Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in der Version 120 verwendet.
+
+
 \subsection{Beschreibung der Testszenarien}
 \label{sec:testszenarien}
 
-Dieses Unterkapitel beschreibt die getesteten Anwendungsszenarien systematisch und ordnet diese den jeweiligen Testimplementierungen zu. Zur besseren Übersichtlichkeit wird im Folgenden auf die Angabe vollständiger Dateipfade verzichtet. Stattdessen werden die zugehörigen Testdateien direkt mit ihrem Dateinamen benannt. Die Namenskonvention orientiert sich an einer fortlaufenden Nummerierung der Szenarien (z.\,B. \texttt{01\_...} für das erste Szenario). Die vollständigen Pfade und Quellcodes sind im digitalen Anhang (Git-Repository) zu finden.
+\begin{figure}[htbp] 
+    \centering 
+    \fbox{\includegraphics[width=1\textwidth]{assets/img/PumaNavigationstsruktur.png}} 
+    \caption{Fachliche Navigations- und Funktionsstruktur von Puma mit Markierung der in den Testszenarien verwendeten Bereiche} 
+    \label{fig:puma_navigation_tests} 
+\end{figure} 
+
+Die in Abbildung~\ref{fig:puma_navigation_tests} dargestellte fachliche Navigations- und Funktionsstruktur ergänzt das zuvor gezeigte Komponentendiagramm um eine stärker anwendungsbezogene Sicht auf Puma. Während das Komponentendiagramm die technische und fachliche Gesamtstruktur der Anwendung beschreibt, zeigt diese Darstellung, über welche Navigationspunkte und Funktionen die prototypischen End-to-End-Tests tatsächlich ausgeführt wurden. Die rot markierten Bereiche kennzeichnen die Funktionen, die direkt in den automatisierten Testszenarien verwendet wurden. 
+
+Die grün markierte Funktion wurde ergänzend im Rahmen der Testvorbereitung beziehungsweise zur fachlichen Einordnung der administrativen Struktur berücksichtigt. Dadurch wird sichtbar, dass die ausgewählten Testszenarien nicht isolierte Einzelfunktionen prüfen, sondern mehrere fachlich zusammenhängende Bereiche der Anwendung durchlaufen. Die Zuordnung der markierten Bereiche zu den Testszenarien ist in Tabelle~\ref{tab:zuordnung_testszenarien_navigation} dargestellt. 
+
+\begin{table}[htbp] 
+    \centering 
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Zuordnung der Testszenarien zu den verwendeten Puma-Funktionen} 
+    \label{tab:zuordnung_testszenarien_navigation} 
+    \begin{tabular}{p{0.25\textwidth} p{0.35\textwidth} p{0.35\textwidth}} 
+    \hline 
+    \textbf{Testszenario} & \textbf{Verwendete Navigations-/Funktionsbereiche} & \textbf{Zweck im Test} \\ 
+    \hline 
+    Szenario 1: Login & Home / Startseite, Meine Projekte & Prüfung der erfolgreichen Anmeldung sowie der Weiterleitung in einen geschützten Bereich. \\ 
+    \hline 
+    Szenario 2: Neues Projekt bzw. neue Aktivität anlegen & Projekte, Projekterstellung, Projektübersicht, Stammblatt, Projektplan, Erstellen & Prüfung der Anlage eines neuen Projekts beziehungsweise einer neuen Aktivität über formularbasierte Eingaben. \\ 
+    \hline 
+    Szenario 3: Aktivität bearbeiten & Projekte, Projektsuche, Projektübersicht, Projektplan, Übersicht, Stammblatt & Prüfung eines mehrstufigen Bearbeitungsprozesses: Suchen, Öffnen, Werte ändern, speichern und kontrollieren. \\ 
+    \hline 
+    Ergänzende Testvorbereitung & Administration, Objektverwaltung & Einordnung administrativer Strukturen, die für das Verständnis der Systemkomplexität relevant sind. \\ 
+    \hline 
+    \end{tabular} 
+\end{table}
+
+Zur besseren Übersichtlichkeit wird im Folgenden auf die Angabe vollständiger Dateipfade verzichtet. Stattdessen werden die zugehörigen Testdateien direkt mit ihrem Dateinamen benannt. Die vollständigen Quellcodes sind im digitalen Anhang zu finden.
 
 \subsubsection{Szenario 1: Login}
-Das Ziel dieses Tests ist es zu prüfen, ob sich ein Benutzer erfolgreich an der Puma-Webanwendung anmelden kann. Die Startbedingungen setzen voraus, dass Puma lokal über den Tomcat-Server auf Port 8082 erreichbar ist und ein gültiger Benutzer mit Benutzername und Passwort zur Verfügung steht.
-
-Der Ablauf des Tests beginnt mit dem Öffnen der Login-Seite. Nach der Eingabe von Benutzername und Passwort wird der Login-Button betätigt. Anschließend wird geprüft, ob eine Weiterleitung auf die erwartete Zielseite erfolgt.
-
-Das erwartete Ergebnis ist, dass der Benutzer erfolgreich angemeldet wird und der Redirect im Test validiert wird. Die automatisierte Umsetzung erfolgte in den Testdateien \textbf{01\_PumaLoginTest.java} (Selenium) und \textbf{01\_login-ui.cy.js} (Cypress).
+Das Ziel dieses Tests ist es zu prüfen, ob sich ein Benutzer erfolgreich an der Puma-Webanwendung anmelden kann. Die Startbedingungen setzen voraus, dass Puma lokal über den Tomcat-Server auf Port 8082 erreichbar ist und ein gültiger Benutzer zur Verfügung steht. Der Ablauf beginnt mit dem Öffnen der Login-Seite, gefolgt von der Eingabe der Credentials und der Betätigung des Login-Buttons. 
+Das erwartete Ergebnis ist der erfolgreiche Redirect, welcher im Test validiert wird (Dateien: \textbf{01\_PumaLoginTest.java} und \textbf{01\_login-ui.cy.js}).
 
 \subsubsection{Szenario 2: Neues Projekt bzw. neue Aktivität anlegen}
-In diesem Szenario wird geprüft, ob ein neues Projekt bzw. eine neue Aktivität korrekt über die Benutzeroberfläche angelegt werden kann. Als Startbedingung muss der Benutzer erfolgreich angemeldet sein. Die Anwendung muss lokal erreichbar sein und die benötigten Dropdown-Werte müssen im System zur Verfügung stehen.
-
-Der Test navigiert zur Maske für die Projekt- bzw. Aktivitätsanlage. Das Stammblatt wird durch Eingabe der benötigten Projektdaten ausgefüllt. Eine Besonderheit bilden hier Dropdowns mit \textbf{select2}, die dynamisch reagieren und daher gezielt im Code angesprochen werden müssen. Nach dem Ausfüllen wird das Formular gespeichert und die Systemrückmeldung geprüft.
-
-Als erwartetes Ergebnis wird das Projekt oder die Aktivität erfolgreich angelegt. Die Anwendung zeigt eine korrekte Bestätigung an, und die Daten sind im System vorhanden. Die zugehörigen Testdateien sind \textbf{02\_NewProjektTest.java} und \textbf{02\_NewActivityAnlegenTest.java} für Selenium sowie \textbf{02\_newProjekt.cy.js} und \textbf{02\_newActivity.cy.js} für Cypress.
+In diesem Szenario wird geprüft, ob ein neues Projekt bzw. eine neue Aktivität korrekt angelegt werden kann. Eine Besonderheit bilden hier Dropdowns mit \textbf{select2}, die dynamisch reagieren und daher gezielt im Code angesprochen werden müssen. 
+Nach dem Ausfüllen wird das Formular gespeichert und die Systemrückmeldung geprüft. Die zugehörigen Testdateien sind \textbf{02\_NewProjektTest.java} und \textbf{02\_newProjekt.cy.js}.
 
 \subsubsection{Szenario 3: Aktivität bearbeiten}
-Das Ziel des dritten Szenarios ist die Prüfung, ob eine bestehende Aktivität geöffnet, geändert, gespeichert und anschließend korrekt validiert werden kann. Die Startbedingungen erfordern, dass der Benutzer angemeldet ist und eine bestehende Aktivität aufgerufen werden kann.
-
-Der Ablauf sieht die Navigation zur Aktivität sowie das Öffnen der Bearbeitungsansicht vor. Es folgt die Änderung definierter Werte (z.\,B. Fortschritt oder Datum). Nach dem Speichern wird die Aktivität erneut aufgerufen, um zu validieren, ob die Änderungen korrekt übernommen wurden.
-
-Es wird erwartet, dass die Aktivität erfolgreich gespeichert wird und die geänderten Werte korrekt in der Oberfläche angezeigt werden. Die Umsetzung für dieses Szenario befindet sich in \textbf{03\_EditActivityTest.java} und \textbf{03\_ControlEditedActivityTest.java} (Selenium) sowie \textbf{03\_editActivity.cy.js} und \textbf{03\_controlEditedActivity.cy.js} (Cypress).
+Das Ziel des dritten Szenarios ist die Prüfung, ob eine bestehende Aktivität geöffnet, geändert, gespeichert und anschließend korrekt validiert werden kann. Nach dem Speichern geänderter Werte (z.\,B. Fortschritt oder Datum) wird die Aktivität erneut aufgerufen, um zu validieren, ob die Änderungen korrekt übernommen wurden (Dateien: \textbf{03\_EditActivityTest.java} und \textbf{03\_editActivity.cy.js}).
 
 
 \subsection{Setup und technische Integration}
@@ -65,60 +85,34 @@ Es wird erwartet, dass die Aktivität erfolgreich gespeichert wird und die geän
 Dieses Unterkapitel erläutert, wie Selenium und Cypress technisch in die bestehende Entwicklungsumgebung integriert wurden und welche spezifischen Herausforderungen dabei aufgetreten sind.
 
 \subsubsection{Selenium}
-Selenium wurde als Bibliothek in die bestehende Java-Umgebung integriert. Die Einbindung erfolgte unkompliziert über die \textbf{pom.xml} mit Maven. Da im Projekt ohnehin mit Java, Eclipse und Maven gearbeitet wird, passt das Framework sehr gut zur bestehenden Entwicklungsumgebung. Die Integration verlief weitgehend reibungslos. Ein anfängliches Kompatibilitätsproblem mit der im Unternehmen verwendeten älteren JDK-Version konnte umgangen werden.
-
-Selenium ließ sich aufgrund der bestehenden Java- und Maven-Struktur gut in die vorhandene Entwicklungsumgebung integrieren.
-
+Selenium wurde als Bibliothek in die bestehende Java-Umgebung integriert. Die Einbindung erfolgte unkompliziert über die \textbf{pom.xml} mit Maven. Da im Projekt ohnehin mit Java, Eclipse und Maven gearbeitet wird, passt das Framework sehr gut zur bestehenden Entwicklungsumgebung. Ein anfängliches Kompatibilitätsproblem mit der im Unternehmen verwendeten älteren JDK-Version konnte zügig umgangen werden.
 
 \subsubsection{Cypress}
-Im Gegensatz zur etablierten Java-basierten Integration von Selenium setzt Cypress eine Node.js- und npm-Umgebung voraus. Im vorliegenden Unternehmenskontext erwies sich diese technologische Anforderung als erste Hürde: Strikte Proxy- und Sicherheitsrichtlinien blockierten die reguläre Paketinstallation über npm, weshalb eine dedizierte IT-Freigabe zwingend erforderlich war.
-
-Zwar kann eine lokale Installation über ein ZIP-Archiv als kurzfristiger Workaround dienen, dieser Ansatz wurde jedoch verworfen. Er eignet sich nicht für wiederholbare, skalierbare Continuous-Integration-Prozesse (CI) und erschwert die saubere Versionsverwaltung. Folglich bleibt der initiale Einrichtungsaufwand für Cypress -- trotz der grundsätzlichen Lösbarkeit durch administrative Freigabeprozesse -- im direkten Vergleich zu Selenium organisatorisch und technisch umständlicher.
+Im Gegensatz zur etablierten Java-basierten Integration setzt Cypress eine Node.js- und npm-Umgebung voraus. Im vorliegenden Unternehmenskontext erwies sich diese technologische Anforderung als erste Hürde: Strikte Proxy- und Sicherheitsrichtlinien blockierten die reguläre Paketinstallation über npm, weshalb eine dedizierte IT-Freigabe zwingend erforderlich war. Dieser initiale Einrichtungsaufwand ist im direkten Vergleich zu Selenium organisatorisch umständlicher und fließt als kritischer Faktor in die Nutzwertanalyse ein.
 
 \subsection{Syntax- und Architekturvergleich}
 \label{sec:syntaxvergleich}
 
-Die Frameworks Selenium und Cypress unterscheiden sich grundlegend in Bezug auf Architektur, Syntax, Wartbarkeit und Synchronisation.
-
 \subsubsection{Architektur}
-Selenium wird als Bibliothek in die bestehende Java/JUnit-Umgebung integriert \cite{spillner2024basiswissen}. Es arbeitet als Bestandteil des vorhandenen Maven-Projekts, wodurch die Testautomatisierung eng mit der bestehenden Backend- bzw. Java-Struktur verbunden ist. Cypress hingegen ist ein eigenständiges Tooling auf Basis von Node.js und bringt eine eigene Testumgebung mit. Es läuft nicht als Java-Bibliothek, sondern agiert als separates End-to-End-Testframework.
+Selenium arbeitet als Bestandteil des vorhandenen Maven-Projekts, wodurch die Testautomatisierung eng mit der bestehenden Backend- bzw. Java-Struktur verbunden ist \cite{spillner2024basiswissen}. Cypress hingegen ist ein eigenständiges Tooling auf Basis von Node.js und bringt eine eigene Testumgebung mit, die direkt im Browser operiert.
 
-Zusammenfassend: Selenium erweitert die vorhandene Java-Testumgebung, während Cypress eine eigenständige Testplattform auf Basis von Node.js bereitstellt.
+\subsubsection{Ausdrucksstärke der Syntax und Wartbarkeit}
+Cypress zeichnet sich durch eine Syntax aus, die näher an natürlicher Sprache ist. Befehle lassen sich über das Konzept des \textbf{Chainings} gut lesbar aneinanderreihen (z.\,B. \textbf{cy.get(...).type(...)}). Selenium ist technischer geprägt; DOM-Elemente müssen in der Regel explizit als \textbf{WebElement} deklariert werden. Um in Selenium Redundanzen zu vermeiden, sind Architekturmuster wie das Page-Object-Pattern zwingend erforderlich \cite{Liggesmeyer2009}.
 
-\subsubsection{Ausdrucksstärke der Syntax}
-Cypress zeichnet sich durch eine Syntax aus, die näher an natürlicher Sprache ist. Befehle lassen sich über das Konzept des Chainings gut lesbar aneinanderreihen. Durch Befehle wie \textbf{cy.get(...).type(...)} entsteht eine kompakte und gut lesbare Testbeschreibung.
-
-Selenium ist hingegen technischer und stärker objektorientiert geprägt. Bevor eine Interaktion stattfinden kann, müssen DOM-Elemente in der Regel explizit als \textbf{WebElement} gespeichert werden. Die tatsächliche Interaktion erfolgt erst im nächsten Schritt über Methoden wie \textbf{clear()} und \textbf{sendKeys()}.
-
-\subsubsection{Wartbarkeit}
-Bei der Nutzung von Selenium entstehen ohne strukturierende Maßnahmen schnell Wiederholungen im Quellcode. Um Redundanzen zu vermeiden, sind Hilfsmethoden oder die Anwendung des Page-Object-Patterns als notwendige Strukturierungsmaßnahmen unerlässlich \cite{Liggesmeyer2009}.
-
-Cypress ermöglicht durch Chaining und implizite Mechanismen häufig kompakteren Code. Gerade einfache Testabläufe wirken dadurch übersichtlicher, auch wenn bei steigender Projektkomplexität ebenso in Cypress eine strukturierte Testorganisation erforderlich sein kann.
-
-\subsubsection{Synchronisation}
-Ein zentraler Unterschied liegt in der Handhabung dynamischer Ladezeiten. In Selenium müssen dynamische Elemente häufig explizit mit Anweisungen wie \textbf{wait.until(...)} behandelt werden. Die Sichtbarkeit oder Klickbarkeit muss aktiv geprüft werden, was den Code umfangreicher macht.
-
-Cypress verfügt über integrierte Auto-Waits. Viele Wartebedingungen sind bereits in den Basisbefehlen wie \textbf{cy.get()}, \textbf{type()} oder \textbf{click()} enthalten, wodurch sich der manuelle Synchronisationsaufwand maßgeblich verringert.
-
-Der wesentliche Unterschied liegt darin, dass Selenium Wartebedingungen häufig explizit formuliert, während Cypress viele Synchronisationsaufgaben automatisch übernimmt.
+\subsubsection{Synchronisation (Waits)}
+In Selenium müssen dynamische Elemente häufig explizit mit Anweisungen wie \textbf{wait.until(...)} behandelt werden, was den Code aufbläht. 
+Cypress verfügt über integrierte \textbf{Auto-Waits}. 
+Viele Wartebedingungen sind bereits in den Basisbefehlen enthalten, wodurch sich der manuelle Synchronisationsaufwand maßgeblich verringert.
 
 \subsubsection{Benutzeroberfläche und Test-Logging}
-Selenium bietet keine eigene Benutzeroberfläche, sondern wird typischerweise als klassischer JUnit-Test aus der IDE heraus gestartet. Zudem fehlt ein integriertes Logging der einzelnen Testschritte. Log-Ausgaben müssen manuell implementiert werden, andernfalls erhält man bei Fehlern oft nur komplexe Java-Stacktraces.
-
-Cypress stellt dagegen einen interaktiven grafischen Test Runner bereit. Dieser beinhaltet ein automatisches \textit{Command-Log}, das jede Interaktion in Echtzeit am Bildschirmrand protokolliert. Über eine integrierte Time-Travel-Funktion lässt sich der visuelle Zustand des Browsers zu jedem vergangenen Testschritt exakt prüfen, was manuellen Log-Aufwand vollständig überflüssig macht.
-
-Es sei an dieser Stelle angemerkt, dass sich das fehlende visuelle Reporting und Logging in Selenium durch die Integration diverser Drittanbieter-Tools (wie beispielsweise Allure Reports oder kommerziellen Cloud-Lösungen) aufrüsten ließe, um ein ähnliches Komfortniveau wie bei Cypress zu erreichen. In dieser Fallstudie werden solche Erweiterungen jedoch nicht berücksichtigt. Die Beschaffung, Lizenzierung und administrative Freigabe externer Tools ist im stark reglementierten Unternehmenskontext häufig mit zusätzlichen Kosten, Datenschutzprüfungen und langwierigen IT-Prozessen verbunden. Daher fokussiert sich dieser Vergleich bewusst auf die \textit{Out-of-the-box}-Funktionalitäten der beiden Frameworks.
-
-Zusammenfassend: Während Selenium in der Standardausführung auf manuelle Log-Implementierungen und IDE-Konsolen angewiesen ist, bietet Cypress durch seinen Test Runner und automatisches Logging von Haus aus eine deutlich bessere visuelle Nachvollziehbarkeit.
+Selenium wird typischerweise als klassischer JUnit-Test aus der IDE gestartet und liefert bei Fehlern oftmals nur Java-Stacktraces, sofern kein manuelles Logging oder externe Tools (wie Allure) integriert werden. Cypress stellt dagegen einen interaktiven grafischen Test Runner bereit, der über eine Time-Travel-Funktion verfügt und jeden Testschritt visuell und nachvollziehbar protokolliert.
 
 
 \subsection{Code-Gegenüberstellung: Projektanlage}
 \label{sec:code_gegenueberstellung}
 
-Anhand eines ausgewählten Codebeispiels wird im Folgenden der strukturelle Aufbau beider Frameworks bei typischen UI-Interaktionen gegenübergestellt. Der Schwerpunkt dieses Vergleichs liegt auf dem Befüllen von Formularfeldern, konkret dem Setzen des Projektnamens und des Enddatums bei der Projektanlage.
+Anhand der Projektanlage wird im Folgenden der strukturelle Aufbau beider Frameworks beim Befüllen von Formularfeldern gegenübergestellt.
 
-\begin{figure}[htbp]
-    \begin{minipage}[t]{1\textwidth}
 \begin{lstlisting}[language=Java, caption={Projektanlage mit Selenium}, label={lst:selenium_form}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 // Projektname setzen + prüfen
 WebElement projektname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project_name")));
@@ -128,16 +122,7 @@ projektname.sendKeys(PROJEKTNAME);
 assertEquals(PROJEKTNAME, projektname.getAttribute("value"),
     "Projektname wurde nicht korrekt gesetzt.");
 
-// Bereich
-selectDropdownByTextAndAssert("project_divisionId", "Informationstechnologie (IT)");
-
-// Projektprofil
-selectDropdownByTextAndAssert("project_sapProjectProfile", "ZEW");
-
-// Profitcenter
-selectDropdownByTextAndAssert("project_sapProfitCenter", "CC10100400 - Ausbildung");
-
-// Enddatum
+// Enddatum setzen
 WebElement endDate = wait.until(ExpectedConditions.elementToBeClickable(By.id("project_endDate")));
 assertNotNull(endDate, "Feld 'Enddatum' wurde nicht gefunden.");
 endDate.clear();
@@ -145,56 +130,18 @@ endDate.sendKeys("17.08.2026");
 assertEquals("17.08.2026", endDate.getAttribute("value"),
     "Enddatum wurde nicht korrekt gesetzt.");
 \end{lstlisting}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{1\textwidth}
-        
-\begin{lstlisting}[language=JavaScript, caption={Projektanlage in Cypress}, label={lst:cypress_form}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
-// Neues Projekt anlegen + Aktivität
-// Stammblatt ausfüllen (Pflichtfelder):
 
+\begin{lstlisting}[language=JavaScript, caption={Projektanlage in Cypress}, label={lst:cypress_form}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 // Projektname
 cy.get('#project_name').type('Cypress Testprojekt')
 
-// Bereich
-cy.get('#project_divisionId')
+// Enddatum
+cy.get('#project_endDate')
   .scrollIntoView()
-  .select('Informationstechnologie (IT)', { force: true })
-
-// Projektprofil
-cy.get('#project_sapProjectProfile')
-  .select('ZEW', { force: true })
-
-// Profitcenter
-cy.get('#project_sapProfitCenter')
-  .select('CC10100400 - Ausbildung', { force: true })
-
-// Datum(Zeitspanne)
-  //Von
-  /*
-  cy.get('#project_startDate')
-    .clear()
-    .type('dd.mm.yyyy')
-  */
-
-  //Bis
-  cy.get('#project_endDate')
-    .scrollIntoView()
-    .clear()
-    .type('17.08.2026')
+  .clear()
+  .type('17.08.2026')
 \end{lstlisting}
-    \end{minipage}
-\end{figure}
 
-Wie in Listing \ref{lst:selenium_form} erkennbar, wird für jedes relevante Element in Selenium zunächst ein explizites Warten (Wait) definiert. Beim Feld \texttt{project\_name} wird auf die Sichtbarkeit gewartet, beim Feld \texttt{project\_endDate} auf die Klickbarkeit. Erst danach können die Felder geleert und mit den Testdaten befüllt werden. Dies macht den Code zwar robust gegenüber dynamischen Ladezeiten, erhöht jedoch die Zeilenanzahl und verleiht dem Test einen stark technischen Charakter.
+Wie in Listing~\ref{lst:selenium_form} erkennbar, erfordert Selenium ein explizites Warten (Wait) auf die Sichtbarkeit oder Klickbarkeit der Elemente. Cypress nutzt im Gegensatz dazu (Listing~\ref{lst:cypress_form}) die integrierten \textit{Auto-Waits}, was ein direktes Verketten (Chaining) der Befehle ermöglicht und den Code kompakter und funktionaler macht.
 
-Cypress nutzt im Gegensatz dazu, wie in Listing \ref{lst:cypress_form} dargestellt, die Anweisung \texttt{cy.get()} zur Auswahl des Elements. Notwendige Wartebedingungen sind in den Cypress-Standardbefehlen bereits implizit integriert, sodass die Aktionen direkt verkettet (Chaining) werden können. Für das Datumsfeld wird zusätzlich \texttt{scrollIntoView()} verwendet, um sicherzustellen, dass sich das Element im sichtbaren Viewport befindet. 
-
-Aus dieser Gegenüberstellung lassen sich folgende Bewertungsaspekte für die Nutzwertanalyse ableiten:
-\begin{enumerate}
-    \item \textbf{Synchronisation:} Selenium erfordert bei dynamischen Oberflächen die manuelle Definition expliziter Waits. Cypress kapselt diese Wartebedingungen in seinen Standardbefehlen.
-    \item \textbf{Codeumfang:} Selenium benötigt mehr Programmzeilen, da Wartebedingungen und Elementvariablen separiert werden. Cypress erreicht durch das Chaining eine kompaktere Darstellung.
-    \item \textbf{Lesbarkeit:} Der Selenium-Code ist stark technisch strukturiert. Die Cypress-Syntax liest sich hingegen eher wie eine direkte funktionale Beschreibung der Anwenderaktion.
-    \item \textbf{Wartbarkeit:} Während Cypress einfache UI-Abläufe nativ kompakt hält, erfordert Selenium bei wachsendem Testumfang zwingend den Einsatz von Hilfsmethoden oder Architekturmustern (wie dem Page Object Model), um die Wartbarkeit sicherzustellen.
-\end{enumerate}
-
-Zusammenfassend zeigt der Vergleich, dass Selenium eine sehr feingranulare Steuerung der Synchronisation ermöglicht, was jedoch den Code-Overhead erhöht. Cypress bietet insbesondere bei formularbasierten Interaktionen eine lesbarere und kompaktere Syntax, was die Einarbeitung und Pflege der Tests erleichtert.
+Aus dieser Gegenüberstellung leiten sich zentrale Bewertungsaspekte für die Nutzwertanalyse ab: Selenium bietet eine feingranulare Steuerung, erzeugt jedoch viel Code-Overhead. Cypress bietet eine kompaktere Syntax, was die Einarbeitung und Pflege der UI-Tests erheblich erleichtert.
