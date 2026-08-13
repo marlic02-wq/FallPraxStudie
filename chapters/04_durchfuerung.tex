@@ -28,7 +28,7 @@ Die Tests wurden lokal auf einem Entwickler-Laptop durchgeführt. Die Spezifikat
     \item \textbf{Arbeitsspeicher (RAM):} 16 GB 
 \end{itemize}
 
-Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in der Version 120 verwendet.
+Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in der Version 151 verwendet. 
 
 
 \subsection{Beschreibung der Testszenarien}
@@ -41,7 +41,7 @@ Für die Testdurchführung wurde ausschließlich der Browser Microsoft Edge in d
     \label{fig:puma_navigation_tests} 
 \end{figure} 
 
-Die in Abbildung~\ref{fig:puma_navigation_tests} dargestellte fachliche Navigations- und Funktionsstruktur ergänzt das zuvor gezeigte Komponentendiagramm um eine stärker anwendungsbezogene Sicht auf Puma. Während das Komponentendiagramm die technische und fachliche Gesamtstruktur der Anwendung beschreibt, zeigt diese Darstellung, über welche Navigationspunkte und Funktionen die prototypischen End-to-End-Tests tatsächlich ausgeführt wurden. Die rot markierten Bereiche kennzeichnen die Funktionen, die direkt in den automatisierten Testszenarien verwendet wurden. 
+Die in Abbildung~\ref{fig:puma_navigation_tests} dargestellte fachliche Navigations- und Funktionsstruktur ergänzt das zuvor gezeigte Komponentendiagramm um eine stärker anwendungsbezogene Sicht auf Puma. Während das Komponentendiagramm die technische und fachliche Gesamtstruktur der Anwendung beschreibt, zeigt diese Darstellung, über welche Navigationspunkte und Funktionen die prototypischen \gls{e2etests} tatsächlich ausgeführt wurden. Die rot markierten Bereiche kennzeichnen die Funktionen, die direkt in den automatisierten Testszenarien verwendet wurden. 
 
 Die grün markierte Funktion wurde ergänzend im Rahmen der Testvorbereitung beziehungsweise zur fachlichen Einordnung der administrativen Struktur berücksichtigt. Dadurch wird sichtbar, dass die ausgewählten Testszenarien nicht isolierte Einzelfunktionen prüfen, sondern mehrere fachlich zusammenhängende Bereiche der Anwendung durchlaufen. Die Zuordnung der markierten Bereiche zu den Testszenarien ist in Tabelle~\ref{tab:zuordnung_testszenarien_navigation} dargestellt. 
 
@@ -85,10 +85,9 @@ Das Ziel des dritten Szenarios ist die Prüfung, ob eine bestehende Aktivität g
 Dieses Unterkapitel erläutert, wie Selenium und Cypress technisch in die bestehende Entwicklungsumgebung integriert wurden und welche spezifischen Herausforderungen dabei aufgetreten sind.
 
 \subsubsection{Selenium}
-Selenium wurde als Bibliothek in die bestehende Java-Umgebung integriert. Die Einbindung erfolgte unkompliziert über die \textbf{pom.xml} mit Maven. Da im Projekt ohnehin mit Java, Eclipse und Maven gearbeitet wird, passt das Framework sehr gut zur bestehenden Entwicklungsumgebung. Ein anfängliches Kompatibilitätsproblem mit der im Unternehmen verwendeten älteren JDK-Version konnte zügig umgangen werden.
-
+Selenium wurde als Bibliothek in die bestehende Java-Umgebung integriert. Die Einbindung erfolgte unkompliziert über die \textbf{pom.xml} mit Maven. Da im Projekt ohnehin mit Java, Eclipse und Maven gearbeitet wird, passt das Framework sehr gut zur bestehenden Entwicklungsumgebung. Ein anfängliches Kompatibilitätsproblem mit der im Unternehmen eingesetzten, älteren \gls{jdk}-Version konnte durch die Verwendung einer kompatiblen, älteren Selenium-Version erfolgreich umgangen werden.
 \subsubsection{Cypress}
-Im Gegensatz zur etablierten Java-basierten Integration setzt Cypress eine Node.js- und npm-Umgebung voraus. Im vorliegenden Unternehmenskontext erwies sich diese technologische Anforderung als erste Hürde: Strikte Proxy- und Sicherheitsrichtlinien blockierten die reguläre Paketinstallation über npm, weshalb eine dedizierte IT-Freigabe zwingend erforderlich war. Dieser initiale Einrichtungsaufwand ist im direkten Vergleich zu Selenium organisatorisch umständlicher und fließt als kritischer Faktor in die Nutzwertanalyse ein.
+Im Gegensatz zur etablierten Java-basierten Integration setzt Cypress eine Node.js- und npm-Umgebung voraus. Im vorliegenden Unternehmenskontext erwies sich diese technologische Anforderung als erste Hürde: Strikte Proxy- und Sicherheitsrichtlinien blockierten die reguläre Paketinstallation über npm, weshalb eine dedizierte \gls{it}-Freigabe zwingend erforderlich war. Dieser initiale Einrichtungsaufwand ist im direkten Vergleich zu Selenium organisatorisch umständlicher und fließt als kritischer Faktor in die Nutzwertanalyse ein.
 
 \subsection{Syntax- und Architekturvergleich}
 \label{sec:syntaxvergleich}
@@ -97,7 +96,7 @@ Im Gegensatz zur etablierten Java-basierten Integration setzt Cypress eine Node.
 Selenium arbeitet als Bestandteil des vorhandenen Maven-Projekts, wodurch die Testautomatisierung eng mit der bestehenden Backend- bzw. Java-Struktur verbunden ist \cite{spillner2024basiswissen}. Cypress hingegen ist ein eigenständiges Tooling auf Basis von Node.js und bringt eine eigene Testumgebung mit, die direkt im Browser operiert.
 
 \subsubsection{Ausdrucksstärke der Syntax und Wartbarkeit}
-Cypress zeichnet sich durch eine Syntax aus, die näher an natürlicher Sprache ist. Befehle lassen sich über das Konzept des \textbf{Chainings} gut lesbar aneinanderreihen (z.\,B. \textbf{cy.get(...).type(...)}). Selenium ist technischer geprägt; DOM-Elemente müssen in der Regel explizit als \textbf{WebElement} deklariert werden. Um in Selenium Redundanzen zu vermeiden, sind Architekturmuster wie das Page-Object-Pattern zwingend erforderlich \cite{Liggesmeyer2009}.
+Cypress zeichnet sich durch eine Syntax aus, die näher an natürlicher Sprache ist. Befehle lassen sich über das Konzept des \textbf{\gls{chaining}} gut lesbar aneinanderreihen (z.\,B. \textbf{cy.get(...).type(...)}). Selenium ist technischer geprägt; \gls{dom}-Elemente müssen in der Regel explizit als \textbf{WebElement} deklariert werden. Um in Selenium Redundanzen zu vermeiden, sind Architekturmuster wie das Page-Object-Pattern zwingend erforderlich \cite{Liggesmeyer2009}.
 
 \subsubsection{Synchronisation (Waits)}
 In Selenium müssen dynamische Elemente häufig explizit mit Anweisungen wie \textbf{wait.until(...)} behandelt werden, was den Code aufbläht. 
@@ -105,8 +104,9 @@ Cypress verfügt über integrierte \textbf{Auto-Waits}.
 Viele Wartebedingungen sind bereits in den Basisbefehlen enthalten, wodurch sich der manuelle Synchronisationsaufwand maßgeblich verringert.
 
 \subsubsection{Benutzeroberfläche und Test-Logging}
-Selenium wird typischerweise als klassischer JUnit-Test aus der IDE gestartet und liefert bei Fehlern oftmals nur Java-Stacktraces, sofern kein manuelles Logging oder externe Tools (wie Allure) integriert werden. Cypress stellt dagegen einen interaktiven grafischen Test Runner bereit, der über eine Time-Travel-Funktion verfügt und jeden Testschritt visuell und nachvollziehbar protokolliert.
+Selenium wird typischerweise als klassischer JUnit-Test aus der \gls{ide} gestartet und liefert bei Fehlern oftmals nur Java-Stacktraces, sofern kein manuelles Logging oder externe Tools (wie Allure) integriert werden. Cypress stellt dagegen einen interaktiven grafischen Test Runner bereit, der über eine \gls{timetravel} verfügt und jeden Testschritt visuell und nachvollziehbar protokolliert.
 
+\clearpage
 
 \subsection{Code-Gegenüberstellung: Projektanlage}
 \label{sec:code_gegenueberstellung}
@@ -142,6 +142,6 @@ cy.get('#project_endDate')
   .type('17.08.2026')
 \end{lstlisting}
 
-Wie in Listing~\ref{lst:selenium_form} erkennbar, erfordert Selenium ein explizites Warten (Wait) auf die Sichtbarkeit oder Klickbarkeit der Elemente. Cypress nutzt im Gegensatz dazu (Listing~\ref{lst:cypress_form}) die integrierten \textit{Auto-Waits}, was ein direktes Verketten (Chaining) der Befehle ermöglicht und den Code kompakter und funktionaler macht.
+Wie in Quellcode\ref{lst:selenium_form} erkennbar, erfordert Selenium ein explizites Warten (Wait) auf die Sichtbarkeit oder Klickbarkeit der Elemente. Cypress nutzt im Gegensatz dazu (Quellcode\ref{lst:cypress_form}) die integrierten \textit{Auto-Waits}, was ein direktes Verketten (\gls{chaining}) der Befehle ermöglicht und den Code kompakter und funktionaler macht.
 
-Aus dieser Gegenüberstellung leiten sich zentrale Bewertungsaspekte für die Nutzwertanalyse ab: Selenium bietet eine feingranulare Steuerung, erzeugt jedoch viel Code-Overhead. Cypress bietet eine kompaktere Syntax, was die Einarbeitung und Pflege der UI-Tests erheblich erleichtert.
+Aus dieser Gegenüberstellung leiten sich zentrale Bewertungsaspekte für die Nutzwertanalyse ab: Selenium bietet eine feingranulare Steuerung, erzeugt jedoch viel Code-Overhead. Cypress bietet eine kompaktere Syntax, was die Einarbeitung und Pflege der \gls{ui}-Tests erheblich erleichtert.

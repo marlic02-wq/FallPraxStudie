@@ -7,7 +7,7 @@
 Um die Eignung der Frameworks Selenium und Cypress für den Einsatz bei der JUMO GmbH \& Co.\ KG systematisch und objektiv zu vergleichen, wurde ein praxisorientiertes Forschungsdesign gewählt. Dieses Kapitel beschreibt den methodischen Aufbau der Fallstudie, die Auswahl der Testszenarien, die Definition der Bewertungskriterien sowie den Ablauf der praktischen Erprobung.
 
 \subsection{Forschungsdesign der Fallstudie}
-Um zu diesem Ergebnis zu gelangen, kombiniert die vorliegende Untersuchung eine prototypische Implementierung mit einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (NWA) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Abgleich der Frameworks die speziellen IT-Rahmenbedingungen des Unternehmens nicht ausreichend berücksichtigen würde, wurden beide Werkzeuge direkt in der realen Entwicklungsumgebung erprobt. 
+Um zu diesem Ergebnis zu gelangen, kombiniert die vorliegende Untersuchung eine prototypische Implementierung mit einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (\gls{nwa}) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Abgleich der Frameworks die speziellen \gls{it}-Rahmenbedingungen des Unternehmens nicht ausreichend berücksichtigen würde, wurden beide Werkzeuge direkt in der realen Entwicklungsumgebung erprobt. 
 
 Die Ergebnisse dieser Implementierung fließen in die Nutzwertanalyse ein. Diese Methode erlaubt es, qualitative und quantitative Beobachtungen in messbare Punktwerte zu übersetzen, diese mit unternehmensspezifischen Gewichtungen zu versehen und so zu einem nachvollziehbaren Gesamtergebnis zu gelangen.
 
@@ -18,7 +18,7 @@ Für die prototypische Umsetzung wurden folgende drei Szenarien definiert:
 \begin{enumerate}
     \item \textbf{Authentifizierung:} Ein Login-Vorgang zur Prüfung des Zugriffs auf geschützte Bereiche. Obwohl dieser Bereich bei funktionalen Erweiterungen der Anwendung selten direkt modifiziert wird, ist er aufgrund seiner hohen Kritikalität (Totalausfall bei Defekt) zwingend abzusichern. Zudem dient er im Framework-Vergleich als methodische Baseline zur Evaluation grundlegender Interaktions- und Warte-Mechanismen.
     
-    \item \textbf{Formularverarbeitung:} Das Ausfüllen, Validieren und Absenden eines typischen Eingabeformulars (Projekt-/Aktivitätsanlage). Dieses Szenario vergleicht, wie die Frameworks mit verschiedenen dynamischen UI-Elementen (z.\,B. Select2-Dropdowns) umgehen.
+    \item \textbf{Formularverarbeitung:} Das Ausfüllen, Validieren und Absenden eines typischen Eingabeformulars (Projekt-/Aktivitätsanlage). Dieses Szenario vergleicht, wie die Frameworks mit verschiedenen dynamischen \gls{ui}-Elementen (z.\,B. Select2-Dropdowns) umgehen.
     
     \item \textbf{Datensatzbearbeitung:} Ein mehrstufiger Prozess, bei dem ein Datensatz aufgerufen, modifiziert, gespeichert und verifiziert wird. Dies testet primär, wie zuverlässig die Werkzeuge asynchrone Ladezeiten und die zusammenhängende Navigation handhaben.
 \end{enumerate}
@@ -28,15 +28,15 @@ Die Bewertungskriterien für die Nutzwertanalyse wurden direkt aus den fachliche
 
 \begin{itemize}
     \item \textbf{Integration in die Infrastruktur (25\,\%):} Bewertung der initialen Einrichtung. Ein Test-Framework im betrieblichen Umfeld der JUMO GmbH \& Co.\ KG kann nur effizient skaliert werden, wenn es die strengen Proxy-Vorgaben und das etablierte Java-Ökosystem respektiert. Ein zu hoher administrativer Overhead negiert den Automatisierungsgewinn, weshalb dieses Kriterium am höchsten gewichtet wird.\\
-    \textit{Zur feingranularen Bewertung unterteilt sich dieses Kriterium in die Aspekte Projektanlage \& Tool-Start (40\,\%), Debugging \& Ausführung (30\,\%) sowie CI/Reporting-Anschlussfähigkeit (30\,\%).}
+    \textit{Zur feingranularen Bewertung unterteilt sich dieses Kriterium in die Aspekte Projektanlage \& Tool-Start (40\,\%), Debugging \& Ausführung (30\,\%) sowie \gls{ci}/Reporting-Anschlussfähigkeit (30\,\%).}
 
     \item \textbf{Lernkurve und Syntax (20\,\%):} Beurteilung, wie intuitiv die Erstellung und Pflege von Tests ist, um eine schnelle Einarbeitung neuer Entwickler zu gewährleisten.\\
     \textit{Die Bewertung setzt sich aus dem Aufwand für den ersten Test (40\,\%), der allgemeinen Usability (10\,\%), der Lesbarkeit \& Wartbarkeit des Codes (25\,\%) sowie der Qualität der Fehlermeldungen und Diagnosemöglichkeiten (25\,\%) zusammen.}
 
     \item \textbf{Test-Ausführung (20\,\%):} Analyse der Ausführungsgeschwindigkeit im Entwicklungsalltag. Schnelle Feedback-Zyklen sind essenziell für die Akzeptanz bei den Entwicklern.\\
-    \textit{Hierbei werden die lokale Ausführungsgeschwindigkeit (60\,\%) und die theoretische Skalierbarkeit in einer CI-Pipeline (40\,\%) betrachtet.}
+    \textit{Hierbei werden die lokale Ausführungsgeschwindigkeit (60\,\%) und die theoretische Skalierbarkeit in einer \gls{ci}-Pipeline (40\,\%) betrachtet.}
 
-    \item \textbf{Stabilität (20\,\%):} Konsistente Stabilität der Tests zur Minimierung von \textit{Flaky Tests}.\\
+    \item \textbf{Stabilität (20\,\%):} Konsistente Stabilität der Tests zur Minimierung von \textit{\gls{flakytest}s}.\\
     \textit{Die Unterkriterien umfassen das systemseitige Warten \& die Synchronisation dynamischer Inhalte (40\,\%), die Zuverlässigkeit über mehrere Testläufe hinweg (55\,\%) sowie die integrierten Debug-Hilfen im Fehlerfall (5\,\%).}
 
     \item \textbf{Dokumentation und Community (15\,\%):} Bewertung der offiziellen Hilfen und des Ökosystems. Dies flankiert den Entwicklungsprozess, ist den technischen Kernaspekten jedoch untergeordnet.\\

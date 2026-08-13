@@ -10,7 +10,7 @@ Während Tests früher häufig manuell durch direkte Interaktion mit der Anwendu
 
 Im Kontext der JUMO GmbH \& Co. KG wird eine interne Webanwendung (Puma) fortlaufend durch Fehlerbehebungen und funktionale Erweiterungen weiterentwickelt. Trotz der bekannten Vorteile der Automatisierung erfolgen Prüfungen zentraler Nutzungsszenarien derzeit noch manuell, häufig in Form explorativer Tests.
 
-Dieser manuelle Testaufwand ist zeitintensiv, bindet personelle Ressourcen und schränkt die Reproduzierbarkeit der Testergebnisse ein, da die Ausführung stark von der testenden Person abhängt. Daher besteht der betriebliche Bedarf, Ansätze zur Automatisierung regressionskritischer End-to-End-Tests systematisch zu untersuchen. Dies betrifft speziell solche Testszenarien, die nach Änderungen besonders anfällig für Fehler oder unerwünschte Seiteneffekte sind.
+Dieser manuelle Testaufwand ist zeitintensiv, bindet personelle Ressourcen und schränkt die Reproduzierbarkeit der Testergebnisse ein, da die Ausführung stark von der testenden Person abhängt. Daher besteht der betriebliche Bedarf, Ansätze zur Automatisierung regressionskritischer \gls{e2etests} systematisch zu untersuchen. Dies betrifft speziell solche Testszenarien, die nach Änderungen besonders anfällig für Fehler oder unerwünschte Seiteneffekte sind.
 
 Im Fokus dieser Fallstudie stehen die Test-Frameworks Selenium \cite{Selenium} und Cypress \cite{Cypress}. Beide Werkzeuge automatisieren browserbasierte Tests, unterscheiden sich jedoch in ihrer technischen Architektur, der Integration in bestehende Entwicklungsumgebungen, der Wartbarkeit der Testimplementierung sowie den infrastrukturellen Voraussetzungen.
 
@@ -18,7 +18,7 @@ Die Motivation dieser Arbeit ergibt sich aus dem konkreten Bedarf, die Qualität
 
 
 \subsection{Zielsetzung der Arbeit}
-Ziel der vorliegenden Fallstudie ist es, auf Basis eines strukturierten Vergleichs eine fundierte Entscheidungshilfe für die Auswahl eines End-to-End-Test-Frameworks bei der JUMO GmbH \& Co.\ KG zu erarbeiten. 
+Ziel der vorliegenden Fallstudie ist es, auf Basis eines strukturierten Vergleichs eine fundierte Entscheidungshilfe für die Auswahl eines \gls{e2etest}-Frameworks bei der JUMO GmbH \& Co.\ KG zu erarbeiten. 
 
 Dabei ist es nicht das Ziel, ein allgemein überlegenes Framework zu bestimmen, sondern das Werkzeug zu identifizieren, welches für den konkreten Unternehmenskontext und dessen technische Restriktionen am besten geeignet ist. Hierzu werden relevante Anforderungen aus dem Betrieb abgeleitet, ausgewählte Nutzungsszenarien der \glqq Puma\grqq-Webanwendung prototypisch in beiden Frameworks umgesetzt und die Ergebnisse anhand einer Nutzwertanalyse systematisch bewertet.
 
@@ -26,12 +26,12 @@ Dabei ist es nicht das Ziel, ein allgemein überlegenes Framework zu bestimmen, 
 Aus der formulierten Zielsetzung leitet sich die zentrale Forschungsfrage dieser Fallstudie ab:
 
 \begin{quote}
-\textit{Welches der beiden Frameworks (Selenium oder Cypress) ist für die Automatisierung ausgewählter repräsentativer regressionskritischer End-to-End-Testszenarien im gegebenen Unternehmenskontext besser geeignet, wenn Integrationsaufwand, Wartbarkeit, Stabilität, Ausführungseffizienz und Unterstützungsangebote systematisch berücksichtigt werden?}
+\textit{Welches der beiden Frameworks (Selenium oder Cypress) ist für die Automatisierung ausgewählter repräsentativer regressionskritischer \gls{e2etests}zenarien im gegebenen Unternehmenskontext besser geeignet, wenn Integrationsaufwand, Wartbarkeit, Stabilität, Ausführungseffizienz und Unterstützungsangebote systematisch berücksichtigt werden?}
 \end{quote}
 
 Zur präzisen Beantwortung der Hauptfrage werden folgende Teilfragen untersucht:
 \begin{itemize}
-    \item Welche Anforderungen ergeben sich aus dem betrieblichen Umfeld an ein End-to-End-Test-Framework?
+    \item Welche Anforderungen ergeben sich aus dem betrieblichen Umfeld an ein \gls{e2etest}-Framework?
     \item Welche Nutzungsszenarien der Webanwendung eignen sich als repräsentative Testfälle für einen Framework-Vergleich?
     \item Wie unterscheiden sich Selenium und Cypress hinsichtlich des technischen und organisatorischen Integrationsaufwands?
     \item Welche Unterschiede zeigen sich in Bezug auf Verständlichkeit, Wartbarkeit und Änderbarkeit des Testcodes?
@@ -39,7 +39,7 @@ Zur präzisen Beantwortung der Hauptfrage werden folgende Teilfragen untersucht:
 \end{itemize}
 
 \textbf{Aufbau der Arbeit:}\\
-Im Anschluss an diese Einleitung werden in Kapitel 2 die theoretischen Grundlagen des End-to-End-Testings sowie der untersuchten Frameworks Selenium und Cypress erläutert. 
+Im Anschluss an diese Einleitung werden in Kapitel 2 die theoretischen Grundlagen des \gls{e2etest}ings sowie der untersuchten Frameworks Selenium und Cypress erläutert. 
 Kapitel 3 widmet sich der Methodik und beschreibt das Vorgehen der Nutzwertanalyse inklusive der Entwicklung des Kriterienmodells. 
 In Kapitel 4 erfolgt die Beschreibung der prototypischen Umsetzung und der Datenerhebung anhand der ausgewählten Testszenarien. 
 Kapitel 5 präsentiert die Auswertung der Ergebnisse mittels der Nutzwertanalyse. Die Arbeit schließt in Kapitel 6 mit einer Diskussion der Erkenntnisse und einem zusammenfassenden Fazit.
