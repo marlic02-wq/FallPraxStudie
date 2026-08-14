@@ -7,12 +7,12 @@
 Um die Eignung der Frameworks Selenium und Cypress für den Einsatz bei der JUMO GmbH \& Co.\ KG systematisch und objektiv zu vergleichen, wurde ein praxisorientiertes Forschungsdesign gewählt. Dieses Kapitel beschreibt den methodischen Aufbau der Fallstudie, die Auswahl der Testszenarien, die Definition der Bewertungskriterien sowie den Ablauf der praktischen Erprobung.
 
 \subsection{Forschungsdesign der Fallstudie}
-Um zu diesem Ergebnis zu gelangen, kombiniert die vorliegende Untersuchung eine prototypische Implementierung mit einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (\gls{nwa}) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Abgleich der Frameworks die speziellen \gls{it}-Rahmenbedingungen des Unternehmens nicht ausreichend berücksichtigen würde, wurden beide Werkzeuge direkt in der realen Entwicklungsumgebung erprobt. 
+Um zu diesem Ergebnis zu gelangen, kombiniert die vorliegende Untersuchung eine prototypische Implementierung mit einer strukturierten Entscheidungsfindung mittels Nutzwertanalyse (NWA) nach Kühnapfel \cite{Kuehnapfel2021}. Da ein rein theoretischer Abgleich der Frameworks die speziellen IT-Rahmenbedingungen des Unternehmens nicht ausreichend berücksichtigen würde, wurden beide Werkzeuge direkt in der realen Entwicklungsumgebung erprobt. 
 
 Die Ergebnisse dieser Implementierung fließen in die Nutzwertanalyse ein. Diese Methode erlaubt es, qualitative und quantitative Beobachtungen in messbare Punktwerte zu übersetzen, diese mit unternehmensspezifischen Gewichtungen zu versehen und so zu einem nachvollziehbaren Gesamtergebnis zu gelangen.
 
 \subsection{Auswahl repräsentativer regressionskritischer Testszenarien}
-Da eine vollständige Automatisierung aller Anwendungsfälle der \glqq Puma\grqq-Webanwendung den Rahmen dieser Studie sprengen würde, wurden repräsentative und regressionskritische Nutzungsszenarien ausgewählt. Diese Szenarien bilden die Kernfunktionalitäten der Anwendung ab und sind nach funktionalen Erweiterungen besonders fehleranfällig. 
+Da eine vollständige Automatisierung aller Anwendungsfälle der \glqq PUMA\grqq-Webanwendung den Rahmen dieser Studie sprengen würde, wurden repräsentative und regressionskritische Nutzungsszenarien ausgewählt. Diese Szenarien bilden die Kernfunktionalitäten der Anwendung ab und sind nach funktionalen Erweiterungen besonders fehleranfällig. 
 
 Für die prototypische Umsetzung wurden folgende drei Szenarien definiert:
 \begin{enumerate}
@@ -27,21 +27,42 @@ Für die prototypische Umsetzung wurden folgende drei Szenarien definiert:
 Die Bewertungskriterien für die Nutzwertanalyse wurden direkt aus den fachlichen, technischen und organisatorischen Anforderungen des Ausbildungsbetriebs abgeleitet. Die Gewichtung (in Klammern) erfolgt vor dem Hintergrund der Unternehmensziele. Um eine hohe Transparenz und Nachvollziehbarkeit der Punktevergabe zu gewährleisten, wurde jedes Hauptkriterium in spezifische Unterkriterien aufgeschlüsselt:
 
 \begin{itemize}
-    \item \textbf{Integration in die Infrastruktur (25\,\%):} Bewertung der initialen Einrichtung. Ein Test-Framework im betrieblichen Umfeld der JUMO GmbH \& Co.\ KG kann nur effizient skaliert werden, wenn es die strengen Proxy-Vorgaben und das etablierte Java-Ökosystem respektiert. Ein zu hoher administrativer Overhead negiert den Automatisierungsgewinn, weshalb dieses Kriterium am höchsten gewichtet wird.\\
-    \textit{Zur feingranularen Bewertung unterteilt sich dieses Kriterium in die Aspekte Projektanlage \& Tool-Start (40\,\%), Debugging \& Ausführung (30\,\%) sowie \gls{ci}/Reporting-Anschlussfähigkeit (30\,\%).}
+    \item \textbf{Integration in die Infrastruktur (25\,\%):} Bewertung der initialen Einrichtung im betrieblichen Umfeld der JUMO GmbH \& Co.\ KG. Da strenge Proxy-Vorgaben und das bestehende Java-/Eclipse-Ökosystem die größte Hürde für eine Testautomatisierung darstellen, besitzt dieses Kriterium das höchste Gesamtgewicht.
+    \begin{itemize}
+        \item \textit{Projektanlage \& Tool-Start (40\,\%):} Größter Hebel, da ein Scheitern an Netzwerk- oder Sicherheitsrestriktionen den gesamten Einsatz verhindert.
+        \item \textit{Debugging \& Ausführung (30\,\%):} Zentral für das tägliche Arbeiten der Entwickler in der gewohnten IDE.
+        \item \textit{\gls{ci}/Reporting-Anschlussfähigkeit (30\,\%):} Notwendig für die spätere automatisierte Qualitätssicherung in Build-Pipelines.
+    \end{itemize}
 
-    \item \textbf{Lernkurve und Syntax (20\,\%):} Beurteilung, wie intuitiv die Erstellung und Pflege von Tests ist, um eine schnelle Einarbeitung neuer Entwickler zu gewährleisten.\\
-    \textit{Die Bewertung setzt sich aus dem Aufwand für den ersten Test (40\,\%), der allgemeinen Usability (10\,\%), der Lesbarkeit \& Wartbarkeit des Codes (25\,\%) sowie der Qualität der Fehlermeldungen und Diagnosemöglichkeiten (25\,\%) zusammen.}
+    \item \textbf{Lernkurve und Syntax (20\,\%):} Beurteilung, wie schnell Entwickler ohne Vorwissen produktiv Tests erstellen und warten können.
+    \begin{itemize}
+        \item \textit{Aufwand für den ersten Test (40\,\%):} Entscheidend, um die Einstiegshürde für das Team so gering wie möglich zu halten.
+        \item \textit{Lesbarkeit \& Wartbarkeit des Codes (25\,\%):} Hohe Bedeutung, um die langfristige Pflege der Tests sicherzustellen.
+        \item \textit{Fehlermeldungen \& Diagnosemöglichkeiten (25\,\%):} Ermöglicht schnelles Auffinden von Ursachen bei Testfehlschlägen.
+        \item \textit{Allgemeine Usability (10\,\%):} Flankierender Faktor, der im Vergleich zur Codequalität zweitrangig ist.
+    \end{itemize}
 
-    \item \textbf{Test-Ausführung (20\,\%):} Analyse der Ausführungsgeschwindigkeit im Entwicklungsalltag. Schnelle Feedback-Zyklen sind essenziell für die Akzeptanz bei den Entwicklern.\\
-    \textit{Hierbei werden die lokale Ausführungsgeschwindigkeit (60\,\%) und die theoretische Skalierbarkeit in einer \gls{ci}-Pipeline (40\,\%) betrachtet.}
+    \item \textbf{Test-Ausführung (20\,\%):} Analyse der Ausführungsgeschwindigkeit zur Gewährleistung schneller Feedback-Zyklen.
+    \begin{itemize}
+        \item \textit{Lokale Ausführungsgeschwindigkeit (60\,\%):} Höchste Relevanz, da das direkte Feedback während der Entwicklung maßgeblich für die Akzeptanz ist.
+        \item \textit{Skalierbarkeit in der \gls{ci}-Pipeline (40\,\%):} Wichtig für die Ausführungsdauer bei wachsender Testsuite in der Integrationsumgebung.
+    \end{itemize}
 
-    \item \textbf{Stabilität (20\,\%):} Konsistente Stabilität der Tests zur Minimierung von \textit{\gls{flakytest}s}.\\
-    \textit{Die Unterkriterien umfassen das systemseitige Warten \& die Synchronisation dynamischer Inhalte (40\,\%), die Zuverlässigkeit über mehrere Testläufe hinweg (55\,\%) sowie die integrierten Debug-Hilfen im Fehlerfall (5\,\%).}
+    \item \textbf{Stabilität (20\,\%):} Zuverlässigkeit der Testergebnisse zur Minimierung von \textit{\gls{flakytest}s}.
+    \begin{itemize}
+        \item \textit{Zuverlässigkeit über mehrere Testläufe (55\,\%):} Das wichtigste Qualitätsmerkmal, um Fehlalarme und Vertrauensverlust in die Tests zu verhindern.
+        \item \textit{Warten \& Synchronisation dynamischer Inhalte (40\,\%):} Technisch entscheidend, um Timing-Probleme moderner Webanwendungen robust abzufangen.
+        \item \textit{Integrierte Debug-Hilfen (5\,\%):} Hilfreich, aber gegenüber der inhärenten Stabilität der Testausführung nachgelagert.
+    \end{itemize}
 
-    \item \textbf{Dokumentation und Community (15\,\%):} Bewertung der offiziellen Hilfen und des Ökosystems. Dies flankiert den Entwicklungsprozess, ist den technischen Kernaspekten jedoch untergeordnet.\\
-    \textit{Dieses Kriterium gliedert sich in die Doku-Qualität (70\,\%), die Community-Hilfe bei Problemen (10\,\%) und die Verfügbarkeit von Plugins oder externen Tools (20\,\%).}
+    \item \textbf{Dokumentation und Community (15\,\%):} Bewertung externer Hilfestellungen und des Ökosystems.
+    \begin{itemize}
+        \item \textit{Dokumentationsqualität (70\,\%):} Primäre Anlaufstelle für die Implementierung und Problemlösung im Unternehmensalltag.
+        \item \textit{Verfügbarkeit von Plugins/Tools (20\,\%):} Wichtig zur einfachen Erweiterung um Reporting- und Hilfsfunktionen.
+        \item \textit{Community-Hilfe (10\,\%):} Nachrangig, da unternehmensspezifische Probleme primär intern und über offizielle Dokus gelöst werden müssen.
+    \end{itemize}
 \end{itemize}
+
 
 \subsection{Vorgehen der prototypischen Umsetzung}
 Die praktische Erprobung erfolgt schrittweise. Zunächst wird für beide Frameworks eine lokale Testumgebung aufgesetzt, wobei notwendige Konfigurationsschritte und Workarounds dokumentiert werden. Anschließend werden die drei definierten Testszenarien nacheinander in Selenium und Cypress implementiert. Um eine Vergleichbarkeit zu gewährleisten, wird für beide Werkzeuge derselbe Ausgangszustand der Anwendung genutzt. 
@@ -49,4 +70,4 @@ Die praktische Erprobung erfolgt schrittweise. Zunächst wird für beide Framewo
 \subsection{Datenerhebung und Auswertung}
 Die Datenerhebung findet parallel zur prototypischen Umsetzung statt. Quantitative Daten (Dauer der Testausführung, Code-Struktur) und qualitative Daten (Hürden bei der Netzwerkintegration, Fehlermeldungen) werden strukturiert festgehalten.
 
-Nach Abschluss der Implementierung werden die erhobenen Daten in das Kriterienmodell überführt. Jedes Framework erhält pro Kriterium eine Bewertung auf einer festen \textbf{Skala von 1 bis 10 Punkten}. Dabei repräsentiert 1 die geringste Erfüllung (ungenügend/nicht nutzbar) und 10 die maximal mögliche Zielerfüllung (exzellent/ohne Einschränkungen).Diese Punktzahl wird mit der zuvor definierten Gewichtung multipliziert. Die Summe aller gewichteten Punkte ergibt den Gesamtnutzwert.
+Nach Abschluss der Implementierung werden die erhobenen Daten in das Kriterienmodell überführt. Jedes Framework erhält pro Kriterium eine Bewertung auf einer festen \textbf{Skala von 1 bis 10 Punkten} (Abbildung \ref{fig:bewertungsmatrix_1}). Dabei repräsentiert 1 die geringste Erfüllung (ungenügend/nicht nutzbar) und 10 die maximal mögliche Zielerfüllung (exzellent/ohne Einschränkungen). Diese Punktzahl wird mit der zuvor definierten Gewichtung multipliziert. Die Summe aller gewichteten Punkte ergibt den Gesamtnutzwert.

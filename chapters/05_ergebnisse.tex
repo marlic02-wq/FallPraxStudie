@@ -10,9 +10,9 @@ Nachdem im vorherigen Kapitel die prototypische Umsetzung der Testszenarien besc
 \subsection{Durchführung und Testergebnisse}
 \label{sec:testergebnisse}
 
-Im Rahmen der praktischen Evaluation wurden die ausgewählten \gls{regkrit} Testszenarien iterativ ausgeführt, um Daten hinsichtlich der Ausführungsgeschwindigkeit und der Zuverlässigkeit (Stabilität) zu erheben. 
+Im Rahmen der praktischen Evaluation wurden die ausgewählten \gls{regkrit} iterativ ausgeführt, um Daten hinsichtlich der Ausführungsgeschwindigkeit und der Zuverlässigkeit (Stabilität) zu erheben. 
 
-Die Ausführungsgeschwindigkeiten beider Frameworks zeigten beim initialen Testlauf identische Werte von jeweils circa 45 Sekunden (inklusive Start der Testumgebung und Browser-Initialisierung). Bei den darauffolgenden Folgeläufen reduzierte sich die Ausführungszeit bei beiden Tools auf eine Spanne von 22 bis 32 Sekunden. Cypress schließt beim vollständigen Projekttest minimal schneller ab, was darauf zurückzuführen ist, dass Aktionen direkter im Browser ausgeführt werden, während Selenium über den \gls{webdriver} mit expliziten Wartebedingungen arbeitet.
+Die Ausführungsgeschwindigkeiten beider Frameworks zeigten beim initialen Testlauf identische Werte von jeweils circa 45 Sekunden (exklusive Start der Testumgebung und Browser-Initialisierung). Bei den darauffolgenden Folgeläufen reduzierte sich die Ausführungszeit bei beiden Tools auf eine Spanne von 22 bis 32 Sekunden. Cypress schließt beim vollständigen Projekttest minimal schneller ab, was darauf zurückzuführen ist, dass Aktionen direkter im Browser ausgeführt werden, während Selenium über den \gls{webdriver} mit expliziten Wartebedingungen arbeitet.
 
 Zur Bewertung der Unzuverlässigkeit (\textit{Flakiness}) wurden die Szenarien für den \textit{Login} sowie das \textit{Ändern von Datensätzen} auf 50 Durchläufe skaliert. Die Tendenz war signifikant: Bei Cypress traten in 4 von 50 Durchläufen Probleme auf, während Selenium mit 11 von 50 Durchläufen eine deutlich höhere Fehlerquote verzeichnete. Selenium reagiert wesentlich empfindlicher auf Ladezeiten dynamischer Ajax-Elemente, wohingegen Cypress durch integrierte Retry-Mechanismen robuster arbeitet.
 
